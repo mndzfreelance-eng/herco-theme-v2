@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="540" viewBox="0 0 720 540" role="img" aria-label="About page photo placeholder">
+  <rect width="720" height="540" fill="#e4e7ee"/>
+  <rect x="40" y="40" width="640" height="460" rx="12" fill="none" stroke="#001e60" stroke-width="2" stroke-dasharray="12 10" opacity=".35"/>
+  <g fill="none" stroke="#001e60" stroke-width="3" opacity=".45">
+    <rect x="280" y="170" width="160" height="130" rx="10"/>
+    <circle cx="318" cy="215" r="20"/>
+    <path d="M280 285 L330 245 L370 265 L440 210 L440 300 L280 300 Z"/>
+  </g>
+  <rect x="0" y="440" width="720" height="100" fill="#001e60" opacity=".9"/>
+  <text x="360" y="485" text-anchor="middle" fill="#f5a800" font-family="system-ui,sans-serif" font-size="20" font-weight="700">ABOUT PHOTO</text>
+  <text x="360" y="512" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="15" opacity=".9">assets/images/about.jpg</text>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" viewBox="0 0 200 80" role="img" aria-label="Affiliate logo placeholder">
+  <rect width="200" height="80" rx="8" fill="#fff" stroke="#c5cad6" stroke-width="1.5"/>
+  <rect x="16" y="16" width="168" height="48" rx="6" fill="none" stroke="#001e60" stroke-width="1.5" stroke-dasharray="6 5" opacity=".35"/>
+  <text x="100" y="48" text-anchor="middle" fill="#001e60" font-family="system-ui,sans-serif" font-size="12" font-weight="600" opacity=".6">PARTNER LOGO</text>
+</svg>

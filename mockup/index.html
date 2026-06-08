@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herco Theme v1.4.0 — Full Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="css/mockup.css">
+  <style>
+    .preview-nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:16px 24px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:500}
+    .preview-nav a{padding:8px 16px;font-size:13px;font-weight:600;border-radius:8px;border:1px solid var(--border);color:var(--navy)}
+    .preview-nav a:hover,.preview-nav a.is-active{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .preview-nav a.is-highlight{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+    .preview-nav a.is-highlight:hover{background:#e09a00;color:var(--navy)}
+    .preview-version{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--navy);color:var(--gold);border-radius:6px;font-size:12px;font-weight:700;letter-spacing:.04em}
+    .preview-version span{color:rgba(255,255,255,.7);font-weight:500;font-size:11px}
+    .preview-frame{border:none;width:100%;display:block}
+    .preview-frame--header{height:160px}
+    .preview-frame--footer{height:420px}
+    .preview-section{
+      padding:14px 24px;
+      background:var(--navy);
+      color:#fff;
+      font-family:var(--font-display);
+      font-size:15px;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .preview-section span{font-weight:400;text-transform:none;letter-spacing:0;opacity:.75;font-family:var(--font-body);font-size:13px;margin-left:8px}
+    @media(min-width:900px){.preview-frame--footer{height:340px}}
+  </style>
+</head>
+<body>
+
+<nav class="preview-nav" aria-label="Mockup files">
+  <strong style="width:100%;text-align:center;margin-bottom:4px;font-size:14px;color:var(--navy)">Herco WordPress Theme</strong>
+  <span class="preview-version">v1.4.0 <span>· Quick Access forms · brands · hero</span></span>
+  <a href="assets/images/" class="is-highlight">📁 Add images here</a>
+  <a href="header.html" target="_blank">header.html</a>
+  <a href="homepage.html" target="_blank">homepage.html</a>
+  <a href="about.html" target="_blank">about.html</a>
+  <a href="brands.html" target="_blank">brands.html</a>
+  <a href="request-quote.html" target="_blank">request-quote.html</a>
+  <a href="schedule-a-call.html" target="_blank">schedule-a-call.html</a>
+  <a href="wireframe.html" target="_blank">wireframe.html</a>
+  <a href="footer.html" target="_blank">footer.html</a>
+  <a href="assets/blank/" target="_blank">placeholders</a>
+</nav>
+
+<p class="mockup-note mockup-note--images">
+  <strong>Same as WordPress theme.</strong> Copy lives in <code>content/site-content.json</code>.
+  Preview images: <code>mockup/assets/images/</code> · Live site: <strong>Appearance → Customize</strong>.
+</p>
+<p class="mockup-note">Full preview — Header → Homepage → About → Footer. Matches the theme after upload.</p>
+
+<div class="preview-section">Header</div>
+<iframe class="preview-frame preview-frame--header" src="header.html" title="Header preview"></iframe>
+
+<div class="preview-section">Homepage</div>
+<iframe class="preview-frame" src="homepage.html" title="Homepage preview" style="min-height:3200px"></iframe>
+
+<div class="preview-section">About Page <span>— Who We Are · Mission Statement · Vision Statement · Affiliates</span></div>
+<iframe class="preview-frame" src="about.html" title="About page preview" style="min-height:2600px"></iframe>
+
+<div class="preview-section">Footer</div>
+<iframe class="preview-frame preview-frame--footer" src="footer.html" title="Footer preview"></iframe>
+
+</body>
+</html>

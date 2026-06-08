@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herco v1.4.0 — Homepage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="css/mockup.css">
+</head>
+<body class="mockup-preview">
+
+<p class="mockup-note"><strong>v1.4.0</strong> — matches <strong>front-page.php</strong>. Lighter hero fade so the building photo shows through. Images: <code>mockup/assets/images/</code> or <strong>Customizer → Herco Homepage</strong>.</p>
+
+<section class="hero">
+  <div class="hero__bg hero__bg--placeholder is-placeholder" data-bg-img="hero" data-herco-slot="hero" style="background-image:url('../assets/images/placeholders/hero.svg')" aria-hidden="true"></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__inner section-inner">
+    <p class="hero__eyebrow" data-herco="hero-badge"></p>
+    <h1 class="hero__title" data-herco="hero-title"></h1>
+    <p class="hero__desc" data-herco="hero-desc"></p>
+    <div class="hero__btns">
+      <a href="/brands/" class="btn btn--primary">Browse All Brands</a>
+      <a href="/request-quote/" class="btn btn--ghost-light">Request a Quote</a>
+    </div>
+  </div>
+  <div class="hero__stats section-inner">
+    <div class="hero__stat"><span class="hero__stat-num">50+</span><span class="hero__stat-label">Global Brands</span></div>
+    <div class="hero__stat"><span class="hero__stat-num">500+</span><span class="hero__stat-label">Trade Partners</span></div>
+    <div class="hero__stat"><span class="hero__stat-num">117</span><span class="hero__stat-label">Years in Business</span></div>
+  </div>
+</section>
+
+<section class="section section--brands" id="brands">
+  <div class="section-inner">
+    <header class="section-hd">
+      <p class="section-label">Our Principals</p>
+      <h2 class="section-heading">Trusted Global Brands</h2>
+      <p class="section-sub">Over 50 world-class manufacturers across hardware, home improvement, and consumer products.</p>
+    </header>
+    <div class="brands-scroll-wrap">
+      <div class="brands-scroll-fade brands-scroll-fade--l"></div>
+      <div class="brands-scroll" tabindex="0" aria-label="Scroll to browse partner brands" data-herco="brands-scroll"></div>
+      <div class="brands-scroll-fade brands-scroll-fade--r"></div>
+    </div>
+    <div class="brands-foot">
+      <p class="brands-foot__hint">Drag or scroll to browse partner logos</p>
+      <a href="/brands/" class="btn btn--secondary" data-herco="brands-link">View all brands</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <header class="section-hd">
+      <p class="section-label">Distribution Network</p>
+      <h2 class="section-heading">Where We Deliver</h2>
+      <p class="section-sub">A scalable nationwide network across all major trade channels.</p>
+    </header>
+    <div class="dist-grid" data-herco="dist-grid"></div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="section-inner">
+    <header class="section-hd">
+      <p class="section-label">Quick Access</p>
+      <h2 class="section-heading">What can we help with?</h2>
+    </header>
+    <div class="actions-grid" data-herco="actions-grid"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <header class="section-hd">
+      <p class="section-label">Support Center</p>
+      <h2 class="section-heading">We're Here to Help</h2>
+    </header>
+    <div class="support-layout">
+      <div class="support-stack">
+        <a class="support-card" href="/warranty-claim/">
+          <span class="support-card__icon" data-icon="shield"></span>
+          <span class="support-card__text">
+            <strong>Warranty Claims</strong>
+            <span class="support-card__desc">Submit a claim for any Herco-distributed product. Response within 3–5 business days.</span>
+          </span>
+        </a>
+        <a class="support-card" href="/after-sales-support/">
+          <span class="support-card__icon" data-icon="wrench"></span>
+          <span class="support-card__text">
+            <strong>After-Sales &amp; Repair</strong>
+            <span class="support-card__desc">Servicing, replacement parts, and technical assistance.</span>
+          </span>
+        </a>
+        <a class="support-card" href="/faq/">
+          <span class="support-card__icon" data-icon="help"></span>
+          <span class="support-card__text">
+            <strong>FAQs by Category</strong>
+            <span class="support-card__desc">Power tools, safety, hardware, ordering, and more.</span>
+          </span>
+        </a>
+      </div>
+      <aside class="contact-panel">
+        <h3>Get in Touch</h3>
+        <ul class="contact-list">
+          <li><span data-icon="pin"></span><span>8F Herco Center, 114 Benavidez Street, Legaspi Village, Makati City 1229</span></li>
+          <li><span data-icon="phone"></span><span><a href="tel:0288187736">(02) 8818-7736</a></span></li>
+          <li><span data-icon="mail"></span><span><a href="mailto:info@herco.com.ph">info@herco.com.ph</a></span></li>
+          <li><span data-icon="clock"></span><span>Mon–Fri, 8:00 AM – 5:30 PM</span></li>
+        </ul>
+        <div class="contact-panel__btns">
+          <a href="/schedule-a-call/" class="btn btn--primary btn--sm">Schedule a Call</a>
+          <a href="/request-quote/" class="btn btn--ghost-light btn--sm">Request Quote</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<script src="js/site-content.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/render-theme.js"></script>
+<script src="js/images.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="48" viewBox="0 0 200 48" role="img" aria-label="Logo placeholder">
+  <rect width="200" height="48" rx="6" fill="#eef0f4" stroke="#001e60" stroke-width="2" stroke-dasharray="6 4" opacity=".9"/>
+  <text x="100" y="30" text-anchor="middle" fill="#001e60" font-family="system-ui,sans-serif" font-size="13" font-weight="700">SITE LOGO</text>
+</svg>

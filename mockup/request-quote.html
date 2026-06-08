@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herco v1.4.0 — Request a Quote</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="css/mockup.css">
+</head>
+<body class="mockup-preview">
+
+<p class="mockup-note"><strong>v1.4.0</strong> — matches <code>page-request-quote.php</code> / <code>template-form-page.php</code></p>
+
+<section class="section">
+  <div class="section-inner">
+    <nav class="breadcrumb"><a href="/">Home</a><span class="breadcrumb-sep">›</span><span>Request a Quotation</span></nav>
+    <div class="herco-form-wrap">
+      <p class="section-label" style="margin-bottom:8px">Sales</p>
+      <h1 class="section-heading" style="font-size:32px;margin-bottom:12px">Request a Quotation</h1>
+      <p class="herco-form-desc" data-herco="form-intro"></p>
+      <form class="herco-form wpcf7-form">
+        <div class="form-row">
+          <div><label class="field-label">Full Name *</label><input type="text" placeholder="Your name"></div>
+          <div><label class="field-label">Company</label><input type="text" placeholder="Company name"></div>
+        </div>
+        <div class="form-row">
+          <div><label class="field-label">Email *</label><input type="email" placeholder="you@company.com"></div>
+          <div><label class="field-label">Phone</label><input type="tel" placeholder="(02) 0000-0000"></div>
+        </div>
+        <div class="form-row full">
+          <div><label class="field-label">Message *</label><textarea rows="6" placeholder="Products, quantities, delivery location…"></textarea></div>
+        </div>
+        <p><input type="submit" value="Send Quote Request"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="js/site-content.js"></script>
+<script>
+(function () {
+  function setIntro() {
+    var page = (window.HERCO_SITE || {}).formPages;
+    var el = document.querySelector('[data-herco="form-intro"]');
+    if (el && page && page['request-quote']) el.textContent = page['request-quote'].intro;
+  }
+  setIntro();
+  document.addEventListener('herco:content-ready', setIntro);
+})();
+</script>
+</body>
+</html>

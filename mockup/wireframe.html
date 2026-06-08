@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herco Theme v1.4.0 — Site Wireframe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="css/wireframe.css">
+</head>
+<body class="wf-body">
+
+<header class="wf-top">
+  <h1>Herco Site Wireframe · v1.4.0</h1>
+  <nav>
+    <a href="index.html">Live mockup</a>
+    <a href="#sitemap">Sitemap</a>
+    <a href="#global">Header/Footer</a>
+    <a href="#home">Homepage</a>
+    <a href="#about">About</a>
+    <a href="#brands">Brands</a>
+    <a href="#inner">Inner pages</a>
+  </nav>
+</header>
+
+<p class="wf-intro">
+  Structural wireframe of the full <strong>Herco WordPress theme</strong>. Grey dashed boxes = content areas or image placeholders.
+  Upload photos in <strong>Appearance → Customize</strong>. Page copy comes from <code>content/site-content.json</code> and WP editor.
+</p>
+
+<div class="wf-legend">
+  <span><span class="wf-tag wf-tag--img">IMG</span> Customizer / uploaded image</span>
+  <span><span class="wf-tag wf-tag--wp">WP</span> WordPress admin content</span>
+  <span><span class="wf-tag wf-tag--form">FORM</span> Contact Form 7 page</span>
+  <span><span class="wf-tag">STATIC</span> Bundled in theme</span>
+</div>
+
+<!-- SITEMAP -->
+<section class="wf-sitemap" id="sitemap">
+  <h2>Site map</h2>
+  <div class="wf-tree">
+    <a href="#home">Homepage<span>/ — front-page.php</span></a>
+    <a href="#about">About<span>/about/ — page-about.php</span></a>
+    <a href="#brands">All Brands<span>/brands/ — archive-brand.php</span></a>
+    <a href="#brand-single">Brand detail<span>/brands/{name}/ — single-brand.php</span></a>
+    <a href="#faq">FAQ / Support<span>/faq/ — template-faq.php</span></a>
+    <a href="#dealers">Where to Buy<span>/dealers/ — template-dealers.php</span></a>
+    <a href="#catalog">Product Catalog<span>/catalog/ — template-catalog.php</span></a>
+    <a href="#forms">Request Quote<span>/request-quote/ — page.php + CF7</span></a>
+    <a href="#forms">Warranty Claim<span>/warranty-claim/</span></a>
+    <a href="#forms">After-Sales<span>/after-sales-support/</span></a>
+    <a href="#forms">Retailer App<span>/retailer-application/</span></a>
+    <a href="#forms">Supplier Partner<span>/supplier-partnership/</span></a>
+    <a href="#forms">Schedule a Call<span>/schedule-a-call/</span></a>
+    <a href="#forms">Privacy / Terms<span>/privacy-policy/ · /terms-of-use/</span></a>
+  </div>
+</section>
+
+<!-- GLOBAL HEADER + FOOTER -->
+<section class="wf-page" id="global">
+  <div class="wf-page__hd">
+    <div class="wf-page__title">Global · Header &amp; Footer</div>
+    <p class="wf-page__meta">Every page · <code>header.php</code> + <code>footer.php</code></p>
+  </div>
+  <div class="wf-frame">
+    <div class="wf-block">
+      <div class="wf-block__label">Top bar <span class="wf-tag">STATIC</span></div>
+      <div class="wf-row">
+        <div class="wf-box wf-box--dark wf-box--sm wf-box--fill">Serving the Philippines since 1908</div>
+        <div class="wf-box wf-box--dark wf-box--sm">email · phone</div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-block__label">Site header <span class="wf-tag wf-tag--img">logo</span> <span class="wf-tag">STATIC</span></div>
+      <div class="wf-row">
+        <div class="wf-box wf-box--img wf-box--sm" style="min-width:100px">LOGO</div>
+        <div class="wf-box wf-box--sm wf-box--fill">Nav: Home · Brands · About · Support</div>
+        <div class="wf-box wf-box--sm">Request Quote</div>
+        <div class="wf-box wf-box--sm wf-btn--primary">Schedule a Call</div>
+        <div class="wf-box wf-box--sm">☰ mobile</div>
+      </div>
+    </div>
+    <div class="wf-block" style="background:var(--bg-subtle)">
+      <div class="wf-box" style="min-height:60px;border-style:dotted">↓ Page content area (varies per page below) ↓</div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-block__label">Site footer <span class="wf-tag">STATIC</span></div>
+      <div class="wf-grid-4">
+        <div>
+          <div class="wf-box wf-box--img wf-box--sm" style="margin-bottom:8px">LOGO</div>
+          <div class="wf-line wf-line--lg"></div>
+          <div class="wf-line wf-line--med"></div>
+          <div class="wf-row" style="margin-top:8px">
+            <div class="wf-box wf-box--sm">f</div>
+            <div class="wf-box wf-box--sm">L</div>
+            <div class="wf-box wf-box--sm">S</div>
+          </div>
+        </div>
+        <div><div class="wf-line wf-line--short"></div><div class="wf-line"></div><div class="wf-line"></div><div class="wf-line"></div></div>
+        <div><div class="wf-line wf-line--short"></div><div class="wf-line"></div><div class="wf-line"></div><div class="wf-line"></div></div>
+        <div><div class="wf-line wf-line--short"></div><div class="wf-line"></div><div class="wf-line"></div><div class="wf-line"></div></div>
+      </div>
+      <div class="wf-row" style="margin-top:12px">
+        <div class="wf-box wf-box--sm wf-box--fill">© copyright</div>
+        <div class="wf-box wf-box--sm">Privacy · Terms</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOMEPAGE -->
+<section class="wf-page" id="home">
+  <div class="wf-page__hd">
+    <div class="wf-page__title">Homepage</div>
+    <p class="wf-page__meta">URL <code>/</code> · Template <code>front-page.php</code></p>
+  </div>
+  <div class="wf-frame">
+    <div class="wf-block">
+      <div class="wf-block__label">① Hero <span class="wf-tag wf-tag--img">hero.jpg</span> <span class="wf-tag">STATIC</span></div>
+      <div class="wf-box wf-box--hero">
+        [ Background photo — building facade ]<br>
+        + lighter navy gradient overlay (v1.3)
+      </div>
+      <div class="wf-grid-2" style="margin-top:12px">
+        <div>
+          <div class="wf-line wf-line--med"></div>
+          <div class="wf-box wf-box--dark" style="margin:8px 0;min-height:48px">HEADLINE · Built on Trust</div>
+          <div class="wf-line wf-line--lg"></div>
+          <div class="wf-line wf-line--med"></div>
+          <div class="wf-row" style="margin-top:10px">
+            <span class="wf-btn wf-btn--primary">Browse All Brands</span>
+            <span class="wf-btn">Request a Quote</span>
+          </div>
+        </div>
+        <div class="wf-box wf-box--fill" style="opacity:.3;border-style:dotted">photo visible →</div>
+      </div>
+      <div class="wf-row" style="margin-top:12px">
+        <div class="wf-box wf-box--dark wf-box--fill">50+ Global Brands</div>
+        <div class="wf-box wf-box--dark wf-box--fill">500+ Trade Partners</div>
+        <div class="wf-box wf-box--dark wf-box--fill">117 Years</div>
+      </div>
+    </div>
+
+    <div class="wf-block">
+      <div class="wf-block__label">② Brands scroll <span class="wf-tag wf-tag--wp">WP Brands CPT</span></div>
+      <div class="wf-line wf-line--short"></div>
+      <div class="wf-line wf-line--med"></div>
+      <div class="wf-scroll" style="margin-top:10px">
+        <div class="wf-box wf-box--sm">BOSCH</div>
+        <div class="wf-box wf-box--sm">DEWALT</div>
+        <div class="wf-box wf-box--sm">STANLEY</div>
+        <div class="wf-box wf-box--sm">3M</div>
+        <div class="wf-box wf-box--sm">…</div>
+        <div class="wf-box wf-box--sm">→ scroll</div>
+      </div>
+      <div class="wf-box wf-box--sm" style="margin-top:10px;width:fit-content">View all brands →</div>
+    </div>
+
+    <div class="wf-block">
+      <div class="wf-block__label">③ Distribution network <span class="wf-tag wf-tag--img">dist-1…4</span></div>
+      <div class="wf-grid-4">
+        <div><div class="wf-box wf-box--img">IMG</div><div class="wf-line"></div><div class="wf-line wf-line--med"></div></div>
+        <div><div class="wf-box wf-box--img">IMG</div><div class="wf-line"></div><div class="wf-line wf-line--med"></div></div>
+        <div><div class="wf-box wf-box--img">IMG</div><div class="wf-line"></div><div class="wf-line wf-line--med"></div></div>
+        <div><div class="wf-box wf-box--img">IMG</div><div class="wf-line"></div><div class="wf-line wf-line--med"></div></div>
+      </div>
+      <p style="font-size:10px;color:var(--muted);margin-top:8px">Traditional · Modern Retail · E-Commerce · Industrial</p>
+    </div>
+
+    <div class="wf-block">
+      <div class="wf-block__label">④ Quick access · 6 action cards <span class="wf-tag">STATIC</span></div>
+      <div class="wf-grid-3">
+        <div class="wf-box">01 Request Quote</div>
+        <div class="wf-box">02 Warranty</div>
+        <div class="wf-box">03 After-Sales</div>
+        <div class="wf-box">04 Retailer App</div>
+        <div class="wf-box">05 Supplier</div>
+        <div class="wf-box">06 Schedule Call</div>
+      </div>
+    </div>
+
+    <div class="wf-block">
+      <div class="wf-block__label">⑤ Support + contact <span class="wf-tag">STATIC</span></div>
+      <div class="wf-grid-2">
+        <div>
+          <div class="wf-box" style="margin-bottom:8px">Warranty Claims card</div>
+          <div class="wf-box" style="margin-bottom:8px">After-Sales card</div>
+          <div class="wf-box">FAQs card</div>
+        </div>
+        <div class="wf-box wf-box--dark wf-box--lg">
+          Get in Touch<br><br>
+          address · phone · email · hours<br><br>
+          [ Schedule a Call ] [ Request Quote ]
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="wf-page" id="about">
+  <div class="wf-page__hd">
+    <div class="wf-page__title">About page</div>
+    <p class="wf-page__meta">URL <code>/about/</code> · <code>page-about.php</code> · <code>template-about.php</code></p>
+  </div>
+  <div class="wf-frame">
+    <div class="wf-block">
+      <div class="wf-block__label">Page header <span class="wf-tag">STATIC</span></div>
+      <div class="wf-line wf-line--short"></div>
+      <div class="wf-box wf-box--dark" style="min-height:36px;margin-top:6px">About Herco Trading</div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-block__label">Who We Are <span class="wf-tag">STATIC</span> · <code>site-content.json</code></div>
+      <div class="wf-grid-2">
+        <div>
+          <div class="wf-line wf-line--lg"></div>
+          <div class="wf-line wf-line--lg"></div>
+          <div class="wf-line wf-line--lg"></div>
+          <div class="wf-line wf-line--lg"></div>
+          <div class="wf-line wf-line--med"></div>
+          <div class="wf-line wf-line--lg"></div>
+          <div class="wf-line wf-line--med"></div>
+          <p style="font-size:10px;margin-top:6px;color:var(--muted)">7 paragraphs — editable in WP page editor (overrides default)</p>
+        </div>
+        <div class="wf-box wf-box--img wf-box--lg">about.jpg</div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-block__label">Mission &amp; Vision <span class="wf-tag">STATIC</span></div>
+      <div class="wf-grid-2">
+        <div class="wf-box wf-box--dark wf-box--lg">Mission Statement<br>• 4 bullet points</div>
+        <div class="wf-box wf-box--lg">Vision Statement<br><div class="wf-line wf-line--lg" style="margin-top:12px"></div><div class="wf-line wf-line--med"></div></div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-block__label">Strategic partners <span class="wf-tag wf-tag--img">affiliate-1…3</span></div>
+      <div class="wf-grid-3">
+        <div class="wf-box wf-box--img">HANDYMAN</div>
+        <div class="wf-box wf-box--img">TRUE VALUE</div>
+        <div class="wf-box wf-box--img">FEDCHEM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS ARCHIVE -->
+<section class="wf-page" id="brands">
+  <div class="wf-page__hd">
+    <div class="wf-page__title">Brands archive</div>
+    <p class="wf-page__meta">URL <code>/brands/</code> · <code>archive-brand.php</code></p>
+  </div>
+  <div class="wf-frame">
+    <div class="wf-block">
+      <div class="wf-block__label">Header <span class="wf-tag">STATIC</span></div>
+      <div class="wf-line wf-line--short"></div>
+      <div class="wf-box wf-box--dark" style="min-height:32px;margin-top:6px">Our Principals</div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-block__label">Category filters <span class="wf-tag wf-tag--wp">brand_category</span></div>
+      <div class="wf-row">
+        <div class="wf-btn wf-btn--primary">All</div>
+        <div class="wf-btn">Power Tools</div>
+        <div class="wf-btn">Hardware</div>
+        <div class="wf-btn">…</div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-block__label">Brand grid <span class="wf-tag wf-tag--wp">Brands CPT + logo</span></div>
+      <div class="wf-grid-6">
+        <div class="wf-box wf-box--img">logo</div>
+        <div class="wf-box wf-box--img">logo</div>
+        <div class="wf-box wf-box--img">logo</div>
+        <div class="wf-box wf-box--img">logo</div>
+        <div class="wf-box wf-box--img">logo</div>
+        <div class="wf-box wf-box--img">logo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SINGLE BRAND -->
+<section class="wf-page" id="brand-single">
+  <div class="wf-page__hd">
+    <div class="wf-page__title">Single brand</div>
+    <p class="wf-page__meta">URL <code>/brands/{brand-name}/</code> · <code>single-brand.php</code></p>
+  </div>
+  <div class="wf-frame">
+    <div class="wf-block">
+      <div class="wf-block__label">Breadcrumb</div>
+      <div class="wf-line wf-line--med">Home › Brands › Brand Name</div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-block__label">Brand header <span class="wf-tag wf-tag--wp">logo · tagline · ACF</span></div>
+      <div class="wf-row">
+        <div class="wf-box wf-box--img wf-box--sm">logo</div>
+        <div class="wf-col">
+          <div class="wf-box wf-box--dark" style="min-height:32px">Brand Name</div>
+          <div class="wf-line wf-line--med" style="margin-top:8px"></div>
+          <div class="wf-row" style="margin-top:8px"><div class="wf-btn">Category</div><div class="wf-btn">Category</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-block__label">Brand description <span class="wf-tag wf-tag--wp">editor</span></div>
+      <div class="wf-line wf-line--lg"></div>
+      <div class="wf-line wf-line--lg"></div>
+      <div class="wf-line wf-line--med"></div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-block__label">Product highlights <span class="wf-tag wf-tag--wp">Products CPT</span></div>
+      <div class="wf-grid-3">
+        <div class="wf-box">product card</div>
+        <div class="wf-box">product card</div>
+        <div class="wf-box">product card</div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-row">
+        <span class="wf-btn wf-btn--primary">Request Quote for Brand</span>
+        <span class="wf-btn">↓ Download Catalog</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INNER PAGES -->
+<section class="wf-page" id="inner">
+  <div class="wf-page__hd">
+    <div class="wf-page__title">Inner pages</div>
+    <p class="wf-page__meta">Special templates + generic form pages</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="wf-frame" style="margin-bottom:24px" id="faq">
+    <div class="wf-block">
+      <div class="wf-block__label">FAQ page <code>template-faq.php</code> · <span class="wf-tag wf-tag--wp">FAQ CPT</span></div>
+      <div class="wf-line wf-line--short"></div>
+      <div class="wf-row" style="margin:10px 0"><div class="wf-btn wf-btn--primary">All</div><div class="wf-btn">Power Tools</div><div class="wf-btn">Safety</div></div>
+      <div class="wf-box" style="margin-bottom:6px">Question 1 +</div>
+      <div class="wf-box" style="margin-bottom:6px">Question 2 +</div>
+      <div class="wf-box">Question 3 +</div>
+    </div>
+  </div>
+
+  <!-- Dealers -->
+  <div class="wf-frame" style="margin-bottom:24px" id="dealers">
+    <div class="wf-block">
+      <div class="wf-block__label">Where to Buy <code>template-dealers.php</code> · <span class="wf-tag wf-tag--wp">Dealers CPT</span></div>
+      <div class="wf-row" style="margin-bottom:10px">
+        <div class="wf-box wf-box--fill">Search city / store…</div>
+        <div class="wf-box">Channel filter</div>
+      </div>
+      <div class="wf-grid-3">
+        <div class="wf-box wf-box--lg">dealer card</div>
+        <div class="wf-box wf-box--lg">dealer card</div>
+        <div class="wf-box wf-box--lg">dealer card</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Catalog -->
+  <div class="wf-frame" style="margin-bottom:24px" id="catalog">
+    <div class="wf-block">
+      <div class="wf-block__label">Product catalog <code>template-catalog.php</code> · <span class="wf-tag">STATIC</span></div>
+      <div class="wf-grid-3">
+        <div class="wf-box wf-box--lg">PDF catalog card</div>
+        <div class="wf-box wf-box--lg">PDF catalog card</div>
+        <div class="wf-box wf-box--lg">PDF catalog card</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form pages -->
+  <div class="wf-frame" id="forms">
+    <div class="wf-block">
+      <div class="wf-block__label">Form / content pages <code>page.php</code> · <span class="wf-tag wf-tag--form">Contact Form 7</span></div>
+      <p style="font-size:11px;color:var(--muted);margin-bottom:12px">Same layout for all — title + page content + CF7 form shortcode in editor</p>
+      <div class="wf-grid-2">
+        <div class="wf-box wf-box--lg">
+          <strong>/request-quote/</strong><br><br>
+          Page title<br>
+          Intro text<br>
+          [ CF7 form fields ]<br>
+          [ Submit ]
+        </div>
+        <div class="wf-box wf-box--lg">
+          <strong>/warranty-claim/</strong><br>
+          <strong>/after-sales-support/</strong><br>
+          <strong>/retailer-application/</strong><br>
+          <strong>/supplier-partnership/</strong><br>
+          <strong>/schedule-a-call/</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE MAP -->
+<section class="wf-page">
+  <div class="wf-page__hd">
+    <div class="wf-page__title">Image upload map</div>
+    <p class="wf-page__meta">Appearance → Customize</p>
+  </div>
+  <div class="wf-frame">
+    <div class="wf-block">
+      <div class="wf-grid-2">
+        <div>
+          <strong style="font-size:12px;color:var(--navy)">Herco Homepage</strong>
+          <ul style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.8">
+            <li>Hero background photo</li>
+            <li>Distribution card 1–4 photos</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="font-size:12px;color:var(--navy)">Herco About Page</strong>
+          <ul style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.8">
+            <li>Who We Are photo (right column)</li>
+            <li>Affiliate logos 1–3</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="font-size:12px;color:var(--navy)">Site Identity</strong>
+          <ul style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.8">
+            <li>Header + footer logo</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="font-size:12px;color:var(--navy)">WP Admin (not Customizer)</strong>
+          <ul style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.8">
+            <li>Brands → featured image per brand</li>
+            <li>Products, Dealers, FAQs → post content</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p style="text-align:center;font-size:12px;color:var(--muted);padding:24px">
+  Herco WordPress Theme wireframe v1.4.0 · <a href="index.html">Open live mockup</a>
+</p>
+
+</body>
+</html>

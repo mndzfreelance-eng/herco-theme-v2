@@ -1,0 +1,40 @@
+/* Mockup preview — same markup/classes as WP theme; dev notes only */
+
+.mockup-preview .mockup-note {
+  background: var(--navy-dark);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 12px 24px;
+  font-size: 13px;
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.mockup-preview .mockup-note code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.mockup-preview .mockup-note strong {
+  color: #fff;
+}
+
+.mockup-preview .site-logo__img {
+  max-height: 40px;
+  width: auto;
+}
+
+.mockup-preview [data-herco-slot].is-placeholder,
+.mockup-preview .dist-card__media.is-placeholder,
+.mockup-preview .about-visual.is-placeholder,
+.mockup-preview .affiliate-badge.is-placeholder {
+  outline: 2px dashed rgba(0, 30, 96, 0.22);
+  outline-offset: -2px;
+}
+
+/* v1.3 — hero matches theme (no extra mockup fade) */
+.mockup-preview .hero__bg--placeholder {
+  opacity: 0.55;
+}
