@@ -48,3 +48,107 @@ body { background-color: #f9f9f9; }
   100% { transform: translateY(100%); opacity: 0; }
 }
 .animate-scroll-hint { animation: scroll-hint 2s infinite; }
+
+/* Premium stat band motion */
+.stat-band {
+  transform-origin: center top;
+}
+
+.stat-band-accent {
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-band-accent::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -24%;
+  width: 24%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  opacity: 0;
+}
+
+.stat-cell {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease,
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.metric-divider {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.7s cubic-bezier(.22, 1, .36, 1);
+}
+
+.stat-band.in {
+  animation: stat-band-rise 0.85s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.stat-band.in .stat-band-accent::after {
+  opacity: 0.55;
+  animation: stat-accent-sweep 1.4s cubic-bezier(.22, 1, .36, 1) 0.18s 1;
+}
+
+.stat-band.in .stat-cell {
+  opacity: 1;
+  transform: none;
+}
+
+.stat-band.in .stat-cell:nth-child(1) { transition-delay: 0.06s; }
+.stat-band.in .stat-cell:nth-child(2) { transition-delay: 0.14s; }
+.stat-band.in .stat-cell:nth-child(3) { transition-delay: 0.22s; }
+.stat-band.in .stat-cell:nth-child(4) { transition-delay: 0.30s; }
+
+.stat-band.in .stat-cell:nth-child(1) .metric-divider { transition-delay: 0.18s; }
+.stat-band.in .stat-cell:nth-child(2) .metric-divider { transition-delay: 0.26s; }
+.stat-band.in .stat-cell:nth-child(3) .metric-divider { transition-delay: 0.34s; }
+.stat-band.in .stat-cell:nth-child(4) .metric-divider { transition-delay: 0.42s; }
+
+.stat-band.in .metric-divider {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stat-cell:hover {
+    background-color: #fbfbfd;
+    box-shadow: inset 0 0 0 1px rgba(37, 39, 107, 0.04);
+  }
+}
+
+@keyframes stat-band-rise {
+  from {
+    opacity: 0.82;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes stat-accent-sweep {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(520%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-band,
+  .stat-cell,
+  .metric-divider,
+  .stat-band-accent::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

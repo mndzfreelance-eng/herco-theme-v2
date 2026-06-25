@@ -58,40 +58,66 @@
 <main id="main">
 <!-- HERO -->
 <section class="bg-heritage-navy relative overflow-hidden">
-<div class="absolute inset-0 opacity-5 pointer-events-none hairline-grid"></div>
-<div class="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-28 md:py-36 text-center">
+<div class="absolute inset-0 bg-slate-black">
+<video class="h-full w-full object-cover object-center" autoplay muted loop playsinline preload="metadata" poster="assets/media/home-banner-poster.jpg" aria-hidden="true">
+<source src="assets/media/home-banner.mp4" type="video/mp4"/>
+<source src="assets/media/home-banner.webm" type="video/webm"/>
+</video>
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(247,148,30,0.22),transparent_26%),linear-gradient(100deg,rgba(14,15,15,0.52),rgba(14,15,15,0.28)_36%,rgba(14,15,15,0.6)_100%),linear-gradient(135deg,rgba(37,39,107,0.54),rgba(26,27,75,0.74))]"></div>
+<div class="absolute inset-0 technical-grid opacity-15 mix-blend-screen"></div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-heritage-navy/82 via-heritage-navy/58 to-heritage-navy/72"></div>
+<div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-heritage-navy/70 to-transparent"></div>
+<div class="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-28 md:py-36 lg:py-40">
+<div class="max-w-[48rem] text-center lg:text-left">
 <span class="inline-block text-industrial-gold text-technical-caps font-technical-caps mb-6 tracking-widest uppercase">Trusted Distribution Partner Since 1908</span>
-<h1 class="text-headline-lg-mobile md:text-display-lg lg:text-[64px] lg:leading-[1.05] font-display-lg text-on-primary mb-8 max-w-4xl mx-auto">
+<h1 class="text-headline-lg-mobile md:text-display-lg lg:text-[64px] lg:leading-[1.05] font-display-lg text-on-primary mb-7 md:mb-8 max-w-4xl mx-auto lg:mx-0">
 The hardware brands the Philippines trusts — <span class="text-industrial-gold">delivered nationwide.</span>
 </h1>
-<p class="text-body-lg font-body-lg text-stucco-white/80 max-w-2xl mx-auto mb-10">
-For five generations, Herco Trading has put the world's best tools and home-improvement brands on Filipino shelves — from neighborhood hardware stores to the country's largest retail chains.
+<p class="text-body-lg font-body-lg text-stucco-white/90 max-w-2xl mx-auto lg:mx-0 mb-8 md:mb-9">
+Herco Trading helps global hardware brands win in the Philippines through nationwide distribution, modern retail coverage, and dependable channel execution.
 </p>
-<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<div class="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
 <a class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-industrial-gold text-heritage-navy text-label-md font-label-md rounded px-8 py-3.5 hover:bg-industrial-gold/90 transition-colors" href="contact.html">Become a partner <span class="material-symbols-outlined text-base">arrow_forward</span></a>
 <a class="w-full sm:w-auto inline-flex items-center justify-center bg-transparent border border-on-primary/40 text-on-primary text-label-md font-label-md rounded px-8 py-3.5 hover:bg-on-primary/10 transition-colors" href="brands.html">Explore our brands</a>
+</div>
+<div class="mt-12 inline-flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 border border-white/10 bg-white/8 backdrop-blur-sm rounded-xl px-6 py-4 text-left shadow-lg shadow-black/10">
+    
+</div>
 </div>
 </div>
 </section>
 
 <!-- STAT BAND -->
-<section class="relative z-20 -mt-16 px-margin-mobile md:px-margin-desktop">
-<div class="max-w-container-max mx-auto bg-surface-container-lowest border border-border-gray shadow-sm grid grid-cols-2 lg:grid-cols-4" data-reveal>
-<div class="p-8 border-b lg:border-b-0 lg:border-r border-border-gray text-center lg:text-left">
-<div class="font-display-lg text-[40px] leading-none text-heritage-navy">117<span class="text-industrial-gold">+</span></div>
-<div class="text-technical-caps font-technical-caps text-on-surface-variant uppercase mt-3">Years in distribution</div>
+<section class="relative z-20 -mt-20 px-margin-mobile md:px-margin-desktop">
+<div class="stat-band max-w-container-max mx-auto overflow-hidden rounded-[1.1rem] border border-heritage-navy/10 bg-white shadow-[0_18px_52px_rgba(26,27,75,0.10)]" data-reveal data-counter-group>
+<div class="stat-band-accent h-1 bg-gradient-to-r from-industrial-gold/90 via-heritage-navy/60 to-industrial-gold/90"></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+<div class="stat-cell p-8 md:p-9 border-b sm:border-r xl:border-b-0 border-border-gray text-left">
+<p class="text-technical-caps font-technical-caps text-industrial-gold uppercase">Brands</p>
+<div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="50">0</span><span class="text-industrial-gold">+</span></div>
+<div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]">Global brands carried across hardware and home improvement.</p>
 </div>
-<div class="p-8 border-b lg:border-b-0 lg:border-r border-border-gray text-center lg:text-left">
-<div class="font-display-lg text-[40px] leading-none text-heritage-navy">50<span class="text-industrial-gold">+</span></div>
-<div class="text-technical-caps font-technical-caps text-on-surface-variant uppercase mt-3">Global brands carried</div>
+<div class="stat-cell p-8 md:p-9 border-b xl:border-b-0 xl:border-r border-border-gray text-left">
+<p class="text-technical-caps font-technical-caps text-industrial-gold uppercase">Experience</p>
+<div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="117">0</span><span class="text-industrial-gold">+</span></div>
+<div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]">Years building distribution relationships in the Philippine market.</p>
 </div>
-<div class="p-8 lg:border-r border-border-gray text-center lg:text-left">
-<div class="font-display-lg text-[40px] leading-none text-heritage-navy">200<span class="text-industrial-gold">+</span></div>
-<div class="text-technical-caps font-technical-caps text-on-surface-variant uppercase mt-3">Modern retail locations</div>
+<div class="stat-cell p-8 md:p-9 border-b sm:border-r sm:border-b-0 xl:border-r border-border-gray text-left">
+<p class="text-technical-caps font-technical-caps text-industrial-gold uppercase">Employees</p>
+<div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="300">0</span><span class="text-industrial-gold">+</span></div>
+<div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]">Teams across sales, logistics, warehousing, and customer support.</p>
 </div>
-<div class="p-8 text-center lg:text-left">
-<div class="font-display-lg text-[40px] leading-none text-heritage-navy">5<span class="text-industrial-gold">th</span></div>
-<div class="text-technical-caps font-technical-caps text-on-surface-variant uppercase mt-3">Generation, family-owned</div>
+<div class="stat-cell p-8 md:p-9 text-left">
+<p class="text-technical-caps font-technical-caps text-industrial-gold uppercase">Retail Locations</p>
+<div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="200">0</span><span class="text-industrial-gold">+</span></div>
+<div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]">Modern retail doors supported by nationwide fulfillment.</p>
+</div>
+</div>
 </div>
 </div>
 </section>

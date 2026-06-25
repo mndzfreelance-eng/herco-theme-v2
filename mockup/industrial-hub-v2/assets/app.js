@@ -68,6 +68,58 @@
     reveal.forEach(function (el) { el.classList.add("in"); });
   }
 
+  /* --- Animated counters --- */
+  var counterGroups = document.querySelectorAll("[data-counter-group]");
+  var counters = document.querySelectorAll("[data-counter-target]");
+  var prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var runCounter = function (el, delay) {
+    var target = Number(el.getAttribute("data-counter-target"));
+    if (!Number.isFinite(target)) { return; }
+
+    if (prefersReducedMotion) {
+      el.textContent = String(target);
+      return;
+    }
+
+    window.setTimeout(function () {
+      var duration = 1450;
+      var start = 0;
+      var startTime = null;
+      var step = function (timestamp) {
+        if (startTime === null) { startTime = timestamp; }
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var value = Math.floor(start + (target - start) * eased);
+        el.textContent = value.toLocaleString();
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          el.textContent = target.toLocaleString();
+        }
+      };
+
+      window.requestAnimationFrame(step);
+    }, delay || 0);
+  };
+
+  if (counterGroups.length) {
+    if ("IntersectionObserver" in window && !prefersReducedMotion) {
+      var counterObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) { return; }
+          var groupCounters = entry.target.querySelectorAll("[data-counter-target]");
+          groupCounters.forEach(function (el, index) {
+            runCounter(el, index * 110);
+          });
+          counterObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.35 });
+      counterGroups.forEach(function (group) { counterObserver.observe(group); });
+    } else {
+      counters.forEach(function (el) { runCounter(el); });
+    }
+  }
+
   /* --- Contact form (demo only) --- */
   var form = document.querySelector("#contact-form");
   if (form) {
