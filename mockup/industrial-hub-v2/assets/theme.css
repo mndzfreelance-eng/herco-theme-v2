@@ -1,0 +1,50 @@
+/* HERCO — small custom layer on top of Tailwind CDN (Premium Industrial Hub) */
+
+body { background-color: #f9f9f9; }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* Technical background motifs */
+.technical-grid {
+  background-image: radial-gradient(circle, #E2E8F0 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.hairline-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(226, 232, 240, 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.5) 1px, transparent 1px);
+}
+
+/* Scroll reveal */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+[data-reveal].in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* Brand marquee (home) */
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: inline-flex; align-items: center; gap: 4rem; white-space: nowrap; animation: marquee 32s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Brand grid filtering */
+.brand-tile.is-hidden { display: none !important; }
+
+/* Hero scroll hint */
+@keyframes scroll-hint {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  50%  { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+.animate-scroll-hint { animation: scroll-hint 2s infinite; }
