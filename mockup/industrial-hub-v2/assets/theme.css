@@ -259,11 +259,195 @@ body { background-color: #f9f9f9; }
   max-width: 32rem;
 }
 
-/* Brand marquee (home) */
-.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.marquee-track { display: inline-flex; align-items: center; gap: 4rem; white-space: nowrap; animation: marquee 32s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
-@keyframes marquee { to { transform: translateX(-50%); } }
+/* Distribution ecosystem (home) */
+.ecosystem-panel {
+  position: relative;
+}
+
+.ecosystem-logo-wall {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.ecosystem-logo-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(226, 232, 240, 1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.92));
+  color: rgba(15, 23, 42, 0.76);
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ecosystem-logo-tile--serif {
+  font-family: "EB Garamond", serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+}
+
+.ecosystem-logo-tile:hover {
+  border-color: rgba(243, 146, 33, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(26, 27, 75, 0.08);
+}
+
+.ecosystem-platform-stack {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.ecosystem-platform-tile {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  transition: border-color 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+}
+
+.ecosystem-platform-tile:hover {
+  border-color: rgba(243, 146, 33, 0.9);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.ecosystem-platform-tile--static:hover {
+  transform: none;
+}
+
+.ecosystem-platform-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 999px;
+  font-family: "EB Garamond", serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ecosystem-platform-mark--lazada {
+  background: linear-gradient(135deg, #5f33ff, #ff8a00);
+}
+
+.ecosystem-platform-mark--shopee {
+  background: linear-gradient(135deg, #ff6a00, #f39221);
+}
+
+.ecosystem-platform-mark--tiktok {
+  background: linear-gradient(135deg, #0f172a, #384252);
+}
+
+/* Partner quotes (home) */
+.testimonial-section {
+  isolation: isolate;
+}
+
+.testimonial-section-pattern,
+.testimonial-section-orb {
+  position: absolute;
+  pointer-events: none;
+}
+
+.testimonial-section-pattern {
+  inset: 0;
+  opacity: 0.38;
+  background-image:
+    linear-gradient(90deg, rgba(0, 30, 96, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(0, 30, 96, 0.035) 1px, transparent 1px),
+    linear-gradient(125deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 38%);
+  background-size: 22px 22px, 22px 22px, 100% 100%;
+  background-position: center center, center center, center center;
+}
+
+.testimonial-section-orb {
+  display: none;
+}
+
+.testimonial-stat-tile {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(26, 27, 75, 0.05);
+}
+
+.testimonial-stat-tile::after {
+  content: "";
+  position: absolute;
+  inset: auto -15% -45% auto;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 999px;
+  background: none;
+}
+
+.testimonial-slider-shell {
+  box-shadow: 0 26px 48px rgba(26, 27, 75, 0.08);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(249, 249, 249, 0.92));
+}
+
+.testimonial-slider-glow {
+  display: none;
+}
+
+.testimonial-slider-button {
+  box-shadow: 0 8px 20px rgba(26, 27, 75, 0.05);
+}
+
+.testimonial-slide-frame {
+  position: relative;
+  padding: 1.25rem 1.25rem 0.35rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+}
+
+.testimonial-quote-mark {
+  text-shadow: none;
+}
+
+.testimonial-slider-dot {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.testimonial-slider-dot:hover {
+  transform: scaleX(1.08);
+}
+
+@media (min-width: 768px) {
+  .ecosystem-logo-wall {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .ecosystem-logo-wall {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .testimonial-section-orb {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  .testimonial-slide-frame {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 
 /* Brand grid filtering */
 .brand-tile.is-hidden { display: none !important; }

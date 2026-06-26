@@ -120,6 +120,62 @@
     }
   }
 
+  /* --- Partner testimonial slider --- */
+  var testimonialSlider = document.querySelector("[data-testimonial-slider]");
+  if (testimonialSlider) {
+    var slides = testimonialSlider.querySelectorAll("[data-testimonial-slide]");
+    var dots = testimonialSlider.querySelectorAll("[data-testimonial-dot]");
+    var prev = testimonialSlider.querySelector("[data-testimonial-prev]");
+    var next = testimonialSlider.querySelector("[data-testimonial-next]");
+    var currentIndex = 0;
+    var autoRotate = null;
+
+    var showSlide = function (index) {
+      currentIndex = (index + slides.length) % slides.length;
+      slides.forEach(function (slide, slideIndex) {
+        slide.classList.toggle("hidden", slideIndex !== currentIndex);
+      });
+      dots.forEach(function (dot, dotIndex) {
+        var active = dotIndex === currentIndex;
+        dot.setAttribute("aria-current", active ? "true" : "false");
+        dot.classList.toggle("bg-heritage-navy", active);
+        dot.classList.toggle("bg-border-gray", !active);
+      });
+    };
+
+    var restartAutoRotate = function () {
+      if (autoRotate) { window.clearInterval(autoRotate); }
+      autoRotate = window.setInterval(function () {
+        showSlide(currentIndex + 1);
+      }, 6500);
+    };
+
+    if (slides.length > 1) {
+      if (prev) {
+        prev.addEventListener("click", function () {
+          showSlide(currentIndex - 1);
+          restartAutoRotate();
+        });
+      }
+      if (next) {
+        next.addEventListener("click", function () {
+          showSlide(currentIndex + 1);
+          restartAutoRotate();
+        });
+      }
+      dots.forEach(function (dot, index) {
+        dot.addEventListener("click", function () {
+          showSlide(index);
+          restartAutoRotate();
+        });
+      });
+      showSlide(0);
+      if (!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+        restartAutoRotate();
+      }
+    }
+  }
+
   /* --- Contact form (demo only) --- */
   var form = document.querySelector("#contact-form");
   if (form) {
