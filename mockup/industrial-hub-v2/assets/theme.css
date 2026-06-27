@@ -1287,3 +1287,72 @@ body { background-color: #f9f9f9; }
     transform: none;
   }
 }
+
+/* Premium mega-menu animations */
+.mega-trigger .mega-trigger-icon {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mega-nav-item.is-open .mega-trigger .mega-trigger-icon {
+  transform: rotate(180deg);
+}
+
+.mega-panel {
+  display: block;
+  position: absolute;
+  opacity: 0;
+  background-color: #fff;
+  box-shadow: 0 20px 48px -8px rgba(26, 27, 75, 0.1), 0 10px 20px -10px rgba(26, 27, 75, 0.08);
+  border-radius: 1rem;
+  left: 50%;
+  top: calc(100% + 0.5rem);
+  z-index: 999; /* Ensure it appears above other content */
+  width: 100%;
+  max-width: 1120px;
+  visibility: hidden;
+  transform: translate(-50%, -0.5rem);
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.mega-nav-item.is-open .mega-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+.mobile-mega-toggle .material-symbols-outlined {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-mega-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-mega-panel > div {
+  overflow: hidden;
+}
+
+.mobile-mega-panel:not(.hidden) {
+  grid-template-rows: 1fr;
+}
+
+/* Hide via JS, not Tailwind, to allow transitions */
+.mobile-mega-panel.hidden {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mega-trigger .mega-trigger-icon,
+  .mega-panel,
+  .mobile-mega-toggle .material-symbols-outlined,
+  .mobile-mega-panel {
+    transition: none;
+  }
+}

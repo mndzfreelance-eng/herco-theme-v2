@@ -32,6 +32,79 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
+  /* --- Mega Menus (Desktop & Mobile) --- */
+  function setupMegaMenus() {
+    // Desktop hover behavior
+    var desktopMegaNavItems = document.querySelectorAll("[data-mega-menu]");
+    if (window.matchMedia("(min-width: 1024px)").matches) {
+      desktopMegaNavItems.forEach(function (navItem) {
+        var trigger = navItem.querySelector(".mega-trigger");
+        var panel = navItem.querySelector(".mega-panel");
+        if (!trigger) return;
+        if (!panel) return;
+
+        trigger.addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default link behavior
+          event.stopPropagation(); // Stop event from bubbling up to document
+
+          var isCurrentlyOpen = navItem.classList.contains("is-open");
+
+          // Close all other open mega-menus
+          desktopMegaNavItems.forEach(function (otherNavItem) {
+            if (otherNavItem !== navItem && otherNavItem.classList.contains("is-open")) {
+              otherNavItem.classList.remove("is-open");
+              otherNavItem.querySelector(".mega-trigger").setAttribute("aria-expanded", "false");
+            }
+          });
+
+          // Toggle current mega-menu
+          if (isCurrentlyOpen) {
+            navItem.classList.remove("is-open");
+            trigger.setAttribute("aria-expanded", "false");
+          } else {
+            navItem.classList.add("is-open");
+            trigger.setAttribute("aria-expanded", "true");
+          }
+        });
+      });
+
+      // Close mega-menu when clicking outside
+      document.addEventListener("click", function (event) {
+        desktopMegaNavItems.forEach(function (navItem) {
+          if (!navItem.contains(event.target) && navItem.classList.contains("is-open")) {
+            navItem.classList.remove("is-open");
+            navItem.querySelector(".mega-trigger").setAttribute("aria-expanded", "false");
+          }
+        });
+      });
+    }
+
+    // Mobile click behavior
+    var mobileMegaToggles = document.querySelectorAll(".mobile-mega-toggle");
+    mobileMegaToggles.forEach(function (toggle) {
+      var panel = toggle.nextElementSibling;
+      if (!panel || !panel.classList.contains("mobile-mega-panel")) return;
+
+      toggle.addEventListener("click", function () {
+        var isPanelNowVisible = !panel.classList.toggle("hidden"); // true if panel is now visible, false if now hidden
+        toggle.setAttribute("aria-expanded", String(isPanelNowVisible));
+        
+        var icon = toggle.querySelector(".material-symbols-outlined");
+        if (icon) {
+          var parentNavItem = toggle.closest('.py-3');
+          if (isPanelNowVisible) { // If panel is now visible
+            icon.style.transform = "rotate(180deg)";
+            if(parentNavItem) parentNavItem.classList.remove('border-b');
+          } else {
+            icon.style.transform = "";
+            if(parentNavItem) parentNavItem.classList.add('border-b');
+          }
+        }
+      });
+    });
+  }
+  setupMegaMenus();
+
   /* --- Brand filter (brands page) --- */
   var chips = document.querySelectorAll("[data-filter]");
   var tiles = document.querySelectorAll(".brand-tile[data-cat]");
