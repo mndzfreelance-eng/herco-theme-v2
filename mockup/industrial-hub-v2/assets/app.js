@@ -260,6 +260,60 @@
     });
   }
 
+  /* --- FAQ Accordion and Filtering --- */
+  function setupFaqs() {
+    var faqQuestions = document.querySelectorAll(".faq-question");
+    faqQuestions.forEach(function (question) {
+      question.addEventListener("click", function () {
+        var answer = this.nextElementSibling;
+        var icon = this.querySelector(".faq-icon");
+        var isExpanded = this.getAttribute("aria-expanded") === "true";
+
+        // Close all other open FAQ items in the same container
+        var parentContainer = this.closest('[data-faq-container]');
+        if (parentContainer) {
+          parentContainer.querySelectorAll('.faq-question[aria-expanded="true"]').forEach(function(openQuestion) {
+            if (openQuestion !== question) {
+              openQuestion.setAttribute("aria-expanded", "false");
+              openQuestion.nextElementSibling.classList.add("hidden");
+              openQuestion.querySelector(".faq-icon").style.transform = "";
+            }
+          });
+        }
+
+        // Toggle current FAQ item
+        this.setAttribute("aria-expanded", String(!isExpanded));
+        answer.classList.toggle("hidden");
+        if (!isExpanded) {
+          icon.style.transform = "rotate(180deg)";
+        } else {
+          icon.style.transform = "";
+        }
+      });
+    });
+
+    var faqFilterChips = document.querySelectorAll("[data-faq-filter]");
+    var faqItems = document.querySelectorAll(".faq-item");
+    faqFilterChips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        var category = this.getAttribute("data-faq-filter");
+        faqFilterChips.forEach(function (c) {
+          c.setAttribute("aria-pressed", "false");
+          c.classList.remove("bg-heritage-navy", "text-white", "border-heritage-navy");
+          c.classList.add("bg-surface-container-lowest", "text-on-surface-variant", "border-border-gray");
+        });
+        this.setAttribute("aria-pressed", "true");
+        this.classList.add("bg-heritage-navy", "text-white", "border-heritage-navy");
+        this.classList.remove("bg-surface-container-lowest", "text-on-surface-variant", "border-border-gray");
+        faqItems.forEach(function (item) {
+          var show = category === "all" || item.getAttribute("data-faq-category") === category;
+          item.classList.toggle("hidden", !show);
+        });
+      });
+    });
+  }
+  setupFaqs();
+
   /* --- Brand Detail Page Dynamic Content (Mockup Only) --- */
   function setupBrandDetailPage() {
     var urlParams = new URLSearchParams(window.location.search);
