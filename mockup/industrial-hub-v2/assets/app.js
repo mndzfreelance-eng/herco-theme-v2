@@ -260,6 +260,41 @@
     });
   }
 
+  /* --- Brand Detail Page Dynamic Content (Mockup Only) --- */
+  function setupBrandDetailPage() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var brandName = urlParams.get('brand');
+
+    if (brandName && document.body.classList.contains('brand-detail-page')) { // Assuming you add a class to brand-detail.html body
+      // Update page title
+      document.title = brandName + ' — Herco Trading Inc.';
+
+      // Update hero section
+      var heroTitle = document.querySelector('.hero-brand-title'); // Add this class to your h1
+      if (heroTitle) heroTitle.innerHTML = brandName + ': [Catchy Slogan or Identity Statement]';
+
+      var heroLogo = document.querySelector('.hero-brand-logo'); // Add this class to your img
+      if (heroLogo) {
+        // Normalize brand name for image filename (e.g., "3M" -> "3m-logo.png", "Black+Decker" -> "black-decker-logo.png")
+        var logoFileName = brandName.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-logo.png';
+        heroLogo.src = 'assets/brand-logos/' + logoFileName;
+        heroLogo.alt = brandName + ' Logo';
+      }
+
+      // Update other brand-specific placeholders (e.g., descriptions, USPs, catalog links)
+      document.querySelectorAll('[data-brand-name-placeholder]').forEach(function(el) {
+        el.textContent = el.textContent.replace(/Brand Name/g, brandName);
+        if (el.tagName === 'A' && el.hasAttribute('href') && el.getAttribute('href').includes('brand-name-catalog.pdf')) {
+          el.setAttribute('href', 'assets/' + brandName.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-catalog.pdf');
+        }
+        if (el.tagName === 'A' && el.hasAttribute('href') && el.getAttribute('href').includes('contact.html?brand=Brand%20Name')) {
+          el.setAttribute('href', 'contact.html?brand=' + encodeURIComponent(brandName));
+        }
+      });
+    }
+  }
+  setupBrandDetailPage();
+
   /* --- Footer year --- */
   var yr = document.querySelector("[data-year]");
   if (yr) { yr.textContent = new Date().getFullYear(); }
