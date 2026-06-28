@@ -35,7 +35,7 @@
 <a class="text-label-md font-label-md text-on-surface-variant font-medium hover:text-industrial-gold transition-colors" href="index.html">Home</a>
 <a class="text-label-md font-label-md text-heritage-navy border-b-2 border-industrial-gold pb-1 font-semibold" href="about.html">About</a>
 <a class="text-label-md font-label-md text-on-surface-variant font-medium hover:text-industrial-gold transition-colors" href="distribution.html">Distribution</a>
-<a class="text-label-md font-label-md text-on-surface-variant font-medium hover:text-industrial-gold transition-colors" href="faqs.html">FAQs</a>
+<!-- <a class="text-label-md font-label-md text-on-surface-variant font-medium hover:text-industrial-gold transition-colors" href="faqs.html">FAQs</a> -->
 <!-- Brands Mega Menu -->
 <div class="relative mega-nav-item" data-mega-menu>
 <button class="mega-trigger flex items-center gap-1 text-label-md font-label-md text-on-surface-variant font-medium hover:text-industrial-gold transition-colors" aria-expanded="false">
@@ -117,6 +117,13 @@ View All 50+ Brands <span class="material-symbols-outlined text-base">arrow_forw
 <span class="text-body-sm font-body-sm text-on-surface-variant">File a claim or request support.</span>
 </span>
 </a></li>
+<li><a href="faqs.html" class="flex items-start gap-3 p-3 rounded-lg hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-industrial-gold mt-1">help_center</span>
+<span>
+<strong class="block text-label-md font-label-md text-heritage-navy">FAQs</strong>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Find answers to common questions.</span>
+</span>
+</a></li>
 </ul>
 </div>
 </div>
@@ -180,8 +187,10 @@ Contact Us <span class="material-symbols-outlined text-base">arrow_forward</span
 
 <main id="main">
 <!-- PAGE HEADER -->
-<section class="bg-heritage-navy py-20 md:py-28 relative overflow-hidden">
-<div class="absolute inset-0 opacity-5 pointer-events-none hairline-grid"></div>
+<section class="py-20 md:py-28 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/media/about-hero.jpg');"></div>
+<div class="absolute inset-0 bg-heritage-navy/70"></div>
+<div class="absolute inset-0 opacity-5 pointer-events-none hairline-grid z-[1]"></div>
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
 <nav class="flex items-center gap-2 text-technical-caps font-technical-caps text-stucco-white/50 uppercase mb-6" aria-label="Breadcrumb"><a class="hover:text-industrial-gold" href="index.html">Home</a><span>/</span><span class="text-industrial-gold">About</span></nav>
 <h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-white max-w-3xl mb-6">A family business that helped build the Filipino home.</h1>
@@ -200,7 +209,7 @@ Contact Us <span class="material-symbols-outlined text-base">arrow_forward</span
 </div>
 
 <!-- STORY + TIMELINE -->
-<section class="py-section-gap bg-surface technical-grid" id="story" style="scroll-margin-top:140px">
+<section class="py-section-gap bg-white technical-grid" id="story" style="scroll-margin-top:140px">
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
 <div>
@@ -242,18 +251,38 @@ Contact Us <span class="material-symbols-outlined text-base">arrow_forward</span
 </section>
 
 <!-- STATS -->
-<section class="bg-heritage-navy py-20 text-white relative overflow-hidden">
+<section class="relative z-20 -mt-20 px-margin-mobile md:px-margin-desktop">
 <div class="absolute inset-0 opacity-5 pointer-events-none hairline-grid"></div>
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-10">
-<div class="border-l border-white/20 pl-6"><div class="font-display-lg text-[40px] leading-none mb-2">1908</div><span class="font-technical-caps text-technical-caps text-industrial-gold uppercase">Year founded</span></div>
-<div class="border-l border-white/20 pl-6"><div class="font-display-lg text-[40px] leading-none mb-2">5<span class="text-industrial-gold">th</span></div><span class="font-technical-caps text-technical-caps text-industrial-gold uppercase">Generation leadership</span></div>
-<div class="border-l border-white/20 pl-6"><div class="font-display-lg text-[40px] leading-none mb-2">6</div><span class="font-technical-caps text-technical-caps text-industrial-gold uppercase">Sourcing countries</span></div>
-<div class="border-l border-white/20 pl-6"><div class="font-display-lg text-[40px] leading-none mb-2">50<span class="text-industrial-gold">+</span></div><span class="font-technical-caps text-technical-caps text-industrial-gold uppercase">Principal brands</span></div>
+<div class="max-w-container-max mx-auto overflow-hidden rounded-[1.1rem] border border-heritage-navy/10 bg-white shadow-[0_18px_52px_rgba(26,27,75,0.10)] grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-gutter">
+<div class="bg-surface border border-border-gray rounded-lg overflow-hidden">
+<div class="h-1 bg-industrial-gold"></div>
+<div class="p-8 md:p-9">
+<div class="font-display-lg text-[52px] leading-none mb-2 text-heritage-navy">1908</div><span class="font-technical-caps text-technical-caps text-industrial-gold uppercase">Year founded</span>
+</div>
+</div>
+<div class="bg-surface border border-border-gray rounded-lg overflow-hidden">
+<div class="h-1 bg-industrial-gold"></div>
+<div class="p-8 md:p-9">
+<div class="font-display-lg text-[52px] leading-none mb-2 text-heritage-navy">5<span class="text-industrial-gold">th</span></div><span class="font-technical-caps text-technical-caps text-industrial-gold uppercase">Generation leadership</span>
+</div>
+</div>
+<div class="bg-surface border border-border-gray rounded-lg overflow-hidden">
+<div class="h-1 bg-industrial-gold"></div>
+<div class="p-8 md:p-9">
+<div class="font-display-lg text-[52px] leading-none mb-2 text-heritage-navy">6</div><span class="font-technical-caps text-technical-caps text-industrial-gold uppercase">Sourcing countries</span>
+</div>
+</div>
+<div class="bg-surface border border-border-gray rounded-lg overflow-hidden">
+<div class="h-1 bg-industrial-gold"></div>
+<div class="p-8 md:p-9">
+<div class="font-display-lg text-[52px] leading-none mb-2 text-heritage-navy">50<span class="text-industrial-gold">+</span></div><span class="font-technical-caps text-technical-caps text-industrial-gold uppercase">Principal brands</span>
+</div>
+</div>
 </div>
 </section>
 
 <!-- MISSION & VISION -->
-<section class="py-section-gap bg-surface" id="mission" style="scroll-margin-top:140px">
+<section class="py-section-gap bg-surface hairline-grid" id="mission" style="scroll-margin-top:140px">
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
 <div class="bg-surface-container-lowest border border-border-gray p-10 md:p-12">
