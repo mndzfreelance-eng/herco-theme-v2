@@ -1367,11 +1367,9 @@ body { background-color: #f9f9f9; }
 .marquee-track {
   display: inline-block; /* Essential for width to be content-based */
   white-space: nowrap; /* Essential to keep all content on one line */
-  animation: marquee-scroll 30s linear infinite; /* Adjust duration as needed */
+  animation: marquee-scroll 30s linear infinite;
   padding-right: 20px; /* Space between repeating content */
-  /* Force the track to be at least twice the width of its parent.
-     This ensures it overflows and the animation has space to move. */
-  min-width: 200%;
+  width: max-content; /* Ensure the track is as wide as its content */
 }
 
 .marquee-track span {
