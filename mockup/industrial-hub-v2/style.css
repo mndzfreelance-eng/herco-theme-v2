@@ -1,0 +1,17 @@
+/*
+Theme Name: Herco Theme
+Theme URI: https://herco.com.ph
+Author: Your Name/Company
+Author URI: https://yourwebsite.com
+Description: A custom WordPress theme for Herco Trading Inc., based on the Premium Industrial Hub design system.
+Version: 1.0.0
+Requires at least: 5.8
+Tested up to: 6.5
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: herco
+*/
+
+/* Import the main theme styles */
+@import url("assets/theme.css");
