@@ -1,0 +1,13 @@
+/*
+Theme Name: Herco Theme V2
+Theme URI: https://herco.com.ph/
+Author: Herco
+Description: WordPress theme matching the Herco mockup front-end design.
+Version: 2.0.6
+Requires at least: 6.0
+Tested up to: 6.6
+Requires PHP: 7.4
+Text Domain: herco
+*/
+
+/* Theme metadata only. Front-end CSS is enqueued from assets/theme.css. */
