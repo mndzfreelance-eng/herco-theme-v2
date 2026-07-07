@@ -5,20 +5,27 @@
 if (!defined('ABSPATH')) exit;
 
 /** Instructions block at top of image sections */
-class Herco_Customize_Note_Control extends WP_Customize_Control {
-    public $type = 'herco_note';
-
-    protected function render_content() {
-        if (!empty($this->label)) {
-            echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
+if ( ! function_exists( 'herco_customize_register' ) ) {
+    function herco_customize_register($wp_customize) {
+        if ( ! class_exists( 'WP_Customize_Control' ) || ! class_exists( 'WP_Customize_Media_Control' ) ) {
+            return;
         }
-        if (!empty($this->description)) {
-            echo '<p class="description" style="margin-top:6px;line-height:1.55">' . wp_kses_post($this->description) . '</p>';
-        }
-    }
-}
 
-function herco_customize_register($wp_customize) {
+        if ( ! class_exists( 'Herco_Customize_Note_Control' ) ) {
+            class Herco_Customize_Note_Control extends WP_Customize_Control {
+                public $type = 'herco_note';
+
+                protected function render_content() {
+                    if (!empty($this->label)) {
+                        echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
+                    }
+                    if (!empty($this->description)) {
+                        echo '<p class="description" style="margin-top:6px;line-height:1.55">' . wp_kses_post($this->description) . '</p>';
+                    }
+                }
+            }
+        }
+
 
     /* ── Homepage images & text ───────────────────────────── */
     $wp_customize->add_section('herco_home', [
@@ -127,8 +134,9 @@ function herco_customize_register($wp_customize) {
             'type'    => 'text',
         ]);
     }
+    }
+    add_action('customize_register', 'herco_customize_register');
 }
-add_action('customize_register', 'herco_customize_register');
 
 /** Register a media control with correct attachment-ID sanitization */
 function herco_add_image_control($wp_customize, $id, $label, $section, $description = '') {
