@@ -7,22 +7,16 @@
 
 get_header();
 
-$marquee_brands = array();
+$brand_names = array();
 if ( function_exists( 'herco_get_brand_tiles' ) ) {
 	$all_brands = herco_get_brand_tiles();
 	if ( ! empty( $all_brands ) ) {
-		$marquee_brands = array_filter(
-			$all_brands,
-			function( $brand ) {
-				return ! empty( $brand['logo'] ) && function_exists( 'herco_is_placeholder_src' ) && ! herco_is_placeholder_src( $brand['logo'] );
-			}
-		);
+		$brand_names = wp_list_pluck( $all_brands, 'name' );
 	}
 }
 
 // Fallback to names if no logos are available.
-$brand_names = array();
-if ( empty( $marquee_brands ) ) {
+if ( empty( $brand_names ) ) {
 	$brand_names = function_exists( 'herco_brands_fallback_names' ) ? herco_brands_fallback_names() : array( '3M', 'WD-40', 'Bosch', 'DeWalt', 'Stanley', 'Bahco', 'Yale', 'Briggs & Stratton', 'Black+Decker', 'Armor All', 'Devcon', 'Dorma' );
 }
 $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : array();
@@ -129,23 +123,15 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 		<span class="text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'Our principals', 'herco' ); ?></span>
 		<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4"><?php esc_html_e( '50+ world-class brands under one roof.', 'herco' ); ?></h2>
 	</div>
-	<?php if ( ! empty( $marquee_brands ) ) : ?>
+	<?php if ( ! empty( $brand_names ) ) : ?>
 		<div class="marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
-			<div class="marquee-track flex items-center gap-16 lg:gap-24">
+			<div class="marquee-track text-2xl font-bold tracking-tight text-slate-black/70">
 				<?php for ( $i = 0; $i < 2; $i++ ) : ?>
-					<?php foreach ( $marquee_brands as $brand ) : ?>
-						<div class="flex-shrink-0">
-							<a href="<?php echo esc_url( $brand['url'] ); ?>" title="<?php echo esc_attr( $brand['name'] ); ?>">
-								<img src="<?php echo esc_url( $brand['logo'] ); ?>" alt="<?php echo esc_attr( $brand['name'] ); ?>" class="h-10 lg:h-12 w-auto object-contain">
-							</a>
-						</div>
+					<?php foreach ( $brand_names as $brand_name ) : ?>
+						<span><?php echo esc_html( $brand_name ); ?></span>
 					<?php endforeach; ?>
 				<?php endfor; ?>
 			</div>
-		</div>
-	<?php elseif ( ! empty( $brand_names ) ) : ?>
-		<div class="marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
-			<div class="marquee-track text-2xl font-bold tracking-tight text-slate-black/70"><?php for ( $i = 0; $i < 2; $i++ ) : foreach ( $brand_names as $brand_name ) : ?><span class="inline-block px-4"><?php echo esc_html( $brand_name ); ?></span><?php endforeach; endfor; ?></div>
 		</div>
 	<?php endif; ?>
 	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mt-12"><a class="inline-flex items-center gap-2 text-industrial-gold text-label-md font-label-md hover:gap-3 transition-all" href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>"><?php esc_html_e( 'View the full brand portfolio', 'herco' ); ?> <span class="material-symbols-outlined text-base">arrow_forward</span></a></div>
