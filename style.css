@@ -110,24 +110,38 @@ textarea.herco-form-control {
 /* Custom CSS for the Brand Marquee */
 
 .marquee {
-  overflow: hidden;
-  /* Ensures content outside the marquee is hidden */
+	overflow: hidden;
+	white-space: nowrap;
+	position: relative;
 }
 
 .marquee-track {
-  animation: marquee-scroll 30s linear infinite; /* Adjust speed (30s) as needed */
-  /* The 'flex flex-nowrap items-center w-max' classes are already in the HTML */
+	display: inline-flex;
+	align-items: center;
+	flex-wrap: nowrap;
+	white-space: nowrap;
+	width: max-content;
+	min-width: max-content;
+	will-change: transform;
+	animation: marquee-scroll 30s linear infinite;
 }
 
 .marquee-track:hover {
-  animation-play-state: paused; /* Pause animation on hover */
+	animation-play-state: paused;
+}
+
+.marquee-track > * {
+	flex: 0 0 auto;
 }
 
 @keyframes marquee-scroll {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%); /* Scrolls half the content width to create an infinite loop with duplicated content */
-  }
+	0% { transform: translate3d(0, 0, 0); }
+	100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.marquee-track {
+		animation: none !important;
+		transform: none !important;
+	}
 }
