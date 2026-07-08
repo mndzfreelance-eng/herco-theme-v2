@@ -1360,34 +1360,3 @@ body { background-color: #f9f9f9; }
     transition: none;
   }
 }
-
-/* Marquee Animation */
-.marquee {
-  overflow: hidden;
-  white-space: nowrap;
-  box-sizing: border-box;
-}
-
-.marquee-track {
-  display: inline-block; /* Essential for width to be content-based */
-  white-space: nowrap; /* Essential to keep all content on one line */
-  animation: marquee-scroll 30s linear infinite;
-  padding-right: 20px; /* Space between repeating content */
-  width: max-content; /* Ensure the track is as wide as its content */
-}
-
-.marquee-track span {
-  margin-right: 20px; /* Space between individual brand names */
-}
-@keyframes marquee-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* Moves half the width of the content */
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none !important;
-    transform: none !important;
-  }
-}
-

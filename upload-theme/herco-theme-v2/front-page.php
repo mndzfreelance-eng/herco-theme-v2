@@ -131,7 +131,7 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 	</div>
 	<?php if ( ! empty( $marquee_brands ) ) : ?>
 		<div class="marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
-			<div class="marquee-track flex flex-nowrap items-center w-max">
+			<div class="marquee-track flex flex-nowrap items-center">
 				<?php for ( $i = 0; $i < 2; $i++ ) : ?>
 					<?php foreach ( $marquee_brands as $brand ) : ?>
 						<a href="<?php echo esc_url( $brand['url'] ); ?>" title="<?php echo esc_attr( $brand['name'] ); ?>" class="flex-shrink-0 px-8 lg:px-12">
@@ -143,7 +143,13 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 		</div>
 	<?php elseif ( ! empty( $brand_names ) ) : ?>
 		<div class="marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
-			<div class="marquee-track text-2xl font-bold tracking-tight text-slate-black/70"><?php for ( $i = 0; $i < 2; $i++ ) : foreach ( $brand_names as $brand_name ) : ?><span class="inline-block px-4"><?php echo esc_html( $brand_name ); ?></span><?php endforeach; endfor; ?></div>
+			<div class="marquee-track flex flex-nowrap items-center text-2xl font-bold tracking-tight text-slate-black/70">
+				<?php for ( $i = 0; $i < 2; $i++ ) : ?>
+					<?php foreach ( $brand_names as $brand_name ) : ?>
+						<span class="flex-shrink-0 px-8 lg:px-12"><?php echo esc_html( $brand_name ); ?></span>
+					<?php endforeach; ?>
+				<?php endfor; ?>
+			</div>
 		</div>
 	<?php endif; ?>
 	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mt-12"><a class="inline-flex items-center gap-2 text-industrial-gold text-label-md font-label-md hover:gap-3 transition-all" href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>"><?php esc_html_e( 'View the full brand portfolio', 'herco' ); ?> <span class="material-symbols-outlined text-base">arrow_forward</span></a></div>
