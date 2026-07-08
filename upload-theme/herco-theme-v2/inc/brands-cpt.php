@@ -99,6 +99,10 @@ function herco_brand_logo_meta_key() {
 	return '_herco_brand_logo';
 }
 
+function herco_brand_banner_meta_key() {
+	return '_herco_brand_banner_image';
+}
+
 function herco_brand_resolve_attachment_url( $attachment_id, $size = 'full' ) {
 	$mime = get_post_mime_type( $attachment_id );
 	if ( 'image/svg+xml' === $mime ) {
@@ -187,6 +191,18 @@ function herco_brand_logo_metabox() {
 }
 add_action( 'add_meta_boxes_brand', 'herco_brand_logo_metabox' );
 
+function herco_brand_banner_metabox() {
+	add_meta_box(
+		'herco-brand-banner',
+		__( 'Brand Banner Image', 'herco' ),
+		'herco_render_brand_banner_metabox',
+		'brand',
+		'side',
+		'low'
+	);
+}
+add_action( 'add_meta_boxes_brand', 'herco_brand_banner_metabox' );
+
 function herco_render_brand_logo_metabox( $post ) {
 	$value   = herco_brand_logo_raw( $post->ID );
 	$logo    = herco_brand_logo_url( $post->ID, 'full' );
@@ -201,6 +217,29 @@ function herco_render_brand_logo_metabox( $post ) {
 	<p style="display:flex; gap:8px; flex-wrap:wrap; margin:0;">
 		<button type="button" class="button button-secondary" data-herco-brand-logo-select><?php esc_html_e( 'Select Logo', 'herco' ); ?></button>
 		<button type="button" class="button" data-herco-brand-logo-remove<?php echo $has_set ? '' : ' style="display:none;"'; ?>><?php esc_html_e( 'Remove Override', 'herco' ); ?></button>
+	</p>
+	<?php
+}
+
+function herco_render_brand_banner_metabox( $post ) {
+	$value      = get_post_meta( $post->ID, herco_brand_banner_meta_key(), true );
+	$banner_url = '';
+	if ( is_numeric( $value ) ) {
+		$banner_url = wp_get_attachment_image_url( (int) $value, 'medium' );
+	}
+	$has_set = (bool) $value;
+	wp_nonce_field( 'herco_save_brand_banner', 'herco_brand_banner_nonce' );
+	?>
+	<p><?php esc_html_e( 'Upload a custom banner image for this brand. This will override the default banner on the brand\'s page.', 'herco' ); ?></p>
+	<input type="hidden" id="herco-brand-banner-field" name="herco_brand_banner" value="<?php echo esc_attr( $value ); ?>">
+	<div id="herco-brand-banner-preview" style="margin:12px 0; padding:12px; border:1px solid #dcdcde; background:#fff; text-align:center;<?php echo $has_set && $banner_url ? '' : ' display:none;'; ?>">
+		<?php if ( $banner_url ) : ?>
+			<img src="<?php echo esc_url( $banner_url ); ?>" alt="" style="max-width:100%; height:auto;">
+		<?php endif; ?>
+	</div>
+	<p style="display:flex; gap:8px; flex-wrap:wrap; margin:0;">
+		<button type="button" class="button button-secondary" data-herco-brand-banner-select><?php esc_html_e( 'Select Banner', 'herco' ); ?></button>
+		<button type="button" class="button" data-herco-brand-banner-remove<?php echo $has_set ? '' : ' style="display:none;"'; ?>><?php esc_html_e( 'Remove Banner', 'herco' ); ?></button>
 	</p>
 	<?php
 }
@@ -230,6 +269,31 @@ function herco_save_brand_logo_meta( $post_id ) {
 }
 add_action( 'save_post_brand', 'herco_save_brand_logo_meta' );
 
+function herco_save_brand_banner_meta( $post_id ) {
+	if ( ! isset( $_POST['herco_brand_banner_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['herco_brand_banner_nonce'] ) ), 'herco_save_brand_banner' ) ) {
+		return;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	$value = isset( $_POST['herco_brand_banner'] ) ? sanitize_text_field( wp_unslash( $_POST['herco_brand_banner'] ) ) : '';
+	$value = is_numeric( $value ) ? absint( $value ) : '';
+
+	if ( empty( $value ) ) {
+		delete_post_meta( $post_id, herco_brand_banner_meta_key() );
+		return;
+	}
+
+	update_post_meta( $post_id, herco_brand_banner_meta_key(), $value );
+}
+add_action( 'save_post_brand', 'herco_save_brand_banner_meta' );
+
 function herco_enqueue_brand_admin_media( $hook ) {
 	if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
 		return;
@@ -244,6 +308,11 @@ function herco_enqueue_brand_admin_media( $hook ) {
 	wp_add_inline_script(
 		'jquery-core',
 		"document.addEventListener('DOMContentLoaded', function () {\n  var field = document.getElementById('herco-brand-logo-field');\n  var preview = document.getElementById('herco-brand-logo-preview');\n  var selectButton = document.querySelector('[data-herco-brand-logo-select]');\n  var removeButton = document.querySelector('[data-herco-brand-logo-remove]');\n  var frame;\n\n  if (!field || !selectButton || !removeButton || typeof wp === 'undefined' || !wp.media) {\n    return;\n  }\n\n  function setPreview(url) {\n    if (!url) {\n      preview.style.display = 'none';\n      preview.innerHTML = '';\n      removeButton.style.display = 'none';\n      return;\n    }\n\n    preview.innerHTML = '<img src=\"' + url + '\" alt=\"\" style=\"max-width:100%; max-height:120px; width:auto; height:auto; object-fit:contain;\">';\n    preview.style.display = 'block';\n    removeButton.style.display = '';\n  }\n\n  selectButton.addEventListener('click', function (event) {\n    event.preventDefault();\n\n    if (!frame) {\n      frame = wp.media({\n        title: 'Select brand logo',\n        button: { text: 'Use this logo' },\n        library: { type: 'image' },\n        multiple: false\n      });\n\n      frame.on('select', function () {\n        var attachment = frame.state().get('selection').first().toJSON();\n        field.value = attachment.id || attachment.url || '';\n        setPreview(attachment.url || '');\n      });\n    }\n\n    frame.open();\n  });\n\n  removeButton.addEventListener('click', function (event) {\n    event.preventDefault();\n    field.value = '';\n    setPreview('');\n  });\n});",
+		'after'
+	);
+	wp_add_inline_script(
+		'jquery-core',
+		"document.addEventListener('DOMContentLoaded', function () {\n  var bannerField = document.getElementById('herco-brand-banner-field');\n  var bannerPreview = document.getElementById('herco-brand-banner-preview');\n  var bannerSelect = document.querySelector('[data-herco-brand-banner-select]');\n  var bannerRemove = document.querySelector('[data-herco-brand-banner-remove]');\n  var bannerFrame;\n\n  if (!bannerField || !bannerSelect || !bannerRemove || typeof wp === 'undefined' || !wp.media) {\n    return;\n  }\n\n  function setBannerPreview(url) {\n    if (!url) {\n      bannerPreview.style.display = 'none';\n      bannerPreview.innerHTML = '';\n      bannerRemove.style.display = 'none';\n      return;\n    }\n\n    bannerPreview.innerHTML = '<img src=\"' + url + '\" alt=\"\" style=\"max-width:100%; height:auto;\">';\n    bannerPreview.style.display = 'block';\n    bannerRemove.style.display = '';\n  }\n\n  bannerSelect.addEventListener('click', function (event) {\n    event.preventDefault();\n\n    if (!bannerFrame) {\n      bannerFrame = wp.media({\n        title: 'Select Brand Banner',\n        button: { text: 'Use this banner' },\n        library: { type: 'image' },\n        multiple: false\n      });\n\n      bannerFrame.on('select', function () {\n        var attachment = bannerFrame.state().get('selection').first().toJSON();\n        bannerField.value = attachment.id;\n        var previewUrl = attachment.sizes && attachment.sizes.medium ? attachment.sizes.medium.url : attachment.url;\n        setBannerPreview(previewUrl);\n      });\n    }\n\n    bannerFrame.open();\n  });\n\n  bannerRemove.addEventListener('click', function (event) {\n    event.preventDefault();\n    bannerField.value = '';\n    setBannerPreview('');\n  });\n});",
 		'after'
 	);
 }
@@ -338,6 +407,20 @@ function herco_maybe_flush_brand_rewrite_rules() {
 	update_option( 'herco_brand_rewrite_version', $version, false );
 }
 add_action( 'init', 'herco_maybe_flush_brand_rewrite_rules', 40 );
+
+function herco_get_brand_banner_url( $post_id ) {
+	$banner_id = get_post_meta( $post_id, herco_brand_banner_meta_key(), true );
+
+	if ( is_numeric( $banner_id ) ) {
+		$url = wp_get_attachment_image_url( (int) $banner_id, 'herco-banner' );
+		if ( $url ) {
+			return $url;
+		}
+	}
+
+	// Fallback to the default brands banner logic.
+	return herco_page_banner_url( 'herco_brands_banner', 'assets/media/brands-hero.jpg', 'page-banner' );
+}
 
 /**
  * Get a list of featured brands for use in mega menus, etc.

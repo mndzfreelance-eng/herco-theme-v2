@@ -18,7 +18,7 @@ $brand_name    = get_the_title();
 $brand_logo    = function_exists( 'herco_brand_logo_url' ) ? herco_brand_logo_url( $brand_id, 'full' ) : '';
 $brand_term    = function_exists( 'herco_brand_primary_category' ) ? herco_brand_primary_category( $brand_id ) : null;
 $brand_excerpt = has_excerpt() ? get_the_excerpt() : '';
-$banner_url    = herco_page_banner_url( 'herco_brands_banner', 'assets/media/brands-hero.jpg', 'page-banner' );
+$banner_url    = function_exists( 'herco_get_brand_banner_url' ) ? herco_get_brand_banner_url( $brand_id ) : herco_page_banner_url( 'herco_brands_banner', 'assets/media/brands-hero.jpg', 'page-banner' );
 $content       = apply_filters( 'the_content', get_the_content() );
 $has_content   = '' !== trim( wp_strip_all_tags( get_the_content() ) );
 ?>
@@ -67,16 +67,6 @@ $has_content   = '' !== trim( wp_strip_all_tags( get_the_content() ) );
 				</div>
 			<?php endif; ?>
 
-			<div class="mt-12 border border-border-gray bg-surface-container-lowest p-8 md:p-10">
-				<span class="font-technical-caps text-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'Distribution with Herco', 'herco' ); ?></span>
-				<h3 class="font-headline-lg text-3xl text-heritage-navy mt-4 mb-4"><?php esc_html_e( 'Built for long-term market growth', 'herco' ); ?></h3>
-				<p class="text-body-md font-body-md text-on-surface-variant mb-6"><?php esc_html_e( 'Herco supports global principals with coordinated logistics, retail coverage, trade relationships, and channel execution across the Philippines.', 'herco' ); ?></p>
-				<ul class="space-y-4 text-body-md font-body-md text-on-surface-variant">
-					<li class="flex items-start gap-3"><span class="material-symbols-outlined text-industrial-gold mt-0.5">check_circle</span><span><?php esc_html_e( 'Traditional hardware, modern retail, e-commerce, and industrial channels.', 'herco' ); ?></span></li>
-					<li class="flex items-start gap-3"><span class="material-symbols-outlined text-industrial-gold mt-0.5">check_circle</span><span><?php esc_html_e( 'Brand-building support for merchandising, training, and market development.', 'herco' ); ?></span></li>
-					<li class="flex items-start gap-3"><span class="material-symbols-outlined text-industrial-gold mt-0.5">check_circle</span><span><?php esc_html_e( 'A dedicated contact path for sourcing, dealership, and customer inquiries.', 'herco' ); ?></span></li>
-				</ul>
-			</div>
 		</div>
 	</div>
 </section>
