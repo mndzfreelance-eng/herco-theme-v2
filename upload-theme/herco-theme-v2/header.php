@@ -71,12 +71,22 @@ $is_support_page = is_page(
 							<div>
 								<h4 class="text-technical-caps font-technical-caps text-heritage-navy/70 uppercase tracking-widest mb-4"><?php esc_html_e( 'Featured Brands', 'herco' ); ?></h4>
 								<div class="grid grid-cols-3 gap-4">
-									<a href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>" class="ecosystem-logo-tile h-16">Bosch</a>
-									<a href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>" class="ecosystem-logo-tile h-16">DeWalt</a>
-									<a href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>" class="ecosystem-logo-tile h-16">Stanley</a>
-									<a href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>" class="ecosystem-logo-tile h-16">3M</a>
-									<a href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>" class="ecosystem-logo-tile h-16">WD-40</a>
-									<a href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>" class="ecosystem-logo-tile h-16">Yale</a>
+									<?php
+									$featured_brands = function_exists( 'herco_get_featured_brands' ) ? herco_get_featured_brands( 6 ) : array();
+									if ( ! empty( $featured_brands ) ) :
+										foreach ( $featured_brands as $brand ) :
+											?>
+											<a href="<?php echo esc_url( $brand['url'] ); ?>" class="ecosystem-logo-tile h-16" title="<?php echo esc_attr( $brand['name'] ); ?>">
+												<?php if ( ! empty( $brand['logo'] ) ) : ?>
+													<img src="<?php echo esc_url( $brand['logo'] ); ?>" alt="<?php echo esc_attr( $brand['name'] ); ?>" class="max-h-12 w-auto object-contain">
+												<?php else : ?>
+													<?php echo esc_html( $brand['name'] ); ?>
+												<?php endif; ?>
+											</a>
+											<?php
+										endforeach;
+									endif;
+									?>
 								</div>
 							</div>
 						</div>

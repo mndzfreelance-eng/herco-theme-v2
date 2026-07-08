@@ -339,6 +339,42 @@ function herco_maybe_flush_brand_rewrite_rules() {
 }
 add_action( 'init', 'herco_maybe_flush_brand_rewrite_rules', 40 );
 
+/**
+ * Get a list of featured brands for use in mega menus, etc.
+ *
+ * @param integer $count Number of brands to retrieve.
+ * @return array
+ */
+function herco_get_featured_brands( $count = 6 ) {
+	$posts = get_posts(
+		array(
+			'post_type'      => 'brand',
+			'post_status'    => 'publish',
+			'posts_per_page' => (int) $count,
+			'orderby'        => array(
+				'menu_order' => 'ASC',
+				'title'      => 'ASC',
+			),
+		)
+	);
+
+	if ( empty( $posts ) ) {
+		return array();
+	}
+
+	$brands = array();
+	foreach ( $posts as $post ) {
+		$logo_url = herco_brand_logo_url( $post->ID, 'medium' );
+		$brands[] = array(
+			'name' => get_the_title( $post ),
+			'url'  => get_permalink( $post ),
+			'logo' => ! herco_is_placeholder_src( $logo_url ) ? $logo_url : '',
+		);
+	}
+
+	return $brands;
+}
+
 function herco_get_brand_tiles() {
 	$posts = get_posts(
 		array(
