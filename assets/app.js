@@ -251,7 +251,7 @@
 
   /* --- Contact form (demo only) --- */
   var form = document.querySelector("#contact-form");
-  if (form) {
+  if (form && !form.getAttribute("action")) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var note = form.querySelector(".form-note");

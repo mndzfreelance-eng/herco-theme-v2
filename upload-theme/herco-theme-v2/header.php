@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $is_front_page   = is_front_page();
 $is_about_page   = is_page( 'about' );
-$is_brands_page  = is_page( 'brands' );
+$is_brands_page  = is_page( 'brands' ) || is_singular( 'brand' );
 $is_dist_page    = is_page( 'distribution' );
 $is_faq_page     = is_page( 'faqs' );
 $is_support_page = is_page(

@@ -42,16 +42,25 @@ $filters = function_exists( 'herco_brand_filter_options' ) ? herco_brand_filter_
 		<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-gutter">
 			<?php if ( ! empty( $brands ) ) : ?>
 				<?php foreach ( $brands as $brand ) : ?>
-					<a href="<?php echo esc_url( herco_page_url( 'contact' ) . '?brand=' . rawurlencode( $brand['name'] ) ); ?>" class="brand-tile group bg-surface-container-lowest border border-border-gray p-6 flex flex-col items-center justify-center text-center aspect-[4/3] hover:border-industrial-gold transition-colors" data-cat="<?php echo esc_attr( $brand['category'] ); ?>">
+					<a href="<?php echo esc_url( $brand['url'] ); ?>" class="brand-tile group bg-surface-container-lowest border border-border-gray p-6 flex flex-col items-center justify-center text-center aspect-[4/3] hover:border-industrial-gold transition-colors" data-cat="<?php echo esc_attr( $brand['category'] ); ?>">
 						<?php if ( ! empty( $brand['logo'] ) ) : ?>
 							<div class="w-full flex items-center justify-center mb-5 min-h-[72px]"><img src="<?php echo esc_url( $brand['logo'] ); ?>" alt="<?php echo esc_attr( $brand['name'] ); ?>" class="max-h-16 w-auto object-contain"></div>
 						<?php endif; ?>
 						<span class="font-headline-lg text-2xl font-bold text-heritage-navy"><?php echo esc_html( $brand['name'] ); ?></span>
 						<small class="font-technical-caps text-technical-caps text-on-surface-variant uppercase mt-2"><?php echo esc_html( $brand['label'] ); ?></small>
+						<span class="mt-4 inline-flex items-center gap-2 text-label-md font-label-md text-industrial-gold opacity-0 group-hover:opacity-100 transition-opacity"><?php esc_html_e( 'View brand', 'herco' ); ?><span class="material-symbols-outlined text-base">arrow_forward</span></span>
 					</a>
 				<?php endforeach; ?>
 			<?php else : ?>
-				<div class="col-span-full border border-border-gray bg-surface-container-lowest p-10 text-center text-on-surface-variant"><?php esc_html_e( 'No brands have been added yet. Add them from the Brands menu in WordPress admin.', 'herco' ); ?></div>
+				<div class="col-span-full border border-border-gray bg-surface-container-lowest p-10 text-center text-on-surface-variant">
+					<p><?php esc_html_e( 'No brands have been added yet. Add them from the Brands menu in WordPress admin.', 'herco' ); ?></p>
+					<?php if ( current_user_can( 'edit_pages' ) ) : ?>
+						<div class="mt-6 flex flex-wrap justify-center gap-3">
+							<a class="inline-flex items-center justify-center bg-heritage-navy text-on-primary text-label-md font-label-md rounded px-6 py-3 hover:bg-heritage-navy/90 transition-colors" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=brand' ) ); ?>"><?php esc_html_e( 'Add First Brand', 'herco' ); ?></a>
+							<a class="inline-flex items-center justify-center border border-border-gray text-heritage-navy text-label-md font-label-md rounded px-6 py-3 hover:border-industrial-gold transition-colors" href="<?php echo esc_url( admin_url( 'edit.php?post_type=brand' ) ); ?>"><?php esc_html_e( 'Manage Brands', 'herco' ); ?></a>
+						</div>
+					<?php endif; ?>
+				</div>
 			<?php endif; ?>
 		</div>
 	</div>

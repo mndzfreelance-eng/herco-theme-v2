@@ -11,3 +11,98 @@ Text Domain: herco
 */
 
 /* Theme metadata only. Front-end CSS is enqueued from assets/theme.css. */
+
+.herco-form {
+	display: grid;
+	gap: 1.25rem;
+}
+
+.herco-form-success,
+.herco-form-error {
+	padding: 0.875rem 1rem;
+	border-radius: 0.5rem;
+	font-size: 0.95rem;
+	line-height: 1.6;
+}
+
+.herco-form-success {
+	border: 1px solid rgba(34, 197, 94, 0.24);
+	background: rgba(240, 253, 244, 0.95);
+	color: #166534;
+}
+
+.herco-form-error {
+	border: 1px solid rgba(239, 68, 68, 0.2);
+	background: rgba(254, 242, 242, 0.95);
+	color: #991b1b;
+}
+
+.form-row {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1.25rem;
+}
+
+.form-row.full {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.field-label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: #121826;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.herco-form-control {
+	width: 100%;
+	padding: 0.75rem 1rem;
+	border: 1px solid #d6dbe4;
+	border-radius: 0.25rem;
+	background: #ffffff;
+	color: #121826;
+	font: inherit;
+	line-height: 1.5;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	appearance: none;
+}
+
+.herco-form-control:focus {
+	outline: none;
+	border-color: #f7941e;
+	box-shadow: 0 0 0 1px #f7941e;
+}
+
+textarea.herco-form-control {
+	min-height: 9rem;
+	resize: vertical;
+}
+
+.herco-form-submit {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 0.875rem 2rem;
+	border: 0;
+	border-radius: 0.25rem;
+	background: #25276b;
+	color: #ffffff;
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.herco-form-submit:hover,
+.herco-form-submit:focus {
+	background: #1d1f54;
+}
+
+@media (max-width: 767px) {
+	.form-row {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}

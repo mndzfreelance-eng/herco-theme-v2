@@ -93,6 +93,38 @@ function herco_get_form_page($slug) {
     return $registry[$slug] ?? null;
 }
 
+function herco_contact_form_topics() {
+    return [
+        ''                    => __( 'Select an option', 'herco' ),
+        'warranty-claim'      => __( 'Warranty Claim', 'herco' ),
+        'after-sales-support' => __( 'After-Sales Support', 'herco' ),
+        'request-quote'       => __( 'Request a Quotation', 'herco' ),
+        'retailer-application' => __( 'Retailer Application', 'herco' ),
+        'supplier-partnership' => __( 'Supplier Partnership', 'herco' ),
+        'other'               => __( 'Other inquiry', 'herco' ),
+    ];
+}
+
+function herco_contact_form_config() {
+    return [
+        'title'      => __( 'Contact', 'herco' ),
+        'label'      => __( 'General Inquiry', 'herco' ),
+        'intro'      => __( 'We welcome customers, suppliers and partnership inquiries. Fill out the form and the Herco team will reply through the contact details you provide.', 'herco' ),
+        'cf7_title'  => '',
+        'email'      => get_theme_mod( 'herco_email', 'info@herco.com.ph' ),
+        'submit'     => __( 'Send Message', 'herco' ),
+        'topics'     => herco_contact_form_topics(),
+    ];
+}
+
+function herco_get_native_form_config( $slug ) {
+    if ( 'contact' === $slug ) {
+        return herco_contact_form_config();
+    }
+
+    return herco_get_form_page( $slug );
+}
+
 function herco_current_form_slug() {
     global $herco_form_slug;
     if (!empty($herco_form_slug)) {
@@ -180,8 +212,19 @@ function herco_render_cf7_form($cf7_title) {
     return true;
 }
 
-function herco_render_native_form($slug, $config) {
+function herco_render_native_form($slug, $config, $args = []) {
+    $args = wp_parse_args(
+        $args,
+        [
+            'form_id'             => '',
+            'show_topic'          => false,
+            'topic_options'       => [],
+            'message_placeholder' => '',
+        ]
+    );
+
     $brand = isset($_GET['brand']) ? sanitize_text_field(wp_unslash($_GET['brand'])) : '';
+    $topic = isset($_GET['topic']) ? sanitize_text_field(wp_unslash($_GET['topic'])) : '';
     $sent  = isset($_GET['sent']) && $_GET['sent'] === '1';
     $error = isset($_GET['error']) && $_GET['error'] === '1';
     ?>
@@ -192,49 +235,61 @@ function herco_render_native_form($slug, $config) {
     <?php endif; ?>
     <?php if ($error) : ?>
       <div class="herco-form-error" role="alert">
-        <?php esc_html_e('Please fill in all required fields and try again.', 'herco'); ?>
+                <?php esc_html_e('Please check the required fields and try again.', 'herco'); ?>
       </div>
     <?php endif; ?>
-    <form class="herco-form wpcf7-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+        <form<?php echo $args['form_id'] ? ' id="' . esc_attr( $args['form_id'] ) . '"' : ''; ?> class="herco-form wpcf7-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
       <?php wp_nonce_field('herco_form_submit', 'herco_form_nonce'); ?>
       <input type="hidden" name="action" value="herco_form_submit">
       <input type="hidden" name="herco_form_slug" value="<?php echo esc_attr($slug); ?>">
       <div class="form-row">
         <div>
           <label class="field-label" for="herco-name-<?php echo esc_attr($slug); ?>"><?php esc_html_e('Full Name', 'herco'); ?> *</label>
-          <input type="text" id="herco-name-<?php echo esc_attr($slug); ?>" name="herco_name" required>
+                    <input class="herco-form-control" type="text" id="herco-name-<?php echo esc_attr($slug); ?>" name="herco_name" required autocomplete="name">
         </div>
         <div>
           <label class="field-label" for="herco-company-<?php echo esc_attr($slug); ?>"><?php esc_html_e('Company', 'herco'); ?></label>
-          <input type="text" id="herco-company-<?php echo esc_attr($slug); ?>" name="herco_company">
+                    <input class="herco-form-control" type="text" id="herco-company-<?php echo esc_attr($slug); ?>" name="herco_company" autocomplete="organization">
         </div>
       </div>
       <div class="form-row">
         <div>
           <label class="field-label" for="herco-email-<?php echo esc_attr($slug); ?>"><?php esc_html_e('Email', 'herco'); ?> *</label>
-          <input type="email" id="herco-email-<?php echo esc_attr($slug); ?>" name="herco_email" required>
+                    <input class="herco-form-control" type="email" id="herco-email-<?php echo esc_attr($slug); ?>" name="herco_email" required autocomplete="email">
         </div>
         <div>
           <label class="field-label" for="herco-phone-<?php echo esc_attr($slug); ?>"><?php esc_html_e('Phone', 'herco'); ?></label>
-          <input type="tel" id="herco-phone-<?php echo esc_attr($slug); ?>" name="herco_phone">
+                    <input class="herco-form-control" type="tel" id="herco-phone-<?php echo esc_attr($slug); ?>" name="herco_phone" autocomplete="tel">
         </div>
       </div>
+            <?php if ( ! empty( $args['show_topic'] ) && ! empty( $args['topic_options'] ) ) : ?>
+            <div class="form-row full">
+                <div>
+                    <label class="field-label" for="herco-topic-<?php echo esc_attr($slug); ?>"><?php esc_html_e('I\'m reaching out as a...', 'herco'); ?></label>
+                    <select class="herco-form-control" id="herco-topic-<?php echo esc_attr($slug); ?>" name="herco_topic">
+                        <?php foreach ( $args['topic_options'] as $value => $label ) : ?>
+                            <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $topic, $value ); ?>><?php echo esc_html( $label ); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <?php endif; ?>
       <?php if ($slug === 'schedule-a-call') : ?>
       <div class="form-row">
         <div>
           <label class="field-label" for="herco-date-<?php echo esc_attr($slug); ?>"><?php esc_html_e('Preferred Date', 'herco'); ?></label>
-          <input type="date" id="herco-date-<?php echo esc_attr($slug); ?>" name="herco_date">
+                    <input class="herco-form-control" type="date" id="herco-date-<?php echo esc_attr($slug); ?>" name="herco_date">
         </div>
         <div>
           <label class="field-label" for="herco-time-<?php echo esc_attr($slug); ?>"><?php esc_html_e('Preferred Time', 'herco'); ?></label>
-          <input type="time" id="herco-time-<?php echo esc_attr($slug); ?>" name="herco_time">
+                    <input class="herco-form-control" type="time" id="herco-time-<?php echo esc_attr($slug); ?>" name="herco_time">
         </div>
       </div>
       <?php endif; ?>
       <div class="form-row full">
         <div>
           <label class="field-label" for="herco-message-<?php echo esc_attr($slug); ?>"><?php esc_html_e('Message', 'herco'); ?> *</label>
-          <textarea id="herco-message-<?php echo esc_attr($slug); ?>" name="herco_message" rows="6" required><?php
+                    <textarea class="herco-form-control" id="herco-message-<?php echo esc_attr($slug); ?>" name="herco_message" rows="6" required placeholder="<?php echo esc_attr( $args['message_placeholder'] ); ?>"><?php
             if ($brand) {
                 echo esc_textarea(sprintf(__('I would like a quotation for %s products.', 'herco'), $brand));
             } elseif ($slug === 'schedule-a-call') {
@@ -243,7 +298,7 @@ function herco_render_native_form($slug, $config) {
           ?></textarea>
         </div>
       </div>
-      <p><input type="submit" class="herco-form-submit" value="<?php echo esc_attr($config['submit']); ?>"></p>
+            <p><input type="submit" class="herco-form-submit" value="<?php echo esc_attr($config['submit']); ?>"></p>
     </form>
     <?php
 }
@@ -254,7 +309,7 @@ function herco_handle_form_submit() {
     }
 
     $slug   = sanitize_key(wp_unslash($_POST['herco_form_slug'] ?? ''));
-    $config = herco_get_form_page($slug);
+    $config = herco_get_native_form_config($slug);
     if (!$config) {
         wp_die(esc_html__('Invalid form.', 'herco'));
     }
@@ -263,6 +318,7 @@ function herco_handle_form_submit() {
     $email   = sanitize_email(wp_unslash($_POST['herco_email'] ?? ''));
     $phone   = sanitize_text_field(wp_unslash($_POST['herco_phone'] ?? ''));
     $company = sanitize_text_field(wp_unslash($_POST['herco_company'] ?? ''));
+    $topic   = sanitize_key(wp_unslash($_POST['herco_topic'] ?? ''));
     $message = sanitize_textarea_field(wp_unslash($_POST['herco_message'] ?? ''));
     $date    = sanitize_text_field(wp_unslash($_POST['herco_date'] ?? ''));
     $time    = sanitize_text_field(wp_unslash($_POST['herco_time'] ?? ''));
@@ -270,20 +326,28 @@ function herco_handle_form_submit() {
     $page = get_page_by_path($slug);
     $redirect = $page ? get_permalink($page) : home_url('/' . $slug . '/');
 
-    if ($name === '' || $email === '' || $message === '') {
+    if ($name === '' || ! is_email( $email ) || $message === '') {
         wp_safe_redirect(add_query_arg('error', '1', $redirect));
         exit;
     }
 
+    $topics      = isset( $config['topics'] ) && is_array( $config['topics'] ) ? $config['topics'] : [];
+    $topic_label = isset( $topics[ $topic ] ) ? $topics[ $topic ] : '';
     $subject = sprintf('[%s] %s — %s', get_bloginfo('name'), $config['title'], $name);
     $body    = "Name: {$name}\nCompany: {$company}\nEmail: {$email}\nPhone: {$phone}\n";
+    if ( $topic_label ) {
+        $body .= "Inquiry Type: {$topic_label}\n";
+    }
     if ($date || $time) {
         $body .= 'Preferred: ' . $date . ($time ? " at {$time}" : '') . "\n";
     }
     $body .= "\nMessage:\n{$message}\n";
     $headers = ['Content-Type: text/plain; charset=UTF-8', 'Reply-To: ' . $name . ' <' . $email . '>'];
 
-    wp_mail($config['email'], $subject, $body, $headers);
+    if ( ! wp_mail($config['email'], $subject, $body, $headers) ) {
+        wp_safe_redirect(add_query_arg('error', '1', $redirect));
+        exit;
+    }
 
     wp_safe_redirect(add_query_arg('sent', '1', $redirect));
     exit;

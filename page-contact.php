@@ -46,30 +46,24 @@ $shopee          = get_theme_mod( 'herco_shopee', 'https://shopee.ph/hercotradin
 				<div class="mt-8 border border-border-gray overflow-hidden aspect-[16/10]"><iframe title="Herco Trading Inc. location map" class="w-full h-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=114+Benavidez+Street+Legaspi+Village+Makati+City&output=embed"></iframe></div>
 			</div>
 			<div>
-				<form class="bg-surface-container-lowest border border-border-gray p-8 md:p-10" id="contact-form" novalidate>
+				<div class="bg-surface-container-lowest border border-border-gray p-8 md:p-10">
 				<?php herco_render_editor_area( 'herco-contact-form-title', '<h3 class="font-subheading text-subheading text-heritage-navy mb-1">' . esc_html__( 'Send us a message', 'herco' ) . '</h3>' ); ?>
 					<?php herco_render_editor_area( 'herco-contact-form-desc', '<p class="text-body-md font-body-md text-on-surface-variant mb-8">' . esc_html__( 'We welcome customers, suppliers and partnership inquiries.', 'herco' ) . '</p>' ); ?>
-					<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-						<div><label class="block text-label-md font-label-md text-on-surface mb-2" for="name"><?php esc_html_e( 'Full name', 'herco' ); ?></label><input class="w-full bg-surface border border-border-gray rounded px-4 py-2.5 text-body-md focus:outline-none focus:border-industrial-gold focus:ring-1 focus:ring-industrial-gold transition-all" id="name" name="name" type="text" required autocomplete="name"></div>
-						<div><label class="block text-label-md font-label-md text-on-surface mb-2" for="company"><?php esc_html_e( 'Company', 'herco' ); ?></label><input class="w-full bg-surface border border-border-gray rounded px-4 py-2.5 text-body-md focus:outline-none focus:border-industrial-gold focus:ring-1 focus:ring-industrial-gold transition-all" id="company" name="company" type="text" autocomplete="organization"></div>
-						<div><label class="block text-label-md font-label-md text-on-surface mb-2" for="email"><?php esc_html_e( 'Email', 'herco' ); ?></label><input class="w-full bg-surface border border-border-gray rounded px-4 py-2.5 text-body-md focus:outline-none focus:border-industrial-gold focus:ring-1 focus:ring-industrial-gold transition-all" id="email" name="email" type="email" required autocomplete="email"></div>
-						<div><label class="block text-label-md font-label-md text-on-surface mb-2" for="phone"><?php esc_html_e( 'Phone', 'herco' ); ?></label><input class="w-full bg-surface border border-border-gray rounded px-4 py-2.5 text-body-md focus:outline-none focus:border-industrial-gold focus:ring-1 focus:ring-industrial-gold transition-all" id="phone" name="phone" type="tel" autocomplete="tel"></div>
+					<?php
+					herco_render_native_form(
+						'contact',
+						function_exists( 'herco_contact_form_config' ) ? herco_contact_form_config() : array(
+							'submit' => __( 'Send Message', 'herco' ),
+						),
+						array(
+							'form_id'             => 'contact-form',
+							'show_topic'          => true,
+							'topic_options'       => function_exists( 'herco_contact_form_topics' ) ? herco_contact_form_topics() : array(),
+							'message_placeholder' => __( 'Tell us a little about what you need...', 'herco' ),
+						)
+					);
+					?>
 				</div>
-					<div class="mt-5"><label class="block text-label-md font-label-md text-on-surface mb-2" for="topic"><?php esc_html_e( 'I\'m reaching out as a...', 'herco' ); ?></label>
-						<select class="w-full bg-surface border border-border-gray rounded px-4 py-2.5 text-body-md focus:outline-none focus:border-industrial-gold focus:ring-1 focus:ring-industrial-gold transition-all" id="topic" name="topic">
-							<option value=""><?php esc_html_e( 'Select an option', 'herco' ); ?></option>
-							<option><?php esc_html_e( 'Warranty Claim Form', 'herco' ); ?></option>
-							<option><?php esc_html_e( 'Aftersales Request Form', 'herco' ); ?></option>
-							<option><?php esc_html_e( 'RFQ (Request for Quote) Form', 'herco' ); ?></option>
-							<option><?php esc_html_e( 'Retailer Application Form', 'herco' ); ?></option>
-							<option><?php esc_html_e( 'Supplier Partnership Form', 'herco' ); ?></option>
-							<option><?php esc_html_e( 'Other inquiry', 'herco' ); ?></option>
-						</select>
-					</div>
-					<div class="mt-5"><label class="block text-label-md font-label-md text-on-surface mb-2" for="message"><?php esc_html_e( 'Message', 'herco' ); ?></label><textarea class="w-full bg-surface border border-border-gray rounded px-4 py-2.5 text-body-md focus:outline-none focus:border-industrial-gold focus:ring-1 focus:ring-industrial-gold transition-all min-h-[140px]" id="message" name="message" required placeholder="<?php esc_attr_e( 'Tell us a little about what you need...', 'herco' ); ?>"></textarea></div>
-					<button class="w-full mt-6 inline-flex items-center justify-center bg-heritage-navy text-on-primary text-label-md font-label-md rounded px-8 py-3.5 hover:bg-heritage-navy/90 transition-colors" type="submit"><?php esc_html_e( 'Send message', 'herco' ); ?></button>
-					<p class="form-note text-body-md font-body-md text-heritage-navy mt-4 text-center" role="status" hidden><?php echo wp_strip_all_tags( herco_get_editor_area_html( 'herco-contact-form-note' ) ?: esc_html__( 'Thanks - your message has been noted. (Demo form - wire to email/CRM on build.)', 'herco' ) ); ?></p>
-				</form>
 			</div>
 		</div>
 	</div>
