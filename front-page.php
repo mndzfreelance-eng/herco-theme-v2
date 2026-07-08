@@ -131,14 +131,12 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 	</div>
 	<?php if ( ! empty( $marquee_brands ) ) : ?>
 		<div class="marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
-			<div class="marquee-track flex items-center gap-16 lg:gap-24">
+			<div class="marquee-track">
 				<?php for ( $i = 0; $i < 2; $i++ ) : ?>
 					<?php foreach ( $marquee_brands as $brand ) : ?>
-						<div class="flex-shrink-0">
-							<a href="<?php echo esc_url( $brand['url'] ); ?>" title="<?php echo esc_attr( $brand['name'] ); ?>">
-								<img src="<?php echo esc_url( $brand['logo'] ); ?>" alt="<?php echo esc_attr( $brand['name'] ); ?>" class="h-10 lg:h-12 w-auto object-contain">
-							</a>
-						</div>
+						<a href="<?php echo esc_url( $brand['url'] ); ?>" title="<?php echo esc_attr( $brand['name'] ); ?>" class="inline-block align-middle mx-8 lg:mx-12">
+							<img src="<?php echo esc_url( $brand['logo'] ); ?>" alt="<?php echo esc_attr( $brand['name'] ); ?>" class="h-10 lg:h-12 w-auto object-contain">
+						</a>
 					<?php endforeach; ?>
 				<?php endfor; ?>
 			</div>
