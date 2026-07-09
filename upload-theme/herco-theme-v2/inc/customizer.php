@@ -79,6 +79,29 @@ if ( ! function_exists( 'herco_customize_register' ) ) {
         herco_add_image_control($wp_customize, "herco_dist_image_{$i}", $label, 'herco_home');
     }
 
+	// --- Marquee Speed ---.
+	$wp_customize->add_setting(
+		'herco_marquee_speed',
+		array(
+			'default'           => 40,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control(
+		'herco_marquee_speed',
+		array(
+			'label'       => __( 'Brand Marquee Speed (seconds)', 'herco' ),
+			'description' => __( 'The time it takes for the brand marquee on the homepage to complete one cycle. Higher is slower.', 'herco' ),
+			'section'     => 'herco_home',
+			'type'        => 'number',
+			'input_attrs' => array(
+				'min'  => 10,
+				'max'  => 200,
+				'step' => 5,
+			),
+		)
+	);
+
     /* ── About & affiliates ───────────────────────────────── */
     $wp_customize->add_section('herco_about', [
         'title'       => __('Herco About Page', 'herco'),

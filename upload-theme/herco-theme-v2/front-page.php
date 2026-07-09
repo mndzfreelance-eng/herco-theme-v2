@@ -28,6 +28,7 @@ if ( empty( $marquee_brands ) ) {
 	$brand_names = function_exists( 'herco_brands_fallback_names' ) ? herco_brands_fallback_names() : array( '3M', 'WD-40', 'Bosch', 'DeWalt', 'Stanley', 'Bahco', 'Yale', 'Briggs & Stratton', 'Black+Decker', 'Armor All', 'Devcon', 'Dorma' );
 }
 $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : array();
+$marquee_speed = get_theme_mod( 'herco_marquee_speed', 40 );
 ?>
 
 <section class="bg-heritage-navy relative overflow-hidden">
@@ -139,7 +140,7 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 		.herco-brand-marquee__track {
 			display: flex !important;
 			width: max-content;
-			animation: herco-marquee-animation 40s linear infinite;
+			animation: herco-marquee-animation <?php echo esc_attr( $marquee_speed ); ?>s linear infinite;
 		}
 		.herco-brand-marquee:hover .herco-brand-marquee__track {
 			animation-play-state: paused;

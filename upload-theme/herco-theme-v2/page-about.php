@@ -264,11 +264,11 @@ $mission_items = herco_get_editor_area_list_items(
 				<?php $affiliate = $affiliates[ $index ] ?? array( 'mod' => 'herco_affiliate_image_' . ( $index + 1 ), 'ph' => 'affiliate-' . ( $index + 1 ), 'alt' => $card['title'] ); ?>
 				<?php $img = herco_get_image( $affiliate['mod'], $affiliate['ph'] ); ?>
 				<div class="bg-surface-container-lowest border border-border-gray p-8 group hover:border-industrial-gold transition-colors" data-reveal>
-					<div class="w-12 h-12 bg-surface-container flex items-center justify-center mb-6 rounded group-hover:bg-industrial-gold transition-colors overflow-hidden">
+					<div class="w-20 h-20 bg-surface-container flex items-center justify-center mb-6 rounded group-hover:bg-industrial-gold transition-colors overflow-hidden">
 						<?php if ( ! empty( $img['is_placeholder'] ) ) : ?>
-							<span class="material-symbols-outlined text-heritage-navy group-hover:text-white">domain</span>
+							<span class="material-symbols-outlined text-7xl text-heritage-navy group-hover:text-white">domain</span>
 						<?php else : ?>
-							<img src="<?php echo esc_url( $img['url'] ); ?>" alt="<?php echo esc_attr( $affiliate['alt'] ?? $card['title'] ); ?>" class="h-full w-full object-contain p-1 bg-white">
+							<img src="<?php echo esc_url( $img['url'] ); ?>" alt="<?php echo esc_attr( $affiliate['alt'] ?? $card['title'] ); ?>" class="h-full w-full object-contain p-2 bg-white">
 						<?php endif; ?>
 					</div>
 					<h4 class="font-subheading text-subheading text-heritage-navy mb-3"><?php echo esc_html( $card['title'] ); ?></h4>
