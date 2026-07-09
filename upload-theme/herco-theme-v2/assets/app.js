@@ -109,6 +109,16 @@
   var chips = document.querySelectorAll("[data-filter]");
   var tiles = document.querySelectorAll(".brand-tile[data-cat]");
   if (chips.length && tiles.length) {
+    var urlParams = new URLSearchParams(window.location.search);
+    var filterFromUrl = urlParams.get('filter');
+    if (filterFromUrl) {
+      var targetChip = document.querySelector('.chip[data-filter="' + filterFromUrl + '"]');
+      if (targetChip) {
+        // Use a small timeout to ensure other scripts have loaded and the page is ready
+        setTimeout(function() { targetChip.click(); }, 100);
+      }
+    }
+
     chips.forEach(function (chip) {
       chip.addEventListener("click", function () {
         var cat = chip.getAttribute("data-filter");
@@ -121,10 +131,34 @@
         chip.classList.add("bg-heritage-navy", "text-white", "border-heritage-navy");
         chip.classList.remove("bg-surface-container-lowest", "text-on-surface-variant", "border-border-gray");
         tiles.forEach(function (t) {
-          var show = cat === "all" || t.getAttribute("data-cat").indexOf(cat) !== -1;
-          t.classList.toggle("is-hidden", !show);
+          var tileCats = t.getAttribute("data-cat").split(' ');
+          var show = cat === "all" || tileCats.includes(cat);
+          t.classList.toggle("hidden", !show);
         });
       });
+    });
+  }
+
+  /* --- View All Brands Button --- */
+  var viewAllButton = document.getElementById('view-all-brands-button');
+  var brandsContainer = document.getElementById('brands-container');
+
+  if (viewAllButton && brandsContainer) {
+    viewAllButton.addEventListener('click', function () {
+      // Select all brand tiles that were initially hidden for pagination
+      var hiddenBrands = brandsContainer.querySelectorAll('.brand-tile.initial-hidden');
+
+      hiddenBrands.forEach(function (brand) {
+        // Remove the classes that were used for pagination to make them visible
+        brand.classList.remove('hidden');
+        brand.classList.remove('initial-hidden');
+      });
+
+      // Hide the "View All Brands" button's container after it's clicked
+      var viewAllContainer = document.getElementById('view-all-brands-container');
+      if (viewAllContainer) {
+        viewAllContainer.classList.add('hidden');
+      }
     });
   }
 

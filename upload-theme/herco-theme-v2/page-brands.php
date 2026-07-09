@@ -14,6 +14,12 @@ $banner_url = herco_page_banner_url( 'herco_brands_banner', 'assets/media/brands
 $feature_image = herco_theme_image_url( 'herco_brands_feature_image', 'generic', '' );
 $brands = function_exists( 'herco_get_brand_tiles' ) ? herco_get_brand_tiles() : array();
 $filters = function_exists( 'herco_brand_filter_options' ) ? herco_brand_filter_options() : array();
+
+// Define the initial number of brands to display
+$initial_brand_limit = 10;
+$total_brands = count($brands);
+$show_view_all_button = $total_brands > $initial_brand_limit;
+ $brand_counter = 0;
 ?>
 
 <section class="py-20 md:py-28 relative overflow-hidden">
@@ -39,10 +45,11 @@ $filters = function_exists( 'herco_brand_filter_options' ) ? herco_brand_filter_
 				<button class="chip bg-surface-container-lowest text-on-surface-variant border border-border-gray text-label-md font-label-md px-5 py-2 rounded hover:border-industrial-gold transition-colors" data-filter="<?php echo esc_attr( $filter['slug'] ); ?>" aria-pressed="false"><?php echo esc_html( $filter['name'] ); ?></button>
 			<?php endforeach; ?>
 		</div>
-		<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-gutter">
+		<div id="brands-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-gutter">
 			<?php if ( ! empty( $brands ) ) : ?>
 				<?php foreach ( $brands as $brand ) : ?>
-					<a href="<?php echo esc_url( $brand['url'] ); ?>" class="brand-tile group bg-surface-container-lowest border border-border-gray p-6 flex flex-col items-center justify-center text-center aspect-[4/3] hover:border-industrial-gold transition-colors" data-cat="<?php echo esc_attr( $brand['category'] ); ?>">
+					<?php $brand_counter++; ?>
+					<a href="<?php echo esc_url( $brand['url'] ); ?>" class="brand-tile group bg-surface-container-lowest border border-border-gray p-6 flex flex-col items-center justify-center text-center aspect-[4/3] hover:border-industrial-gold transition-colors <?php echo ( $brand_counter > $initial_brand_limit ) ? 'initial-hidden hidden' : ''; ?>" data-cat="<?php echo esc_attr( $brand['category'] ); ?>">
 						<?php if ( ! empty( $brand['logo'] ) ) : ?>
 							<div class="w-full flex items-center justify-center mb-5 min-h-[72px]"><img src="<?php echo esc_url( $brand['logo'] ); ?>" alt="<?php echo esc_attr( $brand['name'] ); ?>" class="max-h-16 w-auto object-contain"></div>
 						<?php endif; ?>
@@ -63,6 +70,14 @@ $filters = function_exists( 'herco_brand_filter_options' ) ? herco_brand_filter_
 				</div>
 			<?php endif; ?>
 		</div>
+
+		<?php if ( $show_view_all_button ) : ?>
+			<div class="text-center mt-12" id="view-all-brands-container">
+				<button id="view-all-brands-button" class="inline-flex items-center justify-center bg-heritage-navy text-on-primary text-label-md font-label-md rounded px-8 py-3.5 hover:bg-heritage-navy/90 transition-colors">
+					<?php esc_html_e( 'View All Brands', 'herco' ); ?>
+				</button>
+			</div>
+		<?php endif; ?>
 	</div>
 </section>
 

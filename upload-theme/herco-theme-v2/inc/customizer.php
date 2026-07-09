@@ -138,6 +138,61 @@ if ( ! function_exists( 'herco_customize_register' ) ) {
     add_action('customize_register', 'herco_customize_register');
 }
 
+if ( ! function_exists( 'herco_add_marketplace_controls' ) ) {
+	function herco_add_marketplace_controls( $wp_customize ) {
+		$wp_customize->add_section(
+			'herco_marketplaces',
+			array(
+				'title'       => __( 'Marketplace Stats', 'herco' ),
+				'description' => __( 'Update ratings and links for Lazada, Shopee, and TikTok Shop sections.', 'herco' ),
+				'priority'    => 36,
+			)
+		);
+
+		$marketplaces = array(
+			'lazada' => array( 'label' => 'Lazada', 'rating' => '4.8', 'followers' => '45K+', 'reviews' => '12K+', 'percent' => '96%', 'url' => 'https://www.lazada.com.ph/shop/herco-shop' ),
+			'shopee' => array( 'label' => 'Shopee', 'rating' => '4.9', 'followers' => '38K+', 'reviews' => '9K+', 'percent' => '98%', 'url' => 'https://shopee.ph/hercotradingofficial' ),
+			'tiktok' => array( 'label' => 'TikTok Shop', 'rating' => '4.7', 'followers' => '22K+', 'reviews' => '5K+', 'percent' => '94%', 'url' => '' ),
+		);
+
+		foreach ( $marketplaces as $id => $details ) {
+			// Heading for each marketplace
+			$wp_customize->add_setting( "herco_{$id}_heading", array( 'sanitize_callback' => '__return_empty_string' ) );
+			$wp_customize->add_control(
+				new Herco_Customize_Note_Control(
+					$wp_customize,
+					"herco_{$id}_heading",
+					array(
+						'label'   => $details['label'] . ' Store',
+						'section' => 'herco_marketplaces',
+					)
+				)
+			);
+
+			// URL
+			$wp_customize->add_setting( "herco_{$id}_url", array( 'default' => $details['url'], 'sanitize_callback' => 'esc_url_raw' ) );
+			$wp_customize->add_control( "herco_{$id}_url", array( 'label' => $details['label'] . ' Store URL', 'section' => 'herco_marketplaces', 'type' => 'url' ) );
+
+			// Rating
+			$wp_customize->add_setting( "herco_{$id}_rating", array( 'default' => $details['rating'], 'sanitize_callback' => 'sanitize_text_field' ) );
+			$wp_customize->add_control( "herco_{$id}_rating", array( 'label' => $details['label'] . ' Rating (e.g., 4.8)', 'section' => 'herco_marketplaces', 'type' => 'text' ) );
+
+			// Followers
+			$wp_customize->add_setting( "herco_{$id}_followers", array( 'default' => $details['followers'], 'sanitize_callback' => 'sanitize_text_field' ) );
+			$wp_customize->add_control( "herco_{$id}_followers", array( 'label' => $details['label'] . ' Followers (e.g., 45K+)', 'section' => 'herco_marketplaces', 'type' => 'text' ) );
+
+			// Reviews
+			$wp_customize->add_setting( "herco_{$id}_reviews", array( 'default' => $details['reviews'], 'sanitize_callback' => 'sanitize_text_field' ) );
+			$wp_customize->add_control( "herco_{$id}_reviews", array( 'label' => $details['label'] . ' Reviews (e.g., 12K+)', 'section' => 'herco_marketplaces', 'type' => 'text' ) );
+
+			// Rating Percent for stars
+			$wp_customize->add_setting( "herco_{$id}_rating_percent", array( 'default' => $details['percent'], 'sanitize_callback' => 'sanitize_text_field' ) );
+			$wp_customize->add_control( "herco_{$id}_rating_percent", array( 'label' => $details['label'] . ' Star Rating Width (e.g., 96%)', 'section' => 'herco_marketplaces', 'type' => 'text' ) );
+		}
+	}
+	add_action( 'customize_register', 'herco_add_marketplace_controls' );
+}
+
 /** Register a media control with correct attachment-ID sanitization */
 function herco_add_image_control($wp_customize, $id, $label, $section, $description = '') {
     $wp_customize->add_setting($id, [

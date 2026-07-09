@@ -183,6 +183,35 @@ $mission_items = herco_get_editor_area_list_items(
 	</div>
 </section>
 
+<style>
+	.flip-card-wrapper {
+		perspective: 1000px;
+		min-height: 400px; /* Adjust if content on the back of the card is taller */
+	}
+	.flip-card {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		transition: transform 0.7s;
+		transform-style: preserve-3d;
+	}
+	.flip-card-wrapper:hover .flip-card {
+		transform: rotateY(180deg);
+	}
+	.flip-card-front,
+	.flip-card-back {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+	.flip-card-back {
+		transform: rotateY(180deg);
+	}
+</style>
 <section class="py-section-gap bg-surface-container-lowest" id="core-values" style="scroll-margin-top:140px">
 	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 		<div class="text-center max-w-2xl mx-auto mb-16" data-reveal>
@@ -195,21 +224,27 @@ $mission_items = herco_get_editor_area_list_items(
 				<?php $core_value_image = herco_get_image( $value['mod'], 'generic' ); ?>
 				<div class="flip-card-wrapper border border-border-gray group hover:border-industrial-gold transition-colors" data-reveal>
 					<div class="flip-card">
-						<div class="flip-card-front bg-surface p-8">
-							<?php if ( empty( $core_value_image['is_placeholder'] ) ) : ?>
-								<div class="mb-6 overflow-hidden rounded bg-surface-container aspect-[4/3]"><img src="<?php echo esc_url( $core_value_image['url'] ); ?>" alt="<?php echo esc_attr( $value['title'] ); ?>" class="w-full h-full object-cover"></div>
-							<?php else : ?>
+						<?php if ( empty( $core_value_image['is_placeholder'] ) ) : ?>
+							<div class="flip-card-front bg-cover bg-center relative" style="background-image: url('<?php echo esc_url( $core_value_image['url'] ); ?>');">
+								<div class="absolute inset-0 bg-heritage-navy/70"></div>
+								<div class="relative z-10 p-8 flex flex-col justify-center items-center text-center h-full text-white">
+									<h3 class="font-subheading text-subheading"><?php echo esc_html( $value['title'] ); ?></h3>
+								</div>
+							</div>
+							<div class="flip-card-back bg-heritage-navy p-8 text-white justify-center">
+								<h3 class="font-subheading text-subheading mb-3"><?php echo esc_html( $value['title'] ); ?></h3>
+								<p class="font-body-md text-body-md"><?php echo esc_html( $value['description'] ); ?></p>
+							</div>
+						<?php else : ?>
+							<div class="flip-card-front bg-surface p-8">
 								<div class="w-12 h-12 bg-surface-container flex items-center justify-center mb-6 rounded group-hover:bg-industrial-gold transition-colors"><span class="material-symbols-outlined text-heritage-navy group-hover:text-white"><?php echo esc_html( $value['icon'] ); ?></span></div>
-							<?php endif; ?>
-							<h3 class="font-subheading text-subheading text-heritage-navy mb-3"><?php echo esc_html( $value['title'] ); ?></h3>
-						</div>
-						<div class="flip-card-back bg-surface p-8">
-							<?php if ( empty( $core_value_image['is_placeholder'] ) ) : ?>
-								<div class="mb-5 overflow-hidden rounded bg-surface-container aspect-[16/10]"><img src="<?php echo esc_url( $core_value_image['url'] ); ?>" alt="<?php echo esc_attr( $value['title'] ); ?>" class="w-full h-full object-cover"></div>
-							<?php endif; ?>
-							<h3 class="font-subheading text-subheading text-heritage-navy mb-3"><?php echo esc_html( $value['title'] ); ?></h3>
-							<p class="font-body-md text-body-md text-on-surface-variant"><?php echo esc_html( $value['description'] ); ?></p>
-						</div>
+								<h3 class="font-subheading text-subheading text-heritage-navy mb-3"><?php echo esc_html( $value['title'] ); ?></h3>
+							</div>
+							<div class="flip-card-back bg-surface p-8">
+								<h3 class="font-subheading text-subheading text-heritage-navy mb-3"><?php echo esc_html( $value['title'] ); ?></h3>
+								<p class="font-body-md text-body-md text-on-surface-variant"><?php echo esc_html( $value['description'] ); ?></p>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			<?php endforeach; ?>

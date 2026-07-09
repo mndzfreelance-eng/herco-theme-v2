@@ -477,15 +477,24 @@ function herco_get_brand_tiles() {
 
 	$brands = array();
 	foreach ( $posts as $post ) {
-		$term = herco_brand_primary_category( $post->ID );
-		$logo = herco_brand_logo_url( $post->ID, 'medium' );
+		$terms      = get_the_terms( $post->ID, 'brand_category' );
+		$logo       = herco_brand_logo_url( $post->ID, 'medium' );
+		$categories = array();
+		$label_term = null;
+
+		if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+			$label_term = $terms[0];
+			foreach ( $terms as $term ) {
+				$categories[] = $term->slug;
+			}
+		}
 
 		$brands[] = array(
 			'id'       => (int) $post->ID,
 			'name'     => get_the_title( $post ),
 			'url'      => get_permalink( $post ),
-			'category' => $term ? $term->slug : 'all',
-			'label'    => $post->post_excerpt ? $post->post_excerpt : ( $term ? $term->name : __( 'Brand', 'herco' ) ),
+			'category' => ! empty( $categories ) ? implode( ' ', $categories ) : 'all',
+			'label'    => $post->post_excerpt ? $post->post_excerpt : ( $label_term ? $label_term->name : __( 'Brand', 'herco' ) ),
 			'logo'     => herco_brand_has_custom_logo( $post->ID ) ? $logo : '',
 		);
 	}
@@ -517,23 +526,5 @@ function herco_get_brand_filter_terms() {
 }
 
 function herco_brand_filter_options() {
-	$map      = herco_brand_category_map();
-	$existing = herco_get_brand_filter_terms();
-	$by_slug  = array();
-
-	foreach ( $existing as $term ) {
-		$by_slug[ $term['slug'] ] = $term['name'];
-	}
-
-	$options = array();
-	foreach ( $map as $slug => $label ) {
-		if ( isset( $by_slug[ $slug ] ) ) {
-			$options[] = array(
-				'slug' => $slug,
-				'name' => $label,
-			);
-		}
-	}
-
-	return $options;
+	return herco_get_brand_filter_terms();
 }

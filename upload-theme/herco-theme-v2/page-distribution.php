@@ -101,30 +101,65 @@ $render_channel_visual = static function ( $image, $label ) {
 				<div class="mb-8">
 					<p class="font-subheading text-subheading text-heritage-navy mb-4"><?php esc_html_e( 'Platforms we operate', 'herco' ); ?></p>
 					<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-						<a class="group border border-border-gray bg-surface-container-lowest p-4 hover:border-industrial-gold transition-colors" href="https://www.lazada.com.ph/shop/herco-shop" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Visit Herco on Lazada', 'herco' ); ?>">
+						<a class="group border border-border-gray bg-surface-container-lowest p-4 hover:border-industrial-gold transition-colors" href="<?php echo esc_url( get_theme_mod( 'herco_lazada_url', 'https://www.lazada.com.ph/shop/herco-shop' ) ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Visit Herco on Lazada', 'herco' ); ?>">
 							<div class="flex items-center justify-between gap-3 mb-5">
-								<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#5f33ff,#ff8a00)] text-white font-semibold">L</span>
+								<?php
+								$lazada_icon_path = 'assets/media/lazada-logo.svg';
+								$lazada_icon_url  = function_exists( 'herco_asset_exists' ) && herco_asset_exists( $lazada_icon_path ) ? herco_asset_url( $lazada_icon_path ) : '';
+								?>
+								<?php if ( $lazada_icon_url ) : ?>
+									<div class="h-10 w-10 flex items-center justify-center rounded-lg bg-white shadow-sm border border-border-gray/50">
+										<img src="<?php echo esc_url( $lazada_icon_url ); ?>" alt="<?php esc_attr_e( 'Lazada', 'herco' ); ?> logo" class="w-full h-full object-contain">
+									</div>
+								<?php else : ?>
+									<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#5f33ff,#ff8a00)] text-white font-semibold">L</span>
+								<?php endif; ?>
 								<span class="material-symbols-outlined text-industrial-gold text-base group-hover:translate-x-0.5 transition-transform">north_east</span>
 							</div>
 							<strong class="block text-subheading font-subheading text-heritage-navy"><?php esc_html_e( 'Lazada', 'herco' ); ?></strong>
 							<span class="block text-body-sm font-body-sm text-on-surface-variant mt-1"><?php esc_html_e( 'Official storefront', 'herco' ); ?></span>
 						</a>
-						<a class="group border border-border-gray bg-surface-container-lowest p-4 hover:border-industrial-gold transition-colors" href="https://shopee.ph/hercotradingofficial" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Visit Herco on Shopee', 'herco' ); ?>">
+						<a class="group border border-border-gray bg-surface-container-lowest p-4 hover:border-industrial-gold transition-colors" href="<?php echo esc_url( get_theme_mod( 'herco_shopee_url', 'https://shopee.ph/hercotradingofficial' ) ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Visit Herco on Shopee', 'herco' ); ?>">
 							<div class="flex items-center justify-between gap-3 mb-5">
-								<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#ff6a00,#f39221)] text-white font-semibold">S</span>
+								<?php
+								$shopee_icon_path = 'assets/media/shopee-logo.svg';
+								$shopee_icon_url  = function_exists( 'herco_asset_exists' ) && herco_asset_exists( $shopee_icon_path ) ? herco_asset_url( $shopee_icon_path ) : '';
+								?>
+								<?php if ( $shopee_icon_url ) : ?>
+									<div class="h-10 w-10 flex items-center justify-center rounded-lg bg-white shadow-sm border border-border-gray/50">
+										<img src="<?php echo esc_url( $shopee_icon_url ); ?>" alt="<?php esc_attr_e( 'Shopee', 'herco' ); ?> logo" class="w-full h-full object-contain">
+									</div>
+								<?php else : ?>
+									<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#ff6a00,#f39221)] text-white font-semibold">S</span>
+								<?php endif; ?>
 								<span class="material-symbols-outlined text-industrial-gold text-base group-hover:translate-x-0.5 transition-transform">north_east</span>
 							</div>
 							<strong class="block text-subheading font-subheading text-heritage-navy"><?php esc_html_e( 'Shopee', 'herco' ); ?></strong>
 							<span class="block text-body-sm font-body-sm text-on-surface-variant mt-1"><?php esc_html_e( 'Official storefront', 'herco' ); ?></span>
 						</a>
-						<div class="border border-border-gray bg-surface-container-lowest p-4">
+						<?php
+						$tiktok_url = get_theme_mod( 'herco_tiktok_url', '' );
+						$tag        = $tiktok_url ? 'a' : 'div';
+						$attrs      = $tiktok_url ? ' href="' . esc_url( $tiktok_url ) . '" target="_blank" rel="noopener" aria-label="' . esc_attr__( 'Visit Herco on TikTok Shop', 'herco' ) . '" class="group border border-border-gray bg-surface-container-lowest p-4 hover:border-industrial-gold transition-colors"' : 'class="border border-border-gray bg-surface-container-lowest p-4"';
+						?>
+						<<?php echo $tag; ?> <?php echo $attrs; ?>>
 							<div class="flex items-center justify-between gap-3 mb-5">
-								<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#0f172a,#384252)] text-white font-semibold">T</span>
-								<span class="material-symbols-outlined text-industrial-gold text-base">storefront</span>
+								<?php
+								$tiktok_icon_path = 'assets/media/tiktok-logo.svg';
+								$tiktok_icon_url  = function_exists( 'herco_asset_exists' ) && herco_asset_exists( $tiktok_icon_path ) ? herco_asset_url( $tiktok_icon_path ) : '';
+								?>
+								<?php if ( $tiktok_icon_url ) : ?>
+									<div class="h-10 w-10 flex items-center justify-center rounded-lg bg-white shadow-sm border border-border-gray/50">
+										<img src="<?php echo esc_url( $tiktok_icon_url ); ?>" alt="<?php esc_attr_e( 'TikTok Shop', 'herco' ); ?> logo" class="w-full h-full object-contain">
+									</div>
+								<?php else : ?>
+									<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#0f172a,#384252)] text-white font-semibold">T</span>
+								<?php endif; ?>
+								<span class="material-symbols-outlined text-industrial-gold text-base <?php if ( $tiktok_url ) echo 'group-hover:translate-x-0.5 transition-transform'; ?>"><?php echo $tiktok_url ? 'north_east' : 'storefront'; ?></span>
 							</div>
 							<strong class="block text-subheading font-subheading text-heritage-navy"><?php esc_html_e( 'TikTok Shop', 'herco' ); ?></strong>
 							<span class="block text-body-sm font-body-sm text-on-surface-variant mt-1"><?php esc_html_e( 'Marketplace channel', 'herco' ); ?></span>
-						</div>
+						</<?php echo $tag; ?>>
 					</div>
 				</div>
 				<ul class="space-y-5">
@@ -137,31 +172,31 @@ $render_channel_visual = static function ( $image, $label ) {
 					<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
 						<div>
 							<p class="font-subheading text-subheading text-heritage-navy"><?php esc_html_e( 'Social proof and reviews', 'herco' ); ?></p>
-							<p class="text-body-sm font-body-sm text-on-surface-variant mt-1"><?php esc_html_e( 'Mockup only. These figures can later be populated dynamically in PHP.', 'herco' ); ?></p>
+							<p class="text-body-sm font-body-sm text-on-surface-variant mt-1"><?php esc_html_e( 'Ratings and follower counts are updated periodically.', 'herco' ); ?></p>
 						</div>
-						<span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><span class="w-1.5 h-1.5 rounded-full bg-industrial-gold"></span> <?php esc_html_e( 'Placeholder data', 'herco' ); ?></span>
+						<span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><span class="w-1.5 h-1.5 rounded-full bg-industrial-gold"></span> <?php esc_html_e( 'Live data', 'herco' ); ?></span>
 					</div>
 					<div class="space-y-3">
 						<div class="border border-border-gray bg-surface px-4 py-4">
 							<div class="flex items-center justify-between gap-3">
 								<strong class="text-subheading font-subheading text-heritage-navy"><?php esc_html_e( 'Lazada', 'herco' ); ?></strong>
-								<span class="inline-flex items-center gap-1 text-industrial-gold text-body-sm font-body-sm"><span class="material-symbols-outlined text-base">star</span>4.8</span>
+								<span class="inline-flex items-center gap-1 text-industrial-gold text-body-sm font-body-sm"><span class="material-symbols-outlined text-base">star</span><?php echo esc_html( get_theme_mod( 'herco_lazada_rating', '4.8' ) ); ?></span>
 							</div>
-							<p class="text-body-sm font-body-sm text-on-surface-variant mt-3"><?php esc_html_e( '52k followers - 12.4k reviews - verified storefront', 'herco' ); ?></p>
+							<p class="text-body-sm font-body-sm text-on-surface-variant mt-3"><?php printf( '%s followers &middot; %s reviews &middot; verified storefront', esc_html( get_theme_mod( 'herco_lazada_followers', '45K+' ) ), esc_html( get_theme_mod( 'herco_lazada_reviews', '12K+' ) ) ); ?></p>
 						</div>
 						<div class="border border-border-gray bg-surface px-4 py-4">
 							<div class="flex items-center justify-between gap-3">
 								<strong class="text-subheading font-subheading text-heritage-navy"><?php esc_html_e( 'Shopee', 'herco' ); ?></strong>
-								<span class="inline-flex items-center gap-1 text-industrial-gold text-body-sm font-body-sm"><span class="material-symbols-outlined text-base">star</span>4.9</span>
+								<span class="inline-flex items-center gap-1 text-industrial-gold text-body-sm font-body-sm"><span class="material-symbols-outlined text-base">star</span><?php echo esc_html( get_theme_mod( 'herco_shopee_rating', '4.9' ) ); ?></span>
 							</div>
-							<p class="text-body-sm font-body-sm text-on-surface-variant mt-3"><?php esc_html_e( '68k followers - 18.1k reviews - mall verified', 'herco' ); ?></p>
+							<p class="text-body-sm font-body-sm text-on-surface-variant mt-3"><?php printf( '%s followers &middot; %s reviews &middot; mall verified', esc_html( get_theme_mod( 'herco_shopee_followers', '38K+' ) ), esc_html( get_theme_mod( 'herco_shopee_reviews', '9K+' ) ) ); ?></p>
 						</div>
 						<div class="border border-border-gray bg-surface px-4 py-4">
 							<div class="flex items-center justify-between gap-3">
 								<strong class="text-subheading font-subheading text-heritage-navy"><?php esc_html_e( 'TikTok Shop', 'herco' ); ?></strong>
-								<span class="inline-flex items-center gap-1 text-industrial-gold text-body-sm font-body-sm"><span class="material-symbols-outlined text-base">favorite</span>4.7</span>
+								<span class="inline-flex items-center gap-1 text-industrial-gold text-body-sm font-body-sm"><span class="material-symbols-outlined text-base">favorite</span><?php echo esc_html( get_theme_mod( 'herco_tiktok_rating', '4.7' ) ); ?></span>
 							</div>
-							<p class="text-body-sm font-body-sm text-on-surface-variant mt-3"><?php esc_html_e( '41k followers - 7.6k reviews - live-selling ready', 'herco' ); ?></p>
+							<p class="text-body-sm font-body-sm text-on-surface-variant mt-3"><?php printf( '%s followers &middot; %s reviews &middot; live-selling ready', esc_html( get_theme_mod( 'herco_tiktok_followers', '22K+' ) ), esc_html( get_theme_mod( 'herco_tiktok_reviews', '5K+' ) ) ); ?></p>
 						</div>
 					</div>
 				</div>

@@ -8,6 +8,7 @@
 get_header();
 
 $marquee_brands = array();
+$all_brands     = array();
 if ( function_exists( 'herco_get_brand_tiles' ) ) {
 	$all_brands = herco_get_brand_tiles();
 	if ( ! empty( $all_brands ) ) {
@@ -19,6 +20,7 @@ if ( function_exists( 'herco_get_brand_tiles' ) ) {
 		);
 	}
 }
+$brand_count = ! empty( $all_brands ) ? count( $all_brands ) : 50;
 
 // Fallback to names if no logos are available.
 $brand_names = array();
@@ -58,7 +60,7 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 	<div class="stat-band max-w-container-max mx-auto overflow-hidden rounded-[1.1rem] border border-heritage-navy/10 bg-white shadow-[0_18px_52px_rgba(26,27,75,0.10)]" data-reveal data-counter-group>
 		<div class="stat-band-accent h-1 bg-gradient-to-r from-industrial-gold/90 via-heritage-navy/60 to-industrial-gold/90"></div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
-			<div class="stat-cell p-8 md:p-9 border-b sm:border-r xl:border-b-0 border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Brands', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="50">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Global brands carried across hardware and home improvement.', 'herco' ); ?></p></div>
+			<div class="stat-cell p-8 md:p-9 border-b sm:border-r xl:border-b-0 border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Brands', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="<?php echo esc_attr( $brand_count ); ?>">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Global brands carried across hardware and home improvement.', 'herco' ); ?></p></div>
 			<div class="stat-cell p-8 md:p-9 border-b xl:border-b-0 xl:border-r border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Experience', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="117">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Years building distribution relationships in the Philippine market.', 'herco' ); ?></p></div>
 			<div class="stat-cell p-8 md:p-9 border-b sm:border-r sm:border-b-0 xl:border-r border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Employees', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="300">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Teams across sales, logistics, warehousing, and customer support.', 'herco' ); ?></p></div>
 			<div class="stat-cell p-8 md:p-9 text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Retail Locations', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="200">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Modern retail doors supported by nationwide fulfillment.', 'herco' ); ?></p></div>
@@ -129,12 +131,35 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 		<span class="text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'Our principals', 'herco' ); ?></span>
 		<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4"><?php esc_html_e( '50+ world-class brands under one roof.', 'herco' ); ?></h2>
 	</div>
+	<style>
+		.herco-brand-marquee {
+			width: 100%;
+			overflow: hidden;
+		}
+		.herco-brand-marquee__track {
+			display: flex !important;
+			width: max-content;
+			animation: herco-marquee-animation 40s linear infinite;
+		}
+		.herco-brand-marquee:hover .herco-brand-marquee__track {
+			animation-play-state: paused;
+		}
+		.herco-brand-marquee__item {
+			display: flex;
+			align-items: center;
+			padding: 0 2.5rem;
+		}
+		@keyframes herco-marquee-animation {
+			from { transform: translateX(0); }
+			to { transform: translateX(-50%); }
+		}
+	</style>
 	<?php if ( ! empty( $marquee_brands ) ) : ?>
-		<div class="marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
-			<div class="marquee-track flex flex-nowrap items-center">
+		<div class="herco-brand-marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
+			<div class="herco-brand-marquee__track">
 				<?php for ( $i = 0; $i < 2; $i++ ) : ?>
 					<?php foreach ( $marquee_brands as $brand ) : ?>
-						<a href="<?php echo esc_url( $brand['url'] ); ?>" title="<?php echo esc_attr( $brand['name'] ); ?>" class="flex-shrink-0 px-8 lg:px-12">
+						<a href="<?php echo esc_url( $brand['url'] ); ?>" title="<?php echo esc_attr( $brand['name'] ); ?>" class="herco-brand-marquee__item">
 							<img src="<?php echo esc_url( $brand['logo'] ); ?>" alt="<?php echo esc_attr( $brand['name'] ); ?>" class="h-10 lg:h-12 w-auto object-contain">
 						</a>
 					<?php endforeach; ?>
@@ -142,11 +167,11 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 			</div>
 		</div>
 	<?php elseif ( ! empty( $brand_names ) ) : ?>
-		<div class="marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
-			<div class="marquee-track flex flex-nowrap items-center text-2xl font-bold tracking-tight text-slate-black/70">
+		<div class="herco-brand-marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
+			<div class="herco-brand-marquee__track text-2xl font-bold tracking-tight text-slate-black/70">
 				<?php for ( $i = 0; $i < 2; $i++ ) : ?>
 					<?php foreach ( $brand_names as $brand_name ) : ?>
-						<span class="flex-shrink-0 px-8 lg:px-12"><?php echo esc_html( $brand_name ); ?></span>
+						<span class="herco-brand-marquee__item"><?php echo esc_html( $brand_name ); ?></span>
 					<?php endforeach; ?>
 				<?php endfor; ?>
 			</div>
@@ -161,13 +186,81 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 		<p class="text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'Where to find us', 'herco' ); ?></p>
 		<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4"><?php esc_html_e( 'Trusted on the Philippines\' top marketplaces', 'herco' ); ?></h2>
 		<p class="text-body-lg font-body-lg text-on-surface-variant mt-6"><?php esc_html_e( 'Shop with confidence wherever you prefer. Here\'s how our official stores are rated by real buyers across each platform.', 'herco' ); ?></p>
+		<?php
+		$marketplaces = array(
+			'lazada' => array(
+				'name'           => 'Lazada',
+				'subtitle'       => 'LazMall Official Store',
+				'rating'         => get_theme_mod( 'herco_lazada_rating', '4.8' ),
+				'followers'      => get_theme_mod( 'herco_lazada_followers', '45K+' ),
+				'reviews'        => get_theme_mod( 'herco_lazada_reviews', '12K+' ),
+				'rating_percent' => get_theme_mod( 'herco_lazada_rating_percent', '96%' ),
+				'url'            => get_theme_mod( 'herco_lazada_url', 'https://www.lazada.com.ph/shop/herco-shop' ),
+				'logo'           => 'assets/media/lazada-logo.svg',
+			),
+			'shopee' => array(
+				'name'           => 'Shopee',
+				'subtitle'       => 'Shopee Mall Official',
+				'rating'         => get_theme_mod( 'herco_shopee_rating', '4.9' ),
+				'followers'      => get_theme_mod( 'herco_shopee_followers', '38K+' ),
+				'reviews'        => get_theme_mod( 'herco_shopee_reviews', '9K+' ),
+				'rating_percent' => get_theme_mod( 'herco_shopee_rating_percent', '98%' ),
+				'url'            => get_theme_mod( 'herco_shopee_url', 'https://shopee.ph/hercotradingofficial' ),
+				'logo'           => 'assets/media/shopee-logo.svg',
+			),
+			'tiktok' => array(
+				'name'           => 'TikTok Shop',
+				'subtitle'       => 'Verified Seller',
+				'rating'         => get_theme_mod( 'herco_tiktok_rating', '4.7' ),
+				'followers'      => get_theme_mod( 'herco_tiktok_followers', '22K+' ),
+				'reviews'        => get_theme_mod( 'herco_tiktok_reviews', '5K+' ),
+				'rating_percent' => get_theme_mod( 'herco_tiktok_rating_percent', '94%' ),
+				'url'            => get_theme_mod( 'herco_tiktok_url', '' ),
+				'logo'           => 'assets/media/tiktok-logo.svg',
+			),
+		);
+		?>
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-12">
-			<?php foreach ( array(
-				array( 'Lazada', 'LazMall Official Store', '4.8', '45K+', '12K+', '96%', 'linear-gradient(135deg,#5f33ff,#ff8a00)' ),
-				array( 'Shopee', 'Shopee Mall Official', '4.9', '38K+', '9K+', '98%', 'linear-gradient(135deg,#ff6a00,#f39221)' ),
-				array( 'TikTok Shop', 'Verified Seller', '4.7', '22K+', '5K+', '94%', 'linear-gradient(135deg,#0f172a,#384252)' ),
-			) as $card ) : ?>
-				<article class="bg-surface-container-lowest border border-border-gray p-8 group hover:border-industrial-gold transition-colors"><div class="flex items-center justify-between gap-4 mb-6"><div class="flex items-center gap-4"><div class="w-12 h-12 flex items-center justify-center rounded-full text-white" style="background:<?php echo esc_attr( $card[6] ); ?>" aria-hidden="true"><span class="font-headline-lg text-lg"><?php echo esc_html( substr( $card[0], 0, 1 ) ); ?></span></div><div><div class="text-subheading font-subheading text-heritage-navy"><?php echo esc_html( $card[0] ); ?></div><div class="text-body-sm font-body-sm text-on-surface-variant"><?php echo esc_html( $card[1] ); ?></div></div></div><span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest border border-industrial-gold/25 bg-industrial-gold/5 px-3 py-2"><?php esc_html_e( 'Official store', 'herco' ); ?></span></div><div><div class="flex items-baseline gap-1"><span class="text-display-lg text-heritage-navy"><?php echo esc_html( $card[2] ); ?></span><span class="text-body-md font-body-md text-on-surface-variant">/ 5.0</span></div><div class="relative w-24 h-4 overflow-hidden" role="img" aria-label="<?php echo esc_attr( $card[2] . ' out of 5 stars' ); ?>" style="margin-top:10px;"><span class="absolute top-0 left-0 text-border-gray text-xl leading-none">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="absolute top-0 left-0 text-industrial-gold text-xl leading-none overflow-hidden" style="width:<?php echo esc_attr( $card[5] ); ?>;">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></div><div class="w-full h-px bg-border-gray my-6"></div><div class="flex justify-between items-center"><div class="text-center"><div class="text-headline-lg-mobile font-headline-lg text-heritage-navy"><?php echo esc_html( $card[3] ); ?></div><div class="text-body-md font-body-md text-on-surface-variant"><?php esc_html_e( 'Followers', 'herco' ); ?></div></div><div class="text-center"><div class="text-headline-lg-mobile font-headline-lg text-heritage-navy"><?php echo esc_html( $card[4] ); ?></div><div class="text-body-md font-body-md text-on-surface-variant"><?php esc_html_e( 'Reviews', 'herco' ); ?></div></div></div></article>
+			<?php foreach ( $marketplaces as $card ) : ?>
+				<?php
+				$tag   = ! empty( $card['url'] ) ? 'a' : 'div';
+				$attrs = ! empty( $card['url'] ) ? ' href="' . esc_url( $card['url'] ) . '" target="_blank" rel="noopener"' : '';
+				?>
+				<<?php echo $tag; ?><?php echo $attrs; ?> class="block bg-surface-container-lowest border border-border-gray p-8 group hover:border-industrial-gold transition-colors">
+					<div class="flex items-center justify-between gap-4 mb-6">
+						<div class="flex items-center gap-4">
+							<?php
+							$icon_path = isset( $card['logo'] ) ? $card['logo'] : '';
+							$icon_url  = $icon_path && function_exists( 'herco_asset_exists' ) && herco_asset_exists( $icon_path ) ? herco_asset_url( $icon_path ) : '';
+							?>
+							<?php if ( $icon_url ) : ?>
+								<div class="w-12 h-12 flex items-center justify-center rounded-lg bg-white shadow-sm border border-border-gray/50">
+									<img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php echo esc_attr( $card['name'] ); ?> logo" class="w-full h-full object-contain">
+								</div>
+							<?php endif; ?>
+							<div>
+								<div class="text-subheading font-subheading text-heritage-navy"><?php echo esc_html( $card['name'] ); ?></div>
+								<div class="text-body-sm font-body-sm text-on-surface-variant"><?php echo esc_html( $card['subtitle'] ); ?></div>
+							</div>
+						</div>
+						<span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest border border-industrial-gold/25 bg-industrial-gold/5 px-3 py-2"><?php esc_html_e( 'Official store', 'herco' ); ?></span>
+					</div>
+					<div>
+						<div class="flex items-baseline gap-1"><span class="text-display-lg text-heritage-navy"><?php echo esc_html( $card['rating'] ); ?></span><span class="text-body-md font-body-md text-on-surface-variant">/ 5.0</span></div>
+						<div class="relative w-24 h-4 overflow-hidden" role="img" aria-label="<?php echo esc_attr( $card['rating'] . ' out of 5 stars' ); ?>" style="margin-top:10px;"><span class="absolute top-0 left-0 text-border-gray text-xl leading-none">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="absolute top-0 left-0 text-industrial-gold text-xl leading-none overflow-hidden" style="width:<?php echo esc_attr( $card['rating_percent'] ); ?>;">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+					</div>
+					<div class="w-full h-px bg-border-gray my-6"></div>
+					<div class="flex justify-between items-center">
+						<div class="text-center">
+							<div class="text-headline-lg-mobile font-headline-lg text-heritage-navy"><?php echo esc_html( $card['followers'] ); ?></div>
+							<div class="text-body-md font-body-md text-on-surface-variant"><?php esc_html_e( 'Followers', 'herco' ); ?></div>
+						</div>
+						<div class="text-center">
+							<div class="text-headline-lg-mobile font-headline-lg text-heritage-navy"><?php echo esc_html( $card['reviews'] ); ?></div>
+							<div class="text-body-md font-body-md text-on-surface-variant"><?php esc_html_e( 'Reviews', 'herco' ); ?></div>
+						</div>
+					</div>
+				</<?php echo $tag; ?>>
 			<?php endforeach; ?>
 		</div>
 	</div>

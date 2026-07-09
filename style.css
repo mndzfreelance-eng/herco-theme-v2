@@ -107,36 +107,37 @@ textarea.herco-form-control {
 	}
 }
 
-/* Custom CSS for the Brand Marquee */
-
 .marquee {
 	overflow: hidden;
-	white-space: nowrap;
 	position: relative;
+	width: 100%;
 }
 
 .marquee-track {
-	display: inline-flex;
+	display: flex;
 	align-items: center;
-	flex-wrap: nowrap;
-	white-space: nowrap;
-	width: max-content;
-	min-width: max-content;
+	animation: marquee-scroll 40s linear infinite;
 	will-change: transform;
-	animation: marquee-scroll 30s linear infinite;
 }
 
 .marquee-track:hover {
 	animation-play-state: paused;
 }
 
-.marquee-track > * {
-	flex: 0 0 auto;
+.marquee-item {
+	flex-shrink: 0;
+	padding: 0 2rem;
+}
+
+@media (min-width: 1024px) {
+	.marquee-item {
+		padding: 0 3rem;
+	}
 }
 
 @keyframes marquee-scroll {
-	0% { transform: translate3d(0, 0, 0); }
-	100% { transform: translate3d(-50%, 0, 0); }
+	from { transform: translateX(0); }
+	to { transform: translateX(-50%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
