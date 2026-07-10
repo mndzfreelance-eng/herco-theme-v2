@@ -13,6 +13,9 @@ get_header();
 $banner_url = herco_page_banner_url( 'herco_distribution_banner', 'assets/media/distribution-hero.jpg', 'page-banner' );
 $cards      = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : array();
 $images     = array();
+$lazada_url = get_theme_mod( 'herco_lazada_url', get_theme_mod( 'herco_lazada', 'https://www.lazada.com.ph/shop/herco-shop' ) );
+$shopee_url = get_theme_mod( 'herco_shopee_url', get_theme_mod( 'herco_shopee', 'https://shopee.ph/hercotradingofficial' ) );
+$tiktok_url = get_theme_mod( 'herco_tiktok_url', '' );
 
 foreach ( $cards as $card ) {
 	$images[ $card['title'] ] = herco_get_image( $card['mod'], $card['placeholder'] );
@@ -101,7 +104,7 @@ $render_channel_visual = static function ( $image, $label ) {
 				<div class="mb-8">
 					<p class="font-subheading text-subheading text-heritage-navy mb-4"><?php esc_html_e( 'Platforms we operate', 'herco' ); ?></p>
 					<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-						<a class="group border border-border-gray bg-surface-container-lowest p-4 hover:border-industrial-gold transition-colors" href="<?php echo esc_url( get_theme_mod( 'herco_lazada_url', 'https://www.lazada.com.ph/shop/herco-shop' ) ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Visit Herco on Lazada', 'herco' ); ?>">
+						<a class="group border border-border-gray bg-surface-container-lowest p-4 hover:border-industrial-gold transition-colors" href="<?php echo esc_url( $lazada_url ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Visit Herco on Lazada', 'herco' ); ?>">
 							<div class="flex items-center justify-between gap-3 mb-5">
 								<?php
 								$lazada_icon_path = 'assets/media/lazada-logo.svg';
@@ -119,7 +122,7 @@ $render_channel_visual = static function ( $image, $label ) {
 							<strong class="block text-subheading font-subheading text-heritage-navy"><?php esc_html_e( 'Lazada', 'herco' ); ?></strong>
 							<span class="block text-body-sm font-body-sm text-on-surface-variant mt-1"><?php esc_html_e( 'Official storefront', 'herco' ); ?></span>
 						</a>
-						<a class="group border border-border-gray bg-surface-container-lowest p-4 hover:border-industrial-gold transition-colors" href="<?php echo esc_url( get_theme_mod( 'herco_shopee_url', 'https://shopee.ph/hercotradingofficial' ) ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Visit Herco on Shopee', 'herco' ); ?>">
+						<a class="group border border-border-gray bg-surface-container-lowest p-4 hover:border-industrial-gold transition-colors" href="<?php echo esc_url( $shopee_url ); ?>" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Visit Herco on Shopee', 'herco' ); ?>">
 							<div class="flex items-center justify-between gap-3 mb-5">
 								<?php
 								$shopee_icon_path = 'assets/media/shopee-logo.svg';
@@ -138,7 +141,6 @@ $render_channel_visual = static function ( $image, $label ) {
 							<span class="block text-body-sm font-body-sm text-on-surface-variant mt-1"><?php esc_html_e( 'Official storefront', 'herco' ); ?></span>
 						</a>
 						<?php
-						$tiktok_url = get_theme_mod( 'herco_tiktok_url', '' );
 						$tag        = $tiktok_url ? 'a' : 'div';
 						$attrs      = $tiktok_url ? ' href="' . esc_url( $tiktok_url ) . '" target="_blank" rel="noopener" aria-label="' . esc_attr__( 'Visit Herco on TikTok Shop', 'herco' ) . '" class="group border border-border-gray bg-surface-container-lowest p-4 hover:border-industrial-gold transition-colors"' : 'class="border border-border-gray bg-surface-container-lowest p-4"';
 						?>

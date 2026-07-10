@@ -8,6 +8,26 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+$social_icons = array(
+	'facebook' => array(
+		'url'   => get_theme_mod( 'herco_facebook_url', get_theme_mod( 'herco_facebook', 'https://www.facebook.com/HercoTradingPHOfficial' ) ),
+		'label' => __( 'Facebook', 'herco' ),
+	),
+	'lazada'   => array(
+		'url'   => get_theme_mod( 'herco_lazada_url', get_theme_mod( 'herco_lazada', 'https://www.lazada.com.ph/shop/herco-shop' ) ),
+		'label' => __( 'Lazada', 'herco' ),
+	),
+	'shopee'   => array(
+		'url'   => get_theme_mod( 'herco_shopee_url', get_theme_mod( 'herco_shopee', 'https://shopee.ph/hercotradingofficial' ) ),
+		'label' => __( 'Shopee', 'herco' ),
+	),
+	'tiktok'   => array(
+		'url'   => get_theme_mod( 'herco_tiktok_url', '' ),
+		'label' => __( 'TikTok', 'herco' ),
+	),
+);
+
 ?>
 	</main>
 
@@ -25,9 +45,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</span>
 				<p class="text-body-md font-body-md text-on-primary-fixed-variant mt-6 leading-relaxed"><?php esc_html_e( 'The Philippines\' trusted hardware and houseware distribution partner since 1908. Building the brands entrusted to us, nationwide.', 'herco' ); ?></p>
 				<div class="flex gap-3 mt-6">
-					<a class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-industrial-gold hover:border-industrial-gold transition-all text-on-primary" href="https://www.facebook.com/HercoTradingPHOfficial" target="_blank" rel="noopener" aria-label="Facebook"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3l.5-3H14V4.2c0-.9.3-1.5 1.6-1.5H17V.1C16.7 0 15.6 0 14.4 0 11.8 0 10 1.6 10 4.5V6H7v3h3v9h4V9Z"/></svg></a>
-					<a class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-industrial-gold hover:border-industrial-gold transition-all text-on-primary" href="https://www.lazada.com.ph/shop/herco-shop" target="_blank" rel="noopener" aria-label="Lazada"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 6v8l8 8 8-8V6l-8-4Zm0 3 4 2-4 2-4-2 4-2Z"/></svg></a>
-					<a class="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-industrial-gold hover:border-industrial-gold transition-all text-on-primary" href="https://shopee.ph/hercotradingofficial" target="_blank" rel="noopener" aria-label="Shopee"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h14l-1 13H6L5 8Zm4 0a3 3 0 0 1 6 0" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+					<?php foreach ( $social_icons as $name => $icon ) : ?>
+						<?php
+						$tag   = ! empty( $icon['url'] ) ? 'a' : 'div';
+						$attrs = 'class="w-10 h-10 border border-white/20 flex items-center justify-center transition-all text-on-primary"';
+						if ( 'a' === $tag ) {
+							$attrs .= ' hover:bg-industrial-gold hover:border-industrial-gold';
+							$attrs .= ' href="' . esc_url( $icon['url'] ) . '" target="_blank" rel="noopener" aria-label="' . esc_attr( $icon['label'] ) . '"';
+						} else {
+							$attrs .= ' opacity-50';
+						}
+						?>
+						<<?php echo $tag; ?> <?php echo $attrs; ?>>
+							<?php
+							if ( function_exists( 'herco_render_social_icon' ) ) {
+								herco_render_social_icon( $name );
+							}
+							?>
+						</<?php echo $tag; ?>>
+					<?php endforeach; ?>
 				</div>
 			</div>
 			<div>

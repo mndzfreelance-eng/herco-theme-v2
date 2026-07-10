@@ -1,5 +1,5 @@
 <?php
-if (!defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /** Minimal stroke icons — 20×20, currentColor */
 function herco_icon($name, $class = 'icon') {
@@ -25,4 +25,24 @@ function herco_icon($name, $class = 'icon') {
     ];
     if (!isset($icons[$name])) return '';
     return '<svg class="' . esc_attr($class) . '" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">' . $icons[$name] . '</svg>';
+}
+
+/**
+ * Renders social media icons for the footer.
+ *
+ * @param string $name The name of the social media icon (facebook, lazada, shopee, tiktok).
+ * @return void
+ */
+function herco_render_social_icon( $name ) {
+	$icons = array(
+		'facebook' => '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3l.5-3H14V4.2c0-.9.3-1.5 1.6-1.5H17V.1C16.7 0 15.6 0 14.4 0 11.8 0 10 1.6 10 4.5V6H7v3h3v9h4V9Z"/></svg>',
+		'lazada'   => '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 6v8l8 8 8-8V6l-8-4Zm0 3 4 2-4 2-4-2 4-2Z"/></svg>',
+		'shopee'   => '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h14l-1 13H6L5 8Zm4 0a3 3 0 0 1 6 0" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+		'tiktok'   => '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.18 3.05.28 4.58.02.24.03.48.07.71.54-.16 1.08-.3 1.62-.43 1.48-.37 2.96-.73 4.44-1.09.14,1.54.28,3.08.42,4.61-.53.15-1.06.28-1.59.41-1.41.35-2.82.69-4.23,1.02-.12,1.54-.23,3.08-.35,4.62-1.31.02-2.62.01-3.93.02-.07-1.53-.17-3.06-.26-4.59-.03-.24-.05-.48-.08-.72-.53.16-1.06.3-1.59.44-1.42.36-2.84.72-4.26,1.08-.14-1.54-.28-3.08-.42-4.62.53-.14 1.06-.28 1.59-.41 1.41-.35 2.82-.7 4.23-1.04.12-1.54.23-3.08.35-4.61Z"/></svg>',
+	);
+
+	if ( isset( $icons[ $name ] ) ) {
+		// The SVGs are static strings defined in this function, so this is safe.
+		echo $icons[ $name ]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
 }

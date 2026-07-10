@@ -18,6 +18,7 @@ require_once HERCO_DIR . '/inc/brands-cpt.php';
 require_once HERCO_DIR . '/inc/editor-content.php';
 require_once HERCO_DIR . '/inc/images.php';
 require_once HERCO_DIR . '/inc/customizer.php';
+require_once HERCO_DIR . '/inc/icons.php';
 require_once HERCO_DIR . '/inc/about-content.php';
 require_once HERCO_DIR . '/inc/brands-page.php';
 require_once HERCO_DIR . '/inc/form-pages.php';
@@ -132,4 +133,3 @@ function herco_asset_exists( $relative_path ) {
 function herco_asset_url( $relative_path ) {
 	return HERCO_URI . '/' . ltrim( $relative_path, '/' );
 }
-

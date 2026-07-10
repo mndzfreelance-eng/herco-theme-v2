@@ -135,17 +135,14 @@ if ( ! function_exists( 'herco_customize_register' ) ) {
 
     /* ── Contact ──────────────────────────────────────────── */
     $wp_customize->add_section('herco_contact', [
-        'title'    => __('Herco Contact & Social', 'herco'),
-        'priority' => 35,
+        'title'    => __('Herco Contact Info', 'herco'),
+        'priority' => 34,
     ]);
     foreach ([
         'herco_email'    => ['label' => 'Email', 'default' => 'info@herco.com.ph'],
         'herco_phone'    => ['label' => 'Phone', 'default' => '(02) 8818-7736'],
         'herco_phone_secondary' => ['label' => 'Secondary phone', 'default' => '(02) 8818-7331'],
         'herco_address'  => ['label' => 'Address', 'default' => '8F Herco Center, 114 Benavidez Street, Legaspi Village, Makati City 1229'],
-        'herco_facebook' => ['label' => 'Facebook URL', 'default' => 'https://www.facebook.com/HercoTradingPHOfficial/'],
-        'herco_lazada'   => ['label' => 'Lazada URL', 'default' => 'https://www.lazada.com.ph/shop/herco'],
-        'herco_shopee'   => ['label' => 'Shopee URL', 'default' => 'https://shopee.ph/hercotradingofficial'],
     ] as $id => $f) {
         $wp_customize->add_setting($id, [
             'default'           => $f['default'],
@@ -159,6 +156,52 @@ if ( ! function_exists( 'herco_customize_register' ) ) {
     }
     }
     add_action('customize_register', 'herco_customize_register');
+}
+
+if ( ! function_exists( 'herco_add_social_links_customizer' ) ) {
+	/**
+	 * Adds social media link settings to the Customizer.
+	 *
+	 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
+	 */
+	function herco_add_social_links_customizer( $wp_customize ) {
+		$wp_customize->add_section(
+			'herco_social_links_section',
+			array(
+				'title'       => __( 'Social & Marketplace Links', 'herco' ),
+				'priority'    => 35,
+				'description' => __( 'URLs for social media and marketplace icons in the footer and other parts of the site.', 'herco' ),
+			)
+		);
+
+		$socials = array(
+			'facebook_url' => array(
+				'label'   => __( 'Facebook URL', 'herco' ),
+				'default' => 'https://www.facebook.com/HercoTradingPHOfficial',
+			),
+			'lazada_url'   => array(
+				'label'   => __( 'Lazada URL', 'herco' ),
+				'default' => 'https://www.lazada.com.ph/shop/herco-shop',
+			),
+			'shopee_url'   => array(
+				'label'   => __( 'Shopee URL', 'herco' ),
+				'default' => 'https://shopee.ph/hercotradingofficial',
+			),
+			'tiktok_url'   => array(
+				'label'   => __( 'TikTok URL', 'herco' ),
+				'default' => '',
+			),
+		);
+
+		foreach ( $socials as $key => $details ) {
+			$setting_id = 'herco_' . $key;
+
+			$wp_customize->add_setting( $setting_id, array( 'default' => $details['default'], 'sanitize_callback' => 'esc_url_raw' ) );
+
+			$wp_customize->add_control( $setting_id, array( 'label' => $details['label'], 'section' => 'herco_social_links_section', 'type' => 'url' ) );
+		}
+	}
+	add_action( 'customize_register', 'herco_add_social_links_customizer', 20 );
 }
 
 if ( ! function_exists( 'herco_add_marketplace_controls' ) ) {

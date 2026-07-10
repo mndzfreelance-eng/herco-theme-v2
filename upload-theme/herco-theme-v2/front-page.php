@@ -196,7 +196,7 @@ $marquee_speed = get_theme_mod( 'herco_marquee_speed', 40 );
 				'followers'      => get_theme_mod( 'herco_lazada_followers', '45K+' ),
 				'reviews'        => get_theme_mod( 'herco_lazada_reviews', '12K+' ),
 				'rating_percent' => get_theme_mod( 'herco_lazada_rating_percent', '96%' ),
-				'url'            => get_theme_mod( 'herco_lazada_url', 'https://www.lazada.com.ph/shop/herco-shop' ),
+				'url'            => get_theme_mod( 'herco_lazada_url', get_theme_mod( 'herco_lazada', 'https://www.lazada.com.ph/shop/herco-shop' ) ),
 				'logo'           => 'assets/media/lazada-logo.svg',
 			),
 			'shopee' => array(
@@ -206,7 +206,7 @@ $marquee_speed = get_theme_mod( 'herco_marquee_speed', 40 );
 				'followers'      => get_theme_mod( 'herco_shopee_followers', '38K+' ),
 				'reviews'        => get_theme_mod( 'herco_shopee_reviews', '9K+' ),
 				'rating_percent' => get_theme_mod( 'herco_shopee_rating_percent', '98%' ),
-				'url'            => get_theme_mod( 'herco_shopee_url', 'https://shopee.ph/hercotradingofficial' ),
+				'url'            => get_theme_mod( 'herco_shopee_url', get_theme_mod( 'herco_shopee', 'https://shopee.ph/hercotradingofficial' ) ),
 				'logo'           => 'assets/media/shopee-logo.svg',
 			),
 			'tiktok' => array(
