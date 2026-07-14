@@ -40,7 +40,6 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 		<div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(247,148,30,0.22),transparent_26%),linear-gradient(100deg,rgba(14,15,15,0.52),rgba(14,15,15,0.28)_36%,rgba(14,15,15,0.6)_100%),linear-gradient(135deg,rgba(37,39,107,0.54),rgba(26,27,75,0.74))]"></div>
 		<div class="absolute inset-0 technical-grid opacity-15 mix-blend-screen"></div>
 	</div>
-	<div class="absolute inset-0 bg-gradient-to-r from-heritage-navy/82 via-heritage-navy/58 to-heritage-navy/72"></div>
 	<div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-heritage-navy/70 to-transparent"></div>
 	<div class="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-28 md:py-36 lg:py-40">
 		<div class="max-w-[48rem] text-center lg:text-left">

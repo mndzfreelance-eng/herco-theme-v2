@@ -25,7 +25,7 @@ $has_content   = '' !== trim( wp_strip_all_tags( get_the_content() ) );
 
 <section class="py-20 md:py-28 relative overflow-hidden">
 	<div class="absolute inset-0 bg-cover bg-center" style="background-image:url('<?php echo esc_url( $banner_url ); ?>')"></div>
-	<div class="absolute inset-0 bg-heritage-navy/78"></div>
+	<div class="absolute inset-0 bg-gradient-to-r from-heritage-navy/82 via-heritage-navy/58 to-heritage-navy/72"></div>
 	<div class="absolute inset-0 opacity-5 pointer-events-none hairline-grid z-[1]"></div>
 	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
 		<nav class="flex items-center gap-2 text-technical-caps font-technical-caps text-stucco-white/50 uppercase mb-6" aria-label="<?php esc_attr_e( 'Breadcrumb', 'herco' ); ?>"><a class="hover:text-industrial-gold" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'herco' ); ?></a><span>/</span><a class="hover:text-industrial-gold" href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>"><?php esc_html_e( 'Brands', 'herco' ); ?></a><span>/</span><span class="text-industrial-gold"><?php echo esc_html( $brand_name ); ?></span></nav>
