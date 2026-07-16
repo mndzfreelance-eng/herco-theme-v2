@@ -25,7 +25,7 @@ function herco_form_pages_defaults() {
             'label'     => 'Sales',
             'intro'     => 'Get pricing for bulk orders or specific product inquiries. Fill out the form below and our sales team will respond within 1–2 business days.',
             'cf7_title' => 'Request for Quotation',
-            'email'     => 'sales@herco.com.ph',
+            'email'     => 'info@herco.com.ph',
             'submit'    => 'Send Quote Request',
         ],
         'warranty-claim' => [
@@ -33,7 +33,7 @@ function herco_form_pages_defaults() {
             'label'     => 'After-Sales',
             'intro'     => 'File a product warranty claim for any Herco-distributed product. Please include the product model, serial number, and proof of purchase. We aim to respond within 3–5 business days.',
             'cf7_title' => 'Warranty Claim',
-            'email'     => 'aftersales@herco.com.ph',
+            'email'     => 'info@herco.com.ph',
             'submit'    => 'Submit Claim',
         ],
         'after-sales-support' => [
@@ -41,7 +41,7 @@ function herco_form_pages_defaults() {
             'label'     => 'Service',
             'intro'     => 'Request service, repair, or replacement parts for products purchased through Herco channels. Describe the issue and our service team will assist you.',
             'cf7_title' => 'After-Sales Support',
-            'email'     => 'service@herco.com.ph',
+            'email'     => 'info@herco.com.ph',
             'submit'    => 'Send Support Request',
         ],
         'retailer-application' => [
@@ -49,7 +49,7 @@ function herco_form_pages_defaults() {
             'label'     => 'Partner',
             'intro'     => 'Apply to become an authorized Herco retailer. Tell us about your business and the brands you currently carry.',
             'cf7_title' => 'Retailer Application',
-            'email'     => 'bizdev@herco.com.ph',
+            'email'     => 'info@herco.com.ph',
             'submit'    => 'Submit Application',
         ],
         'supplier-partnership' => [
@@ -57,7 +57,7 @@ function herco_form_pages_defaults() {
             'label'     => 'Sourcing',
             'intro'     => 'Introduce your brand to the Philippine market through Herco. Share your company profile and product range for our sourcing team to review.',
             'cf7_title' => 'Supplier Partnership',
-            'email'     => 'sourcing@herco.com.ph',
+            'email'     => 'info@herco.com.ph',
             'submit'    => 'Send Partnership Inquiry',
         ],
         'schedule-a-call' => [
@@ -65,7 +65,7 @@ function herco_form_pages_defaults() {
             'label'     => 'Consultation',
             'intro'     => 'Book a consultation with our business development team. Let us know your preferred date and what you would like to discuss.',
             'cf7_title' => 'Schedule a Call',
-            'email'     => 'sales@herco.com.ph',
+            'email'     => 'info@herco.com.ph',
             'submit'    => 'Request a Call',
         ],
     ];
