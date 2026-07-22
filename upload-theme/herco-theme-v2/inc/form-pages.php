@@ -81,7 +81,7 @@ function herco_form_pages_registry() {
     $out = [];
     foreach ($defaults as $slug => $default) {
         $merged = wp_parse_args(is_array($json[$slug] ?? null) ? $json[$slug] : [], $default);
-        $merged['email'] = $merged['email'] ?: get_theme_mod('herco_email', 'info@herco.com.ph');
+        $merged['email'] = 'info@herco.com.ph';
         $out[$slug] = $merged;
     }
 
@@ -111,7 +111,7 @@ function herco_contact_form_config() {
         'label'      => __( 'General Inquiry', 'herco' ),
         'intro'      => __( 'We welcome customers, suppliers and partnership inquiries. Fill out the form and the Herco team will reply through the contact details you provide.', 'herco' ),
         'cf7_title'  => '',
-        'email'      => get_theme_mod( 'herco_email', 'info@herco.com.ph' ),
+        'email'      => 'info@herco.com.ph',
         'submit'     => __( 'Send Message', 'herco' ),
         'topics'     => herco_contact_form_topics(),
     ];

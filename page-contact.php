@@ -11,7 +11,7 @@
 get_header();
 
 $banner_url      = herco_page_banner_url( 'herco_contact_banner', 'assets/media/contact-hero.jpg', 'page-banner' );
-$email           = get_theme_mod( 'herco_email', 'info@herco.com.ph' );
+$email           = 'info@herco.com.ph';
 $phone           = get_theme_mod( 'herco_phone', '(02) 8818-7736' );
 $secondary_phone = get_theme_mod( 'herco_phone_secondary', '(02) 8818-7331' );
 $address         = get_theme_mod( 'herco_address', "8F Herco Center, 114 Benavidez Street,\nLegaspi Village, Makati City 1229, Philippines" );

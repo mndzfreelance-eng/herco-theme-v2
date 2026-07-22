@@ -139,7 +139,6 @@ if ( ! function_exists( 'herco_customize_register' ) ) {
         'priority' => 34,
     ]);
     foreach ([
-        'herco_email'    => ['label' => 'Email', 'default' => 'info@herco.com.ph'],
         'herco_phone'    => ['label' => 'Phone', 'default' => '(02) 8818-7736'],
         'herco_phone_secondary' => ['label' => 'Secondary phone', 'default' => '(02) 8818-7331'],
         'herco_address'  => ['label' => 'Address', 'default' => '8F Herco Center, 114 Benavidez Street, Legaspi Village, Makati City 1229'],
@@ -257,6 +256,60 @@ if ( ! function_exists( 'herco_add_marketplace_controls' ) ) {
 		}
 	}
 	add_action( 'customize_register', 'herco_add_marketplace_controls' );
+}
+
+if ( ! function_exists( 'herco_add_partner_logos_customizer' ) ) {
+	/**
+	 * Adds retail partner logo settings to the Customizer.
+	 *
+	 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
+	 */
+	function herco_add_partner_logos_customizer( $wp_customize ) {
+		// Add a new section for Partner Logos.
+		$wp_customize->add_section(
+			'herco_partner_logos_section',
+			array(
+				'title'       => __( 'Retail Partner Logos', 'herco' ),
+				'description' => __( 'Logos for the "Modern Retail" section on the Distribution page.', 'herco' ),
+				'priority'    => 37,
+				'capability'  => 'edit_theme_options',
+			)
+		);
+
+		// Define the retail partners that need logo uploaders.
+		$retail_partners = array(
+			array( 'name' => 'Wilcon Depot', 'logo_mod' => 'herco_partner_logo_wilcon' ),
+			array( 'name' => 'Handyman', 'logo_mod' => 'herco_partner_logo_handyman' ),
+			array( 'name' => 'Do-it-Best', 'logo_mod' => 'herco_partner_logo_doitbest' ),
+			array( 'name' => 'True Value', 'logo_mod' => 'herco_partner_logo_truevalue' ),
+			array( 'name' => 'Robinsons Builders', 'logo_mod' => 'herco_partner_logo_robinsons' ),
+		);
+
+		// Add a setting and an image upload control for each partner.
+		foreach ( $retail_partners as $partner ) {
+			$wp_customize->add_setting(
+				$partner['logo_mod'],
+				array(
+					'default'           => '',
+					'sanitize_callback' => 'absint',
+					'transport'         => 'refresh',
+				)
+			);
+			$wp_customize->add_control(
+				new WP_Customize_Media_Control(
+					$wp_customize,
+					$partner['logo_mod'],
+					array(
+						'label'       => sprintf( __( '%s Logo', 'herco' ), $partner['name'] ),
+						'section'     => 'herco_partner_logos_section',
+						'mime_type'   => 'image',
+						'description' => sprintf( __( 'Upload the logo for %s.', 'herco' ), $partner['name'] ),
+					)
+				)
+			);
+		}
+	}
+	add_action( 'customize_register', 'herco_add_partner_logos_customizer' );
 }
 
 /** Register a media control with correct attachment-ID sanitization */

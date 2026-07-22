@@ -250,7 +250,7 @@ $mission_items = herco_get_editor_area_list_items(
 			<div class="absolute inset-0 opacity-5 pointer-events-none hairline-grid"></div>
 			<div class="relative z-10 max-w-3xl mx-auto">
 				<?php herco_render_editor_area( 'herco-about-cta-title', '<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6">' . esc_html__( '117 years in, we\'re still looking for the next great partnership.', 'herco' ) . '</h2>' ); ?>
-				<?php herco_render_editor_area( 'herco-about-cta-desc', '<p class="font-body-lg text-body-lg text-stucco-white/80 mb-10">' . esc_html__( 'Talk to the team about distributing your brand - or stocking the brands Filipinos trust.', 'herco' ) . '</p>' ); ?>
+				<?php herco_render_editor_area( 'herco-about-cta-desc', '<p class="font-body-lg text-body-lg text-stucco-white/80 mb-10">' . esc_html__( 'Looking to expand your brand in the Philippines or add trusted products to your business? Let’s explore how we can work together.', 'herco' ) . '</p>' ); ?>
 				<a class="inline-flex items-center justify-center bg-industrial-gold text-heritage-navy text-label-md font-label-md rounded px-8 py-3.5 hover:bg-industrial-gold/90 transition-colors" href="<?php echo esc_url( herco_page_url( 'contact' ) ); ?>"><?php esc_html_e( 'Contact Herco', 'herco' ); ?></a>
 			</div>
 		</div>
