@@ -5,11 +5,6 @@
  * @package Herco_Theme
  */
 
-if ( is_front_page() || is_home() ) {
-	require HERCO_DIR . '/front-page.php';
-	return;
-}
-
 get_header();
 ?>
 

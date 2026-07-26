@@ -294,6 +294,16 @@ function herco_save_brand_banner_meta( $post_id ) {
 }
 add_action( 'save_post_brand', 'herco_save_brand_banner_meta' );
 
+/**
+ * Clear the featured brands cache when a brand is updated.
+ *
+ * @param int $post_id The post ID.
+ */
+function herco_clear_featured_brands_cache( $post_id ) {
+	delete_transient( 'herco_featured_brands_sorted' );
+}
+add_action( 'save_post_brand', 'herco_clear_featured_brands_cache' );
+
 function herco_enqueue_brand_admin_media( $hook ) {
 	if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
 		return;
@@ -429,33 +439,39 @@ function herco_get_brand_banner_url( $post_id ) {
  * @return array
  */
 function herco_get_featured_brands( $count = 6 ) {
-	$posts = get_posts(
-		array(
-			'post_type'      => 'brand',
-			'post_status'    => 'publish',
-			'posts_per_page' => (int) $count,
-			'orderby'        => array(
-				'menu_order' => 'ASC',
-				'title'      => 'ASC',
-			),
-		)
-	);
+	$transient_key = 'herco_featured_brands_sorted';
+	$all_brands    = get_transient( $transient_key );
 
-	if ( empty( $posts ) ) {
-		return array();
-	}
-
-	$brands = array();
-	foreach ( $posts as $post ) {
-		$logo_url = herco_brand_logo_url( $post->ID, 'medium' );
-		$brands[] = array(
-			'name' => get_the_title( $post ),
-			'url'  => get_permalink( $post ),
-			'logo' => ! herco_is_placeholder_src( $logo_url ) ? $logo_url : '',
+	if ( false === $all_brands ) {
+		$posts = get_posts(
+			array(
+				'post_type'      => 'brand',
+				'post_status'    => 'publish',
+				'posts_per_page' => -1, // Get all brands to sort them correctly.
+				'orderby'        => array(
+					'menu_order' => 'ASC',
+					'title'      => 'ASC',
+				),
+			)
 		);
+
+		$all_brands = array();
+		if ( ! empty( $posts ) ) {
+			foreach ( $posts as $post ) {
+				$logo_url   = herco_brand_logo_url( $post->ID, 'medium' );
+				$all_brands[] = array(
+					'name' => get_the_title( $post ),
+					'url'  => get_permalink( $post ),
+					'logo' => ! herco_is_placeholder_src( $logo_url ) ? $logo_url : '',
+				);
+			}
+		}
+		// Cache the full sorted list for 12 hours.
+		set_transient( $transient_key, $all_brands, 12 * HOUR_IN_SECONDS );
 	}
 
-	return $brands;
+	// Return the requested number of brands from the start of the cached list.
+	return array_slice( (array) $all_brands, 0, (int) $count );
 }
 
 function herco_get_brand_tiles() {

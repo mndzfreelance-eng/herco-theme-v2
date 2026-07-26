@@ -29,6 +29,24 @@ if ( empty( $marquee_brands ) ) {
 }
 $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : array();
 $marquee_speed = get_theme_mod( 'herco_marquee_speed', 40 );
+
+$testimonials = array();
+for ( $i = 1; $i <= 3; $i++ ) {
+	if ( get_theme_mod( "herco_testimonial_{$i}_enabled", true ) ) {
+		$quote = get_theme_mod( "herco_testimonial_{$i}_quote" );
+		if ( ! empty( $quote ) ) {
+			$testimonials[] = array(
+				'quote'   => $quote,
+				'channel' => get_theme_mod( "herco_testimonial_{$i}_channel" ),
+			);
+		}
+	}
+}
+
+$stat_experience       = get_theme_mod( 'herco_stat_experience', 117 );
+$stat_employees        = get_theme_mod( 'herco_stat_employees', 300 );
+$stat_retail_locations = get_theme_mod( 'herco_stat_retail_locations', 200 );
+
 ?>
 
 <section class="bg-heritage-navy relative overflow-hidden">
@@ -61,11 +79,65 @@ $marquee_speed = get_theme_mod( 'herco_marquee_speed', 40 );
 		<div class="stat-band-accent h-1 bg-gradient-to-r from-industrial-gold/90 via-heritage-navy/60 to-industrial-gold/90"></div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
 			<div class="stat-cell p-8 md:p-9 border-b sm:border-r xl:border-b-0 border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Brands', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="<?php echo esc_attr( $brand_count ); ?>">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Global brands carried across hardware and home improvement.', 'herco' ); ?></p></div>
-			<div class="stat-cell p-8 md:p-9 border-b xl:border-b-0 xl:border-r border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Experience', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="117">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Years building distribution relationships in the Philippine market.', 'herco' ); ?></p></div>
-			<div class="stat-cell p-8 md:p-9 border-b sm:border-r sm:border-b-0 xl:border-r border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Employees', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="300">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Teams across sales, logistics, warehousing, and customer support.', 'herco' ); ?></p></div>
-			<div class="stat-cell p-8 md:p-9 text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Retail Locations', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="200">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Modern retail doors supported by nationwide fulfillment.', 'herco' ); ?></p></div>
+			<div class="stat-cell p-8 md:p-9 border-b xl:border-b-0 xl:border-r border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Experience', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="<?php echo esc_attr( $stat_experience ); ?>">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Years building distribution relationships in the Philippine market.', 'herco' ); ?></p></div>
+			<div class="stat-cell p-8 md:p-9 border-b sm:border-r sm:border-b-0 xl:border-r border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Employees', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="<?php echo esc_attr( $stat_employees ); ?>">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Teams across sales, logistics, warehousing, and customer support.', 'herco' ); ?></p></div>
+			<div class="stat-cell p-8 md:p-9 text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Retail Locations', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="<?php echo esc_attr( $stat_retail_locations ); ?>">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Modern retail doors supported by nationwide fulfillment.', 'herco' ); ?></p></div>
 		</div>
 	</div>
+</section>
+
+<section class="py-section-gap bg-surface-container-lowest border-y border-border-gray">
+	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-12">
+		<span class="text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'Our principals', 'herco' ); ?></span>
+		<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4"><?php esc_html_e( '50+ world-class brands under one roof.', 'herco' ); ?></h2>
+	</div>
+	<style>
+		.herco-brand-marquee {
+			width: 100%;
+			overflow: hidden;
+		}
+		.herco-brand-marquee__track {
+			display: flex !important;
+			width: max-content;
+			animation: herco-marquee-animation <?php echo esc_attr( $marquee_speed ); ?>s linear infinite;
+		}
+		.herco-brand-marquee:hover .herco-brand-marquee__track {
+			animation-play-state: paused;
+		}
+		.herco-brand-marquee__item {
+			display: flex;
+			align-items: center;
+			padding: 0 2.5rem;
+		}
+		@keyframes herco-marquee-animation {
+			from { transform: translateX(0); }
+			to { transform: translateX(-50%); }
+		}
+	</style>
+	<?php if ( ! empty( $marquee_brands ) ) : ?>
+		<div class="herco-brand-marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
+			<div class="herco-brand-marquee__track">
+				<?php for ( $i = 0; $i < 2; $i++ ) : ?>
+					<?php foreach ( $marquee_brands as $brand ) : ?>
+						<a href="<?php echo esc_url( $brand['url'] ); ?>" title="<?php echo esc_attr( $brand['name'] ); ?>" class="herco-brand-marquee__item">
+							<img src="<?php echo esc_url( $brand['logo'] ); ?>" alt="<?php echo esc_attr( $brand['name'] ); ?>" class="h-10 lg:h-12 w-auto object-contain">
+						</a>
+					<?php endforeach; ?>
+				<?php endfor; ?>
+			</div>
+		</div>
+	<?php elseif ( ! empty( $brand_names ) ) : ?>
+		<div class="herco-brand-marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
+			<div class="herco-brand-marquee__track text-2xl font-bold tracking-tight text-slate-black/70">
+				<?php for ( $i = 0; $i < 2; $i++ ) : ?>
+					<?php foreach ( $brand_names as $brand_name ) : ?>
+						<span class="herco-brand-marquee__item"><?php echo esc_html( $brand_name ); ?></span>
+					<?php endforeach; ?>
+				<?php endfor; ?>
+			</div>
+		</div>
+	<?php endif; ?>
+	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mt-12"><a class="inline-flex items-center gap-2 text-industrial-gold text-label-md font-label-md hover:gap-3 transition-all" href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>"><?php esc_html_e( 'View the full brand portfolio', 'herco' ); ?> <span class="material-symbols-outlined text-base">arrow_forward</span></a></div>
 </section>
 
 <section class="py-section-gap bg-surface-container-lowest relative">
@@ -123,60 +195,6 @@ $marquee_speed = get_theme_mod( 'herco_marquee_speed', 40 );
 		</div>
 		<div class="mt-12"><a class="inline-flex items-center justify-center bg-heritage-navy text-on-primary text-label-md font-label-md rounded px-8 py-3.5 hover:bg-heritage-navy/90 transition-colors" href="<?php echo esc_url( herco_page_url( 'distribution' ) ); ?>"><?php esc_html_e( 'See how each channel works', 'herco' ); ?></a></div>
 	</div>
-</section>
-
-<section class="py-section-gap bg-surface-container-lowest border-y border-border-gray">
-	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-12">
-		<span class="text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'Our principals', 'herco' ); ?></span>
-		<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4"><?php esc_html_e( '50+ world-class brands under one roof.', 'herco' ); ?></h2>
-	</div>
-	<style>
-		.herco-brand-marquee {
-			width: 100%;
-			overflow: hidden;
-		}
-		.herco-brand-marquee__track {
-			display: flex !important;
-			width: max-content;
-			animation: herco-marquee-animation <?php echo esc_attr( $marquee_speed ); ?>s linear infinite;
-		}
-		.herco-brand-marquee:hover .herco-brand-marquee__track {
-			animation-play-state: paused;
-		}
-		.herco-brand-marquee__item {
-			display: flex;
-			align-items: center;
-			padding: 0 2.5rem;
-		}
-		@keyframes herco-marquee-animation {
-			from { transform: translateX(0); }
-			to { transform: translateX(-50%); }
-		}
-	</style>
-	<?php if ( ! empty( $marquee_brands ) ) : ?>
-		<div class="herco-brand-marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
-			<div class="herco-brand-marquee__track">
-				<?php for ( $i = 0; $i < 2; $i++ ) : ?>
-					<?php foreach ( $marquee_brands as $brand ) : ?>
-						<a href="<?php echo esc_url( $brand['url'] ); ?>" title="<?php echo esc_attr( $brand['name'] ); ?>" class="herco-brand-marquee__item">
-							<img src="<?php echo esc_url( $brand['logo'] ); ?>" alt="<?php echo esc_attr( $brand['name'] ); ?>" class="h-10 lg:h-12 w-auto object-contain">
-						</a>
-					<?php endforeach; ?>
-				<?php endfor; ?>
-			</div>
-		</div>
-	<?php elseif ( ! empty( $brand_names ) ) : ?>
-		<div class="herco-brand-marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">
-			<div class="herco-brand-marquee__track text-2xl font-bold tracking-tight text-slate-black/70">
-				<?php for ( $i = 0; $i < 2; $i++ ) : ?>
-					<?php foreach ( $brand_names as $brand_name ) : ?>
-						<span class="herco-brand-marquee__item"><?php echo esc_html( $brand_name ); ?></span>
-					<?php endforeach; ?>
-				<?php endfor; ?>
-			</div>
-		</div>
-	<?php endif; ?>
-	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mt-12"><a class="inline-flex items-center gap-2 text-industrial-gold text-label-md font-label-md hover:gap-3 transition-all" href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>"><?php esc_html_e( 'View the full brand portfolio', 'herco' ); ?> <span class="material-symbols-outlined text-base">arrow_forward</span></a></div>
 </section>
 
 <section class="py-section-gap bg-surface-container-lowest">
@@ -269,7 +287,49 @@ $marquee_speed = get_theme_mod( 'herco_marquee_speed', 40 );
 	<div class="testimonial-section-orb testimonial-section-orb--gold" aria-hidden="true"></div>
 	<div class="testimonial-section-orb testimonial-section-orb--navy" aria-hidden="true"></div>
 	<div class="testimonial-section-pattern" aria-hidden="true"></div>
-	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop"><div class="grid grid-cols-1 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-10 xl:gap-14 items-start"><div class="max-w-xl relative z-10" data-reveal><span class="text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'Partner and channel quotes', 'herco' ); ?></span><h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4 mb-5"><?php esc_html_e( 'What our partners say about working with Herco.', 'herco' ); ?></h2><p class="text-body-lg font-body-lg text-on-surface-variant"><?php esc_html_e( 'A mockup section for distributor and retail-partner testimonials, designed to become dynamic later without changing the layout pattern.', 'herco' ); ?></p></div><div class="testimonial-slider-shell border border-border-gray bg-surface p-6 md:p-8 relative overflow-hidden z-10" data-reveal data-testimonial-slider><div class="absolute inset-0 opacity-[0.07] pointer-events-none hairline-grid"></div><div class="relative z-10"><div class="flex items-center justify-between gap-4 mb-8"><p class="text-technical-caps font-technical-caps text-heritage-navy/70 uppercase tracking-widest"><?php esc_html_e( 'Partner voices', 'herco' ); ?></p><div class="flex items-center gap-2"><button type="button" class="testimonial-slider-button w-11 h-11 border border-border-gray bg-surface-container-lowest text-heritage-navy hover:border-industrial-gold transition-colors" data-testimonial-prev aria-label="<?php esc_attr_e( 'Previous quote', 'herco' ); ?>"><span class="material-symbols-outlined text-base">west</span></button><button type="button" class="testimonial-slider-button w-11 h-11 border border-border-gray bg-surface-container-lowest text-heritage-navy hover:border-industrial-gold transition-colors" data-testimonial-next aria-label="<?php esc_attr_e( 'Next quote', 'herco' ); ?>"><span class="material-symbols-outlined text-base">east</span></button></div></div><div class="space-y-6"><article class="testimonial-slide-frame" data-testimonial-slide><div class="flex items-start justify-between gap-4 mb-6"><span class="testimonial-quote-mark text-industrial-gold text-5xl leading-none font-display-lg">“</span><span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest border border-industrial-gold/25 bg-industrial-gold/5 px-3 py-2"><?php esc_html_e( 'Modern Retail', 'herco' ); ?></span></div><p class="text-[1.55rem] leading-[1.5] md:text-[1.8rem] font-display-lg text-heritage-navy max-w-3xl"><?php esc_html_e( 'Herco is one of the few distribution partners that combines steady supply, responsive account management and real follow-through at store level.', 'herco' ); ?></p></article><article class="testimonial-slide-frame hidden" data-testimonial-slide><div class="flex items-start justify-between gap-4 mb-6"><span class="testimonial-quote-mark text-industrial-gold text-5xl leading-none font-display-lg">“</span><span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest border border-industrial-gold/25 bg-industrial-gold/5 px-3 py-2"><?php esc_html_e( 'Traditional Trade', 'herco' ); ?></span></div><p class="text-[1.55rem] leading-[1.5] md:text-[1.8rem] font-display-lg text-heritage-navy max-w-3xl"><?php esc_html_e( 'Our branches trust Herco because commitments are clear, deliveries are dependable and the brands they carry continue to move well in the market.', 'herco' ); ?></p></article><article class="testimonial-slide-frame hidden" data-testimonial-slide><div class="flex items-start justify-between gap-4 mb-6"><span class="testimonial-quote-mark text-industrial-gold text-5xl leading-none font-display-lg">“</span><span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest border border-industrial-gold/25 bg-industrial-gold/5 px-3 py-2"><?php esc_html_e( 'E-Commerce', 'herco' ); ?></span></div><p class="text-[1.55rem] leading-[1.5] md:text-[1.8rem] font-display-lg text-heritage-navy max-w-3xl"><?php esc_html_e( 'When we evaluate marketplace execution, Herco stands out for keeping inventory disciplined while still moving quickly on promotions and customer demand.', 'herco' ); ?></p></article></div><div class="mt-8 flex items-center gap-2" aria-label="<?php esc_attr_e( 'Testimonial slide controls', 'herco' ); ?>"><button type="button" class="testimonial-slider-dot w-10 h-1.5 bg-heritage-navy" data-testimonial-dot aria-label="<?php esc_attr_e( 'Show first quote', 'herco' ); ?>" aria-current="true"></button><button type="button" class="testimonial-slider-dot w-10 h-1.5 bg-border-gray" data-testimonial-dot aria-label="<?php esc_attr_e( 'Show second quote', 'herco' ); ?>" aria-current="false"></button><button type="button" class="testimonial-slider-dot w-10 h-1.5 bg-border-gray" data-testimonial-dot aria-label="<?php esc_attr_e( 'Show third quote', 'herco' ); ?>" aria-current="false"></button></div></div></div></div></div>
+	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+		<div class="grid grid-cols-1 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-10 xl:gap-14 items-start">
+			<div class="max-w-xl relative z-10" data-reveal>
+				<span class="text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'Partner and channel quotes', 'herco' ); ?></span>
+				<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4 mb-5"><?php esc_html_e( 'What our partners say about working with Herco.', 'herco' ); ?></h2>
+				<p class="text-body-lg font-body-lg text-on-surface-variant"><?php esc_html_e( 'Hear from our network of principals and retailers who trust Herco to build their brands and grow their businesses in the Philippine market.', 'herco' ); ?></p>
+			</div>
+			<div class="testimonial-slider-shell border border-border-gray bg-surface p-6 md:p-8 relative overflow-hidden z-10" data-reveal data-testimonial-slider>
+				<div class="absolute inset-0 opacity-[0.07] pointer-events-none hairline-grid"></div>
+				<div class="relative z-10">
+					<div class="flex items-center justify-between gap-4 mb-8">
+						<p class="text-technical-caps font-technical-caps text-heritage-navy/70 uppercase tracking-widest"><?php esc_html_e( 'Partner voices', 'herco' ); ?></p>
+						<div class="flex items-center gap-2">
+							<button type="button" class="testimonial-slider-button w-11 h-11 border border-border-gray bg-surface-container-lowest text-heritage-navy hover:border-industrial-gold transition-colors" data-testimonial-prev aria-label="<?php esc_attr_e( 'Previous quote', 'herco' ); ?>"><span class="material-symbols-outlined text-base">west</span></button>
+							<button type="button" class="testimonial-slider-button w-11 h-11 border border-border-gray bg-surface-container-lowest text-heritage-navy hover:border-industrial-gold transition-colors" data-testimonial-next aria-label="<?php esc_attr_e( 'Next quote', 'herco' ); ?>"><span class="material-symbols-outlined text-base">east</span></button>
+						</div>
+					</div>
+					<?php if ( ! empty( $testimonials ) ) : ?>
+						<div class="space-y-6">
+							<?php foreach ( $testimonials as $index => $testimonial ) : ?>
+								<article class="testimonial-slide-frame<?php echo $index > 0 ? ' hidden' : ''; ?>" data-testimonial-slide>
+									<div class="flex items-start justify-between gap-4 mb-6">
+										<span class="testimonial-quote-mark text-industrial-gold text-5xl leading-none font-display-lg">“</span>
+										<?php if ( ! empty( $testimonial['channel'] ) ) : ?>
+											<span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest border border-industrial-gold/25 bg-industrial-gold/5 px-3 py-2"><?php echo esc_html( $testimonial['channel'] ); ?></span>
+										<?php endif; ?>
+									</div>
+									<p class="text-[1.55rem] leading-[1.5] md:text-[1.8rem] font-display-lg text-heritage-navy max-w-3xl"><?php echo esc_html( $testimonial['quote'] ); ?></p>
+								</article>
+							<?php endforeach; ?>
+						</div>
+						<div class="mt-8 flex items-center gap-2" aria-label="<?php esc_attr_e( 'Testimonial slide controls', 'herco' ); ?>">
+							<?php foreach ( $testimonials as $index => $testimonial ) : ?>
+								<button type="button" class="testimonial-slider-dot w-10 h-1.5 <?php echo $index === 0 ? 'bg-heritage-navy' : 'bg-border-gray'; ?>" data-testimonial-dot aria-label="<?php printf( esc_attr__( 'Show quote %d', 'herco' ), $index + 1 ); ?>" <?php echo ( 0 === $index ) ? 'aria-current="true"' : 'aria-current="false"'; ?>></button>
+							<?php endforeach; ?>
+						</div>
+					<?php else : ?>
+						<div class="space-y-6"><article class="testimonial-slide-frame" data-testimonial-slide><div class="flex items-start justify-between gap-4 mb-6"><span class="testimonial-quote-mark text-industrial-gold text-5xl leading-none font-display-lg">“</span><span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest border border-industrial-gold/25 bg-industrial-gold/5 px-3 py-2"><?php esc_html_e( 'Modern Retail', 'herco' ); ?></span></div><p class="text-[1.55rem] leading-[1.5] md:text-[1.8rem] font-display-lg text-heritage-navy max-w-3xl"><?php esc_html_e( 'Herco is one of the few distribution partners that combines steady supply, responsive account management and real follow-through at store level.', 'herco' ); ?></p></article><article class="testimonial-slide-frame hidden" data-testimonial-slide><div class="flex items-start justify-between gap-4 mb-6"><span class="testimonial-quote-mark text-industrial-gold text-5xl leading-none font-display-lg">“</span><span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest border border-industrial-gold/25 bg-industrial-gold/5 px-3 py-2"><?php esc_html_e( 'Traditional Trade', 'herco' ); ?></span></div><p class="text-[1.55rem] leading-[1.5] md:text-[1.8rem] font-display-lg text-heritage-navy max-w-3xl"><?php esc_html_e( 'Our branches trust Herco because commitments are clear, deliveries are dependable and the brands they carry continue to move well in the market.', 'herco' ); ?></p></article><article class="testimonial-slide-frame hidden" data-testimonial-slide><div class="flex items-start justify-between gap-4 mb-6"><span class="testimonial-quote-mark text-industrial-gold text-5xl leading-none font-display-lg">“</span><span class="inline-flex items-center gap-2 text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest border border-industrial-gold/25 bg-industrial-gold/5 px-3 py-2"><?php esc_html_e( 'E-Commerce', 'herco' ); ?></span></div><p class="text-[1.55rem] leading-[1.5] md:text-[1.8rem] font-display-lg text-heritage-navy max-w-3xl"><?php esc_html_e( 'When we evaluate marketplace execution, Herco stands out for keeping inventory disciplined while still moving quickly on promotions and customer demand.', 'herco' ); ?></p></article></div><div class="mt-8 flex items-center gap-2" aria-label="<?php esc_attr_e( 'Testimonial slide controls', 'herco' ); ?>"><button type="button" class="testimonial-slider-dot w-10 h-1.5 bg-heritage-navy" data-testimonial-dot aria-label="<?php esc_attr_e( 'Show first quote', 'herco' ); ?>" aria-current="true"></button><button type="button" class="testimonial-slider-dot w-10 h-1.5 bg-border-gray" data-testimonial-dot aria-label="<?php esc_attr_e( 'Show second quote', 'herco' ); ?>" aria-current="false"></button><button type="button" class="testimonial-slider-dot w-10 h-1.5 bg-border-gray" data-testimonial-dot aria-label="<?php esc_attr_e( 'Show third quote', 'herco' ); ?>" aria-current="false"></button></div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <section class="py-section-gap bg-surface"><div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop"><div class="bg-heritage-navy relative overflow-hidden p-12 md:p-20 text-center" data-reveal><div class="absolute inset-0 opacity-5 pointer-events-none hairline-grid"></div><div class="relative z-10 max-w-3xl mx-auto"><span class="text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'WORK WITH HERCO', 'herco' ); ?></span><h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-white mt-4 mb-6"><?php esc_html_e( 'Your distribution partner for growth in the Philippines.', 'herco' ); ?></h2><p class="text-body-lg font-body-lg text-stucco-white/80 mb-10"><?php esc_html_e( 'Whether you\'re a global principal seeking distribution or a retailer building your shelves, Herco is ready to partner.', 'herco' ); ?></p><div class="flex flex-col sm:flex-row items-center justify-center gap-4"><a class="w-full sm:w-auto inline-flex items-center justify-center bg-industrial-gold text-heritage-navy text-label-md font-label-md rounded px-8 py-3.5 hover:bg-industrial-gold/90 transition-colors" href="<?php echo esc_url( herco_page_url( 'contact' ) ); ?>"><?php esc_html_e( 'Start a conversation', 'herco' ); ?></a><a class="w-full sm:w-auto inline-flex items-center justify-center border border-white/40 text-white text-label-md font-label-md rounded px-8 py-3.5 hover:bg-white/10 transition-colors" href="<?php echo esc_url( herco_page_url( 'distribution' ) ); ?>"><?php esc_html_e( 'Explore channels', 'herco' ); ?></a></div></div></div></div></section>

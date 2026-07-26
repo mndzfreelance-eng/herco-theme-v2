@@ -14,6 +14,7 @@ $is_about_page   = is_page( 'about' );
 $is_brands_page  = is_page( 'brands' ) || is_singular( 'brand' );
 $is_dist_page    = is_page( 'distribution' );
 $is_faq_page     = is_page( 'faqs' );
+$is_news_page    = is_home() || is_singular( 'post' ) || is_archive();
 $is_support_page = is_page(
 	array(
 		'contact',
@@ -66,6 +67,7 @@ $has_more_categories  = $category_count > 6;
 				<a class="text-label-md font-label-md <?php echo $is_front_page ? 'text-heritage-navy border-b-2 border-industrial-gold pb-1 font-semibold' : 'text-on-surface-variant font-medium hover:text-industrial-gold transition-colors'; ?>" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'herco' ); ?></a>
 				<a class="text-label-md font-label-md <?php echo $is_about_page ? 'text-heritage-navy border-b-2 border-industrial-gold pb-1 font-semibold' : 'text-on-surface-variant font-medium hover:text-industrial-gold transition-colors'; ?>" href="<?php echo esc_url( herco_page_url( 'about' ) ); ?>"><?php esc_html_e( 'About', 'herco' ); ?></a>
 				<a class="text-label-md font-label-md <?php echo $is_dist_page ? 'text-heritage-navy border-b-2 border-industrial-gold pb-1 font-semibold' : 'text-on-surface-variant font-medium hover:text-industrial-gold transition-colors'; ?>" href="<?php echo esc_url( herco_page_url( 'distribution' ) ); ?>"><?php esc_html_e( 'Distribution', 'herco' ); ?></a>
+				<a class="text-label-md font-label-md <?php echo $is_news_page ? 'text-heritage-navy border-b-2 border-industrial-gold pb-1 font-semibold' : 'text-on-surface-variant font-medium hover:text-industrial-gold transition-colors'; ?>" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>"><?php esc_html_e( 'News', 'herco' ); ?></a>
 				<div class="relative mega-nav-item" data-mega-menu>
 					<button class="mega-trigger flex items-center gap-1 text-label-md font-label-md <?php echo $is_brands_page ? 'text-heritage-navy font-semibold' : 'text-on-surface-variant font-medium hover:text-industrial-gold transition-colors'; ?>" aria-expanded="false">
 						<span><?php esc_html_e( 'Brands', 'herco' ); ?></span>
@@ -134,7 +136,7 @@ $has_more_categories  = $category_count > 6;
 				</div>
 				<div class="relative mega-nav-item" data-mega-menu>
 					<button class="mega-trigger flex items-center gap-1 text-label-md font-label-md <?php echo $is_support_page ? 'text-heritage-navy font-semibold' : 'text-on-surface-variant font-medium hover:text-industrial-gold transition-colors'; ?>" aria-expanded="false">
-						<span><?php esc_html_e( 'Customer Support', 'herco' ); ?></span>
+						<span><?php esc_html_e( 'Contact Us', 'herco' ); ?></span>
 						<span class="material-symbols-outlined mega-trigger-icon text-base transition-transform">expand_more</span>
 					</button>
 					<div class="mega-panel p-8 border border-border-gray bg-white" style="width: 580px; left: 50%; transform: translateX(-50%);">
@@ -172,6 +174,7 @@ $has_more_categories  = $category_count > 6;
 				<a class="py-3 text-label-md font-label-md <?php echo $is_front_page ? 'text-heritage-navy font-semibold' : 'text-on-surface-variant hover:text-industrial-gold transition-colors'; ?>" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'herco' ); ?></a>
 				<a class="py-3 text-label-md font-label-md <?php echo $is_about_page ? 'text-heritage-navy font-semibold' : 'text-on-surface-variant hover:text-industrial-gold transition-colors'; ?>" href="<?php echo esc_url( herco_page_url( 'about' ) ); ?>"><?php esc_html_e( 'About', 'herco' ); ?></a>
 				<a class="py-3 text-label-md font-label-md <?php echo $is_dist_page ? 'text-heritage-navy font-semibold' : 'text-on-surface-variant hover:text-industrial-gold transition-colors'; ?>" href="<?php echo esc_url( herco_page_url( 'distribution' ) ); ?>"><?php esc_html_e( 'Distribution', 'herco' ); ?></a>
+				<a class="py-3 text-label-md font-label-md <?php echo $is_news_page ? 'text-heritage-navy font-semibold' : 'text-on-surface-variant hover:text-industrial-gold transition-colors'; ?>" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>"><?php esc_html_e( 'News', 'herco' ); ?></a>
 				<a class="py-3 text-label-md font-label-md <?php echo $is_faq_page ? 'text-heritage-navy font-semibold' : 'text-on-surface-variant hover:text-industrial-gold transition-colors'; ?>" href="<?php echo esc_url( herco_page_url( 'faqs' ) ); ?>"><?php esc_html_e( 'FAQs', 'herco' ); ?></a>
 				<div class="py-3 border-b border-border-gray">
 					<button class="mobile-mega-toggle w-full flex justify-between items-center text-label-md font-label-md <?php echo $is_brands_page ? 'text-heritage-navy font-semibold' : 'text-on-surface-variant'; ?>" aria-expanded="false">
@@ -191,7 +194,7 @@ $has_more_categories  = $category_count > 6;
 				</div>
 				<div class="py-3">
 					<button class="mobile-mega-toggle w-full flex justify-between items-center text-label-md font-label-md <?php echo $is_support_page ? 'text-heritage-navy font-semibold' : 'text-on-surface-variant'; ?>" aria-expanded="false">
-						<span><?php esc_html_e( 'Customer Support', 'herco' ); ?></span>
+						<span><?php esc_html_e( 'Contact Us', 'herco' ); ?></span>
 						<span class="material-symbols-outlined text-lg transition-transform">expand_more</span>
 					</button>
 					<div class="mobile-mega-panel hidden">

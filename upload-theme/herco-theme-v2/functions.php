@@ -133,3 +133,51 @@ function herco_asset_exists( $relative_path ) {
 function herco_asset_url( $relative_path ) {
 	return HERCO_URI . '/' . ltrim( $relative_path, '/' );
 }
+
+function herco_stats_customizer_settings( $wp_customize ) {
+	// Add section for Front Page Stats.
+	$wp_customize->add_section(
+		'herco_front_page_stats',
+		array(
+			'title'    => __( 'Front Page Stats', 'herco' ),
+			'priority' => 30,
+		)
+	);
+
+	// Experience.
+	$wp_customize->add_setting(
+		'herco_stat_experience',
+		array(
+			'default'           => 117,
+			'sanitize_callback' => 'absint',
+		)
+	);
+	$wp_customize->add_control( 'herco_stat_experience', array(
+		'label'   => __( 'Years of Experience', 'herco' ),
+		'section' => 'herco_front_page_stats',
+		'type'    => 'number',
+	) );
+
+	// Employees.
+	$wp_customize->add_setting( 'herco_stat_employees', array(
+		'default'           => 300,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( 'herco_stat_employees', array(
+		'label'   => __( 'Number of Employees', 'herco' ),
+		'section' => 'herco_front_page_stats',
+		'type'    => 'number',
+	) );
+
+	// Retail Locations.
+	$wp_customize->add_setting( 'herco_stat_retail_locations', array(
+		'default'           => 200,
+		'sanitize_callback' => 'absint',
+	) );
+	$wp_customize->add_control( 'herco_stat_retail_locations', array(
+		'label'   => __( 'Retail Locations', 'herco' ),
+		'section' => 'herco_front_page_stats',
+		'type'    => 'number',
+	) );
+}
+add_action( 'customize_register', 'herco_stats_customizer_settings' );

@@ -79,6 +79,64 @@ if ( ! function_exists( 'herco_customize_register' ) ) {
         herco_add_image_control($wp_customize, "herco_dist_image_{$i}", $label, 'herco_home');
     }
 
+	// --- Testimonials ---.
+	$wp_customize->add_section(
+		'herco_testimonials',
+		array(
+			'title'       => __( 'Partner Quotes', 'herco' ),
+			'description' => __( 'Manage the testimonial quotes on the homepage. If all quotes are empty, the original mockup content will be shown as a fallback.', 'herco' ),
+			'priority'    => 31,
+		)
+	);
+
+	$default_testimonials = array(
+		1 => array(
+			'channel' => __( 'Modern Retail', 'herco' ),
+			'quote'   => __( 'Herco is one of the few distribution partners that combines steady supply, responsive account management and real follow-through at store level.', 'herco' ),
+		),
+		2 => array(
+			'channel' => __( 'Traditional Trade', 'herco' ),
+			'quote'   => __( 'Our branches trust Herco because commitments are clear, deliveries are dependable and the brands they carry continue to move well in the market.', 'herco' ),
+		),
+		3 => array(
+			'channel' => __( 'E-Commerce', 'herco' ),
+			'quote'   => __( 'When we evaluate marketplace execution, Herco stands out for keeping inventory disciplined while still moving quickly on promotions and customer demand.', 'herco' ),
+		),
+	);
+
+	for ( $i = 1; $i <= 3; $i++ ) {
+		// Heading for each testimonial.
+		$wp_customize->add_setting( "herco_testimonial_{$i}_heading", array( 'sanitize_callback' => '__return_empty_string' ) );
+		$wp_customize->add_control(
+			new Herco_Customize_Note_Control(
+				$wp_customize,
+				"herco_testimonial_{$i}_heading",
+				array(
+					'label'   => sprintf( __( 'Testimonial %d', 'herco' ), $i ),
+					'section' => 'herco_testimonials',
+				)
+			)
+		);
+
+		// Enabled.
+		$wp_customize->add_setting( "herco_testimonial_{$i}_enabled", array( 'default' => true, 'sanitize_callback' => 'wp_validate_boolean' ) );
+		$wp_customize->add_control( "herco_testimonial_{$i}_enabled", array( 'label' => __( 'Show this testimonial', 'herco' ), 'section' => 'herco_testimonials', 'type' => 'checkbox' ) );
+
+		// Channel.
+		$wp_customize->add_setting( "herco_testimonial_{$i}_channel", array( 'default' => $default_testimonials[ $i ]['channel'], 'sanitize_callback' => 'sanitize_text_field' ) );
+		$wp_customize->add_control( "herco_testimonial_{$i}_channel", array( 'label' => __( 'Partner Type / Channel', 'herco' ), 'section' => 'herco_testimonials', 'type' => 'text' ) );
+
+		// Quote.
+		$wp_customize->add_setting(
+			"herco_testimonial_{$i}_quote",
+			array(
+				'default'           => $default_testimonials[ $i ]['quote'],
+				'sanitize_callback' => 'wp_kses_post',
+			)
+		);
+		$wp_customize->add_control( "herco_testimonial_{$i}_quote", array( 'label' => __( 'Quote', 'herco' ), 'section' => 'herco_testimonials', 'type' => 'textarea' ) );
+	}
+
 	// --- Marquee Speed ---.
 	$wp_customize->add_setting(
 		'herco_marquee_speed',
@@ -135,7 +193,7 @@ if ( ! function_exists( 'herco_customize_register' ) ) {
 
     /* ── Contact ──────────────────────────────────────────── */
     $wp_customize->add_section('herco_contact', [
-        'title'    => __('Herco Contact Info', 'herco'),
+        'title'    => __('Contact Us', 'herco'),
         'priority' => 34,
     ]);
     foreach ([

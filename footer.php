@@ -36,6 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<li><a class="text-body-md font-body-md text-on-primary-fixed-variant hover:text-white transition-colors" href="<?php echo esc_url( herco_page_url( 'about' ) ); ?>"><?php esc_html_e( 'About Us', 'herco' ); ?></a></li>
 					<li><a class="text-body-md font-body-md text-on-primary-fixed-variant hover:text-white transition-colors" href="<?php echo esc_url( herco_page_url( 'distribution' ) ); ?>"><?php esc_html_e( 'Distribution', 'herco' ); ?></a></li>
 					<li><a class="text-body-md font-body-md text-on-primary-fixed-variant hover:text-white transition-colors" href="<?php echo esc_url( herco_page_url( 'brands' ) ); ?>"><?php esc_html_e( 'Brands', 'herco' ); ?></a></li>
+					<li><a class="text-body-md font-body-md text-on-primary-fixed-variant hover:text-white transition-colors" href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>"><?php esc_html_e( 'News & Press Releases', 'herco' ); ?></a></li>
 					<li><a class="text-body-md font-body-md text-on-primary-fixed-variant hover:text-white transition-colors" href="<?php echo esc_url( herco_page_url( 'contact' ) ); ?>"><?php esc_html_e( 'Contact', 'herco' ); ?></a></li>
 				</ul>
 			</div>
