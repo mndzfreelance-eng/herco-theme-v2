@@ -124,7 +124,8 @@ $has_more_categories  = $category_count > 6;
 								<?php
 								if ( $brand_count > 0 ) {
 									// translators: %d is the approximate number of brands, rounded down to the nearest 10.
-									printf( esc_html__( 'View All %d+ Brands', 'herco' ), floor( $brand_count / 10 ) * 10 );
+									$display_count = $brand_count < 10 ? $brand_count : floor( $brand_count / 10 ) * 10;
+									printf( esc_html__( 'View All %d+ Brands', 'herco' ), esc_html( $display_count ) );
 								} else {
 									esc_html_e( 'View All Brands', 'herco' );
 								}

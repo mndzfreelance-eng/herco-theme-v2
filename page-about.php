@@ -13,6 +13,10 @@ get_header();
 $banner_url = herco_page_banner_url( 'herco_about_banner', 'assets/media/about-hero.jpg', 'page-banner' );
 $affiliates = function_exists( 'herco_about_affiliates' ) ? herco_about_affiliates() : array();
 
+$all_brands      = function_exists( 'herco_get_brand_tiles' ) ? herco_get_brand_tiles() : array();
+$brand_count_raw = ! empty( $all_brands ) ? count( $all_brands ) : 50;
+$brand_count     = $brand_count_raw < 10 ? $brand_count_raw : floor( $brand_count_raw / 10 ) * 10;
+
 $mission_items = array(
 	__( 'Grow the brands entrusted to us by our principals.', 'herco' ),
 	__( 'Help customers grow with the best products, prices and service.', 'herco' ),
@@ -120,7 +124,7 @@ $mission_items = herco_get_editor_area_list_items(
 						<span class="absolute -left-[7px] top-1 w-3 h-3 bg-industrial-gold rounded-full ring-4 ring-surface"></span>
 						<span class="font-technical-caps text-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Today', 'herco' ); ?></span>
 						<h3 class="font-subheading text-subheading text-heritage-navy mt-1"><?php esc_html_e( 'Fifth-generation leadership', 'herco' ); ?></h3>
-						<p class="font-body-md text-body-md text-on-surface-variant mt-1"><?php esc_html_e( '50+ global brands, 200+ modern retail locations and an owned logistics fleet serving the whole archipelago.', 'herco' ); ?></p>
+						<p class="font-body-md text-body-md text-on-surface-variant mt-1"><?php printf( esc_html__( '%d+ global brands, 200+ modern retail locations and an owned logistics fleet serving the whole archipelago.', 'herco' ), esc_html( $brand_count ) ); ?></p>
 					</li>
 				</ol>
 			</div>
@@ -152,7 +156,7 @@ $mission_items = herco_get_editor_area_list_items(
 		<div class="bg-surface border border-border-gray rounded-lg overflow-hidden">
 			<div class="h-1 bg-industrial-gold"></div>
 			<div class="p-8 md:p-9">
-				<div class="font-display-lg text-[52px] leading-none mb-2 text-heritage-navy">50<span class="text-industrial-gold">+</span></div><span class="font-technical-caps text-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Principal brands', 'herco' ); ?></span>
+				<div class="font-display-lg text-[52px] leading-none mb-2 text-heritage-navy"><?php echo esc_html( $brand_count ); ?><span class="text-industrial-gold">+</span></div><span class="font-technical-caps text-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Principal brands', 'herco' ); ?></span>
 			</div>
 		</div>
 	</div>
@@ -249,8 +253,8 @@ $mission_items = herco_get_editor_area_list_items(
 		<div class="bg-heritage-navy relative overflow-hidden p-12 md:p-20 text-center" data-reveal>
 			<div class="absolute inset-0 opacity-5 pointer-events-none hairline-grid"></div>
 			<div class="relative z-10 max-w-3xl mx-auto">
-				<?php herco_render_editor_area( 'herco-about-cta-title', '<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6">' . esc_html__( '117 years in, we\'re still looking for the next great partnership.', 'herco' ) . '</h2>' ); ?>
-				<?php herco_render_editor_area( 'herco-about-cta-desc', '<p class="font-body-lg text-body-lg text-stucco-white/80 mb-10">' . esc_html__( 'Looking to expand your brand in the Philippines or add trusted products to your business? Let’s explore how we can work together.', 'herco' ) . '</p>' ); ?>
+				<?php herco_render_editor_area( 'herco-about-cta-title', '<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6">' . esc_html__( '120 years in, we\'re still looking for the next great partnership.', 'herco' ) . '</h2>' ); ?>
+				<?php herco_render_editor_area( 'herco-about-cta-desc', '<p class="font-body-lg text-body-lg text-stucco-white/80 mb-10">' . esc_html__( 'Talk to the team about distributing your brand - or stocking the brands Filipinos trust.', 'herco' ) . '</p>' ); ?>
 				<a class="inline-flex items-center justify-center bg-industrial-gold text-heritage-navy text-label-md font-label-md rounded px-8 py-3.5 hover:bg-industrial-gold/90 transition-colors" href="<?php echo esc_url( herco_page_url( 'contact' ) ); ?>"><?php esc_html_e( 'Contact Herco', 'herco' ); ?></a>
 			</div>
 		</div>

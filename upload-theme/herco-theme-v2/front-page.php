@@ -20,12 +20,13 @@ if ( function_exists( 'herco_get_brand_tiles' ) ) {
 		);
 	}
 }
-$brand_count = ! empty( $all_brands ) ? count( $all_brands ) : 50;
+$brand_count_raw = ! empty( $all_brands ) ? count( $all_brands ) : 50;
+$brand_count     = $brand_count_raw < 10 ? $brand_count_raw : floor( $brand_count_raw / 10 ) * 10;
 
 // Fallback to names if no logos are available.
 $brand_names = array();
 if ( empty( $marquee_brands ) ) {
-	$brand_names = function_exists( 'herco_brands_fallback_names' ) ? herco_brands_fallback_names() : array( '3M', 'WD-40', 'Bosch', 'DeWalt', 'Stanley', 'Bahco', 'Yale', 'Briggs & Stratton', 'Black+Decker', 'Armor All', 'Devcon', 'Dorma' );
+	$brand_names = function_exists( 'herco_brands_fallback_names' ) ? herco_brands_fallback_names() : array( 'WD-40', '3M', 'Greenfield', 'Stanley', 'Irwin', 'Yale', 'Fedseal', 'Devcon', 'Bosch', 'Briggs & Stratton', 'Oxo', 'DeWalt' );
 }
 $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : array();
 $marquee_speed = get_theme_mod( 'herco_marquee_speed', 40 );
@@ -43,7 +44,7 @@ for ( $i = 1; $i <= 3; $i++ ) {
 	}
 }
 
-$stat_experience       = get_theme_mod( 'herco_stat_experience', 117 );
+$stat_experience       = get_theme_mod( 'herco_stat_experience', 120 );
 $stat_employees        = get_theme_mod( 'herco_stat_employees', 300 );
 $stat_retail_locations = get_theme_mod( 'herco_stat_retail_locations', 200 );
 
@@ -89,7 +90,7 @@ $stat_retail_locations = get_theme_mod( 'herco_stat_retail_locations', 200 );
 <section class="py-section-gap bg-surface-container-lowest border-y border-border-gray">
 	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-12">
 		<span class="text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'Our principals', 'herco' ); ?></span>
-		<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4"><?php esc_html_e( '50+ world-class brands under one roof.', 'herco' ); ?></h2>
+		<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4"><?php printf( esc_html__( '%d+ world-class brands under one roof.', 'herco' ), esc_html( $brand_count ) ); ?></h2>
 	</div>
 	<style>
 		.herco-brand-marquee {

@@ -187,7 +187,7 @@ function herco_about_editor_default_content() {
 			herco_editor_area_block( 'herco-about-core-desc', herco_editor_paragraph_block( 'Our values are practical, visible and measured over time. They shape how we serve principals, support customers and protect a name that has been trusted since 1908.', 'font-body-lg text-body-lg text-on-surface-variant mt-6' ) ),
 			herco_editor_area_block( 'herco-about-affiliates-title', herco_editor_heading_block( 'A group with reach across industries.', 2, 'font-headline-lg text-headline-lg-mobile md:text-headline-lg text-heritage-navy mt-4 mb-6' ) ),
 			herco_editor_area_block( 'herco-about-affiliates-desc', herco_editor_paragraph_block( 'Herco maintains strategic partnerships with major Philippine companies in plastic manufacturing, consumer chemicals and financial services - strengthening the network behind every delivery.', 'font-body-lg text-body-lg text-on-surface-variant' ) ),
-			herco_editor_area_block( 'herco-about-cta-title', herco_editor_heading_block( '117 years in, we\'re still looking for the next great partnership.', 2, 'font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6' ) ),
+			herco_editor_area_block( 'herco-about-cta-title', herco_editor_heading_block( '120 years in, we\'re still looking for the next great partnership.', 2, 'font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6' ) ),
 			herco_editor_area_block( 'herco-about-cta-desc', herco_editor_paragraph_block( 'Talk to the team about distributing your brand - or stocking the brands Filipinos trust.', 'font-body-lg text-body-lg text-stucco-white/80 mb-10' ) ),
 		)
 	);

@@ -20,7 +20,8 @@ if ( function_exists( 'herco_get_brand_tiles' ) ) {
 		);
 	}
 }
-$brand_count = ! empty( $all_brands ) ? count( $all_brands ) : 50;
+$brand_count_raw = ! empty( $all_brands ) ? count( $all_brands ) : 50;
+$brand_count     = $brand_count_raw < 10 ? $brand_count_raw : floor( $brand_count_raw / 10 ) * 10;
 
 // Fallback to names if no logos are available.
 $brand_names = array();
@@ -60,7 +61,7 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 		<div class="stat-band-accent h-1 bg-gradient-to-r from-industrial-gold/90 via-heritage-navy/60 to-industrial-gold/90"></div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
 			<div class="stat-cell p-8 md:p-9 border-b sm:border-r xl:border-b-0 border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Brands', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="<?php echo esc_attr( $brand_count ); ?>">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Global brands carried across hardware and home improvement.', 'herco' ); ?></p></div>
-			<div class="stat-cell p-8 md:p-9 border-b xl:border-b-0 xl:border-r border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Experience', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="117">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Years building distribution relationships in the Philippine market.', 'herco' ); ?></p></div>
+			<div class="stat-cell p-8 md:p-9 border-b xl:border-b-0 xl:border-r border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Experience', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="120">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Years building distribution relationships in the Philippine market.', 'herco' ); ?></p></div>
 			<div class="stat-cell p-8 md:p-9 border-b sm:border-r sm:border-b-0 xl:border-r border-border-gray text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Employees', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="300">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Teams across sales, logistics, warehousing, and customer support.', 'herco' ); ?></p></div>
 			<div class="stat-cell p-8 md:p-9 text-left"><p class="text-technical-caps font-technical-caps text-industrial-gold uppercase"><?php esc_html_e( 'Retail Locations', 'herco' ); ?></p><div class="mt-5 font-display-lg text-[52px] leading-none text-heritage-navy tracking-[-0.04em] tabular-nums"><span data-counter-target="200">0</span><span class="text-industrial-gold">+</span></div><div class="metric-divider w-10 h-px bg-heritage-navy/20 mt-5"></div><p class="text-body-md font-body-md text-on-surface-variant mt-4 max-w-[15rem]"><?php esc_html_e( 'Modern retail doors supported by nationwide fulfillment.', 'herco' ); ?></p></div>
 		</div>
@@ -127,7 +128,7 @@ $dist_cards  = function_exists( 'herco_dist_cards' ) ? herco_dist_cards() : arra
 <section class="py-section-gap bg-surface-container-lowest border-y border-border-gray">
 	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-12">
 		<span class="text-technical-caps font-technical-caps text-industrial-gold uppercase tracking-widest"><?php esc_html_e( 'Our principals', 'herco' ); ?></span>
-		<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4"><?php esc_html_e( '50+ world-class brands under one roof.', 'herco' ); ?></h2>
+		<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-heritage-navy mt-4"><?php printf( esc_html__( '%d+ world-class brands under one roof.', 'herco' ), esc_html( $brand_count ) ); ?></h2>
 	</div>
 	<?php if ( ! empty( $marquee_brands ) ) : ?>
 		<div class="marquee" aria-label="<?php esc_attr_e( 'Brands distributed by Herco', 'herco' ); ?>">

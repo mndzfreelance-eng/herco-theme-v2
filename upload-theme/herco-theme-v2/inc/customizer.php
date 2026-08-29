@@ -370,6 +370,56 @@ if ( ! function_exists( 'herco_add_partner_logos_customizer' ) ) {
 	add_action( 'customize_register', 'herco_add_partner_logos_customizer' );
 }
 
+if ( ! function_exists( 'herco_mega_menu_customizer' ) ) {
+	/**
+	 * Get all brands for customizer select controls.
+	 */
+	function herco_get_all_brands_for_customizer() {
+		$brands = get_posts(
+			array(
+				'post_type'      => 'brand',
+				'posts_per_page' => -1,
+				'post_status'    => 'publish',
+				'orderby'        => 'title',
+				'order'          => 'ASC',
+			)
+		);
+
+		$choices = array( '0' => __( '— None —', 'herco' ) );
+		if ( $brands ) {
+			foreach ( $brands as $brand ) {
+				$choices[ $brand->ID ] = $brand->post_title;
+			}
+		}
+		return $choices;
+	}
+
+	/**
+	 * Adds Mega Menu settings to the Customizer.
+	 *
+	 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
+	 */
+	function herco_mega_menu_customizer( $wp_customize ) {
+		$wp_customize->add_section(
+			'herco_mega_menu_section',
+			array(
+				'title'       => __( 'Mega Menu Settings', 'herco' ),
+				'description' => __( 'Select the brands to feature in the main navigation mega menu. If none are selected, the first 6 brands will be shown automatically.', 'herco' ),
+				'priority'    => 38,
+			)
+		);
+
+		$brands = herco_get_all_brands_for_customizer();
+
+		for ( $i = 1; $i <= 6; $i++ ) {
+			$setting_id = "herco_featured_brand_{$i}";
+			$wp_customize->add_setting( $setting_id, array( 'default' => '0', 'sanitize_callback' => 'absint' ) );
+			$wp_customize->add_control( $setting_id, array( 'label' => sprintf( __( 'Featured Brand %d', 'herco' ), $i ), 'section' => 'herco_mega_menu_section', 'type' => 'select', 'choices' => $brands ) );
+		}
+	}
+	add_action( 'customize_register', 'herco_mega_menu_customizer' );
+}
+
 /** Register a media control with correct attachment-ID sanitization */
 function herco_add_image_control($wp_customize, $id, $label, $section, $description = '') {
     $wp_customize->add_setting($id, [

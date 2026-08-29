@@ -9,9 +9,9 @@
     "intro": "We offer an extensive range of high-quality hardware products sourced from renowned international brands and world-class manufacturers. Our strong global supplier network allows us to consistently deliver premium tools, equipment, and home improvement solutions to customers across the Philippines. In addition to hardware distribution, HERCO TRADING is strategically connected with some of the country's leading companies in plastic product manufacturing, consumer chemical production, and financial services—enabling us to create greater value and drive growth across multiple industries."
   },
   "brandsFallback": [
-    "BOSCH", "DEWALT", "STANLEY", "3M", "WD-40", "YALE", "IRWIN",
-    "BLACK+DECKER", "BAHCO", "DEVCON", "OXO", "BONDHUS", "DORMA",
-    "BRIGGS & STRATTON", "ARMOR ALL"
+    "WD-40", "3M", "GREENFIELD", "STANLEY", "IRWIN", "YALE", "FEDSEAL",
+    "DEVCON", "BOSCH", "BRIGGS & STRATTON", "OXO", "DEWALT",
+    "BLACK+DECKER", "BAHCO", "ARMOR ALL"
   ],
   "distCards": [
     {

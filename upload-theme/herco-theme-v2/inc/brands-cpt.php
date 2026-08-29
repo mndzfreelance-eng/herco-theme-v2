@@ -439,6 +439,43 @@ function herco_get_brand_banner_url( $post_id ) {
  * @return array
  */
 function herco_get_featured_brands( $count = 6 ) {
+	$featured_brand_ids = array();
+	for ( $i = 1; $i <= $count; $i++ ) {
+		$brand_id = get_theme_mod( "herco_featured_brand_{$i}", '0' );
+		if ( ! empty( $brand_id ) ) {
+			$featured_brand_ids[] = (int) $brand_id;
+		}
+	}
+	// Remove '0' values and duplicates.
+	$featured_brand_ids = array_unique( array_filter( $featured_brand_ids ) );
+
+	// If we have manually selected brands, use them.
+	if ( ! empty( $featured_brand_ids ) ) {
+		$posts = get_posts(
+			array(
+				'post_type'      => 'brand',
+				'post_status'    => 'publish',
+				'posts_per_page' => count( $featured_brand_ids ),
+				'post__in'       => $featured_brand_ids,
+				'orderby'        => 'post__in',
+			)
+		);
+
+		$brands = array();
+		if ( ! empty( $posts ) ) {
+			foreach ( $posts as $post ) {
+				$logo_url   = herco_brand_logo_url( $post->ID, 'medium' );
+				$brands[] = array(
+					'name' => get_the_title( $post ),
+					'url'  => get_permalink( $post ),
+					'logo' => ! herco_is_placeholder_src( $logo_url ) ? $logo_url : '',
+				);
+			}
+		}
+		return $brands;
+	}
+
+	// Fallback to original logic if no brands are selected in Customizer.
 	$transient_key = 'herco_featured_brands_sorted';
 	$all_brands    = get_transient( $transient_key );
 
@@ -447,30 +484,21 @@ function herco_get_featured_brands( $count = 6 ) {
 			array(
 				'post_type'      => 'brand',
 				'post_status'    => 'publish',
-				'posts_per_page' => -1, // Get all brands to sort them correctly.
-				'orderby'        => array(
-					'menu_order' => 'ASC',
-					'title'      => 'ASC',
-				),
+				'posts_per_page' => -1,
+				'orderby'        => array( 'menu_order' => 'ASC', 'title' => 'ASC' ),
 			)
 		);
 
 		$all_brands = array();
 		if ( ! empty( $posts ) ) {
 			foreach ( $posts as $post ) {
-				$logo_url   = herco_brand_logo_url( $post->ID, 'medium' );
-				$all_brands[] = array(
-					'name' => get_the_title( $post ),
-					'url'  => get_permalink( $post ),
-					'logo' => ! herco_is_placeholder_src( $logo_url ) ? $logo_url : '',
-				);
+				$logo_url     = herco_brand_logo_url( $post->ID, 'medium' );
+				$all_brands[] = array( 'name' => get_the_title( $post ), 'url' => get_permalink( $post ), 'logo' => ! herco_is_placeholder_src( $logo_url ) ? $logo_url : '' );
 			}
 		}
-		// Cache the full sorted list for 12 hours.
 		set_transient( $transient_key, $all_brands, 12 * HOUR_IN_SECONDS );
 	}
 
-	// Return the requested number of brands from the start of the cached list.
 	return array_slice( (array) $all_brands, 0, (int) $count );
 }
 

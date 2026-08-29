@@ -148,7 +148,7 @@ function herco_stats_customizer_settings( $wp_customize ) {
 	$wp_customize->add_setting(
 		'herco_stat_experience',
 		array(
-			'default'           => 117,
+			'default'           => 120,
 			'sanitize_callback' => 'absint',
 		)
 	);
